@@ -11,7 +11,7 @@
   :root {
     --blue-50: #E6F1FB;
     --blue-100: #B5D4F4;
-    --blue-200: #lig;
+    --blue-200: #84B8ED;
     --blue-400: #378ADD;
     --blue-600: #185FA5;
     --blue-800: #0C447C;
@@ -52,12 +52,12 @@
     backdrop-filter: blur(12px);
     border-bottom: 0.5px solid var(--rule);
   }
-	.nav-logo img {
-  width: 140px;
-  height: auto;
-  display: block;
-	}
-  .-name {
+  .nav-logo img {
+    width: 140px;
+    height: auto;
+    display: block;
+  }
+  .nav-name {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -215,38 +215,38 @@
 
   /* SECTION LABELS */
   .section-num {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--blue-800);
-  background: linear-gradient(
-    135deg,
-    rgba(181,212,244,0.35),
-    rgba(230,241,251,0.95)
-  );
-  border: 1px solid rgba(24,95,165,0.16);
-  padding: 8px 16px;
-  border-radius: 999px;
-  margin-bottom: 40px;
-  box-shadow: 0 1px 2px rgba(13,17,23,0.04);
-}
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-800);
+    background: linear-gradient(
+      135deg,
+      rgba(181,212,244,0.35),
+      rgba(230,241,251,0.95)
+    );
+    border: 1px solid rgba(24,95,165,0.16);
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 40px;
+    box-shadow: 0 1px 2px rgba(13,17,23,0.04);
+  }
 
-.section-num span {
-  color: var(--white);
-  background: var(--blue-600);
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  letter-spacing: 0;
-}
+  .section-num span {
+    color: var(--white);
+    background: var(--blue-600);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
 
   .section-h {
     font-family: 'DM Serif Display', serif;
@@ -403,7 +403,7 @@
     line-height: 1.5;
   }
 
-  /* OUTCOME STATS (post-launch) */
+  /* OUTCOME STATS */
   .outcome-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -416,35 +416,34 @@
   }
 
   .outcome-box {
-  background: #05264A;
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+    background: #05264A;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
 
-.outcome-num {
-  font-family: 'Urbanist', sans-serif;
-  font-size: 38px;
-  font-weight: 700;
-  color: #FFFFFF;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
+  .outcome-num {
+    font-size: 38px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
 
-.outcome-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #F4F8FC;
-  margin-top: 4px;
-}
+  .outcome-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #F4F8FC;
+    margin-top: 4px;
+  }
 
-.outcome-sub {
-  font-size: 11px;
-  font-weight: 400;
-  color: #D9E7F5;
-  line-height: 1.6;
-}
+  .outcome-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: #D9E7F5;
+    line-height: 1.6;
+  }
 
   /* PROCESS STEPS */
   .process-track {
@@ -534,34 +533,29 @@
   }
 
   .insight-card {
-  padding: 28px;
-  border: 1px solid var(--rule);
-  border-radius: 12px;
-  background: var(--white);
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
-  cursor: default;
-}
+    padding: 28px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: var(--white);
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+    cursor: default;
+  }
 
-.insight-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(24,95,165,0.2);
-  background: rgba(230,241,251,0.35);
-  box-shadow:
-    0 10px 30px rgba(13,17,23,0.06),
-    0 2px 8px rgba(13,17,23,0.04);
-}
+  .insight-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(24,95,165,0.2);
+    background: rgba(230,241,251,0.35);
+    box-shadow:
+      0 10px 30px rgba(13,17,23,0.06),
+      0 2px 8px rgba(13,17,23,0.04);
+  }
 
-.insight-card:hover .insight-title {
-  color: var(--blue-800);
-}
-
-.insight-card:hover .insight-icon {
-  color: var(--blue-600);
-}
+  .insight-card:hover .insight-title { color: var(--blue-800); }
+  .insight-card:hover .insight-icon { color: var(--blue-600); }
 
   .insight-icon {
     font-size: 11px;
@@ -586,48 +580,69 @@
     color: var(--ink-60);
     line-height: 1.65;
   }
-/* BEFORE / AFTER IMAGE SHOWCASE */
 
-.before-after-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 48px;
-}
-
-.before-after-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.before-after-label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  padding: 8px 16px;
-  border-radius: 999px;
-  margin-bottom: 16px;
-
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  background: rgba(13,17,23,0.06);
-  color: var(--ink);
-}
-
-.before-after-label.after {
-  background: rgba(24,95,165,0.12);
-  color: var(--blue-800);
-}
-
-@media (max-width: 900px) {
-  .before-after-grid {
-    grid-template-columns: 1fr;
+  /* IMAGE CONTAINERS */
+  .image-placeholder {
+    width: 100%;
+    margin: 40px 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #F7F9FC;
+    border: 1px solid var(--rule);
   }
-}
+
+  .image-placeholder img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .image-placeholder.small {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .image-placeholder.small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* BEFORE / AFTER IMAGE SHOWCASE */
+  .before-after-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .before-after-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .before-after-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(13,17,23,0.06);
+    color: var(--ink);
+  }
+
+  .before-after-label.after {
+    background: rgba(24,95,165,0.12);
+    color: var(--blue-800);
+  }
 
   /* DIVIDER */
   .divider {
@@ -730,7 +745,7 @@
     line-height: 1.7;
   }
 
-  /* METRIC CALLOUT (post-launch highlight) */
+  /* METRIC CALLOUT */
   .metric-highlight {
     display: flex;
     align-items: center;
@@ -806,64 +821,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-	/* IMAGE PLACEHOLDERS */
-.image-placeholder {
-  width: 100%;
-  min-height: 420px;
-  border: 1px dashed var(--blue-200);
-  background: linear-gradient(
-    135deg,
-    rgba(230,241,251,0.7),
-    rgba(247,249,252,1)
-  );
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 32px;
-  margin: 40px 0;
-}
-	.image-placeholder img {
-		width: 100%;
-  display: block;
-  object-fit: cover;
-	}
-
-.image-placeholder-content {
-  max-width: 420px;
-}
-	.image-placeholder-label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--blue-600);
-  margin-bottom: 12px;
-}
-
-.image-placeholder-title {
-  font-family: 'Urbanist', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 12px;
-}
-
-.image-placeholder-copy {
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--ink-60);
-}
-
-.image-placeholder.small {
-  min-height: 260px;
-}
-	.image-placeholder.small img {
-		width: 100%;
-  display: block;
-  object-fit: cover;
-	}
 
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
@@ -880,6 +837,8 @@
     .method-grid { grid-template-columns: 1fr; }
     .solution-row { grid-template-columns: 1fr; gap: 8px; }
     .solution-num { font-size: 40px; }
+    .before-after-grid { grid-template-columns: 1fr; }
+    .image-placeholder.small { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -912,28 +871,11 @@
     <div class="hero-tag">UX Design · B2B Industrial · 2024</div>
     <h1 class="hero-title">Proper Storage<br><em>Systems</em> Redesign</h1>
     <p class="hero-sub">Redesigning an industrial B2B website to be responsive, modern, and conversion-optimized — turning a 7-year-old static site into a lead generation machine for OEM, aerospace, and automotive buyers.</p>
-	  <div class="image-placeholder">
-		  <img 
-    src=PSS/pss-hp-hero.png 
-    alt="homepage-hero">
-  <div class="image-placeholder-content">
-    <div class="image-placeholder-label">Hero Imagery</div>
-    <div class="image-placeholder-title">Final Homepage Mockup</div>
-    <p class="image-placeholder-copy">
-      Full-width desktop mockup, responsive layout preview,
-      or before/after comparison imagery.
-    </p>
-  </div>
-</div>
-<div style="margin: 48px 0;">
-  <p style="
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--blue-600);
-    margin-bottom: 16px;">
-</div>
-	  <meta name="description" content="A Figma prototype of the redesign site.">
+
+    <div class="image-placeholder">
+      <img src="PSS/pss-hp-hero.png" alt="Homepage hero mockup">
+    </div>
+
     <div class="meta-grid">
       <div class="meta-item">
         <div class="meta-label">Role</div>
@@ -958,7 +900,7 @@
   <section id="overview">
     <div class="section-num"><span>01</span> Overview</div>
     <h2 class="section-h">A 7-year-old site<br>holding back <em>real growth</em></h2>
-    <p class="body-copy">Proper Storage Systems manufactures heavy-duty industrial storage racks capable of holding up to 12,000 lbs. Their products  roll-out racks, die storage systems, pneumatic shelving  serve the most demanding environments in aerospace, automotive, and OEM manufacturing.</p>
+    <p class="body-copy">Proper Storage Systems manufactures heavy-duty industrial storage racks capable of holding up to 12,000 lbs. Their products — roll-out racks, die storage systems, pneumatic shelving — serve the most demanding environments in aerospace, automotive, and OEM manufacturing.</p>
     <p class="body-copy" style="margin-top:16px;">Despite a robust product line and blue-chip clients like Boeing, 3M, and NASA, their website was a conversion bottleneck: non-responsive, visually dated, and lacking the clarity industrial buyers need to act quickly.</p>
 
     <div class="pull-quote">
@@ -999,16 +941,12 @@
     <div class="section-num"><span>02</span> Research</div>
     <h2 class="section-h">Understanding the<br><em>industrial buyer</em></h2>
     <p class="body-copy">Three intersecting research methods informed the redesign. The goal: understand not just what users want to see, but what decisions they're making and how fast they need to make them.</p>
-	  <div class="image-placeholder small">
-		  <img 
-    src=PSS/pss-analytics.png 
-    alt="homepage-hero">
-		    <img 
-    src=PSS/pss-conversion.png 
-    alt="homepage-hero">
-  <div class="image-placeholder-content">
-  </div>
-</div>
+
+    <div class="image-placeholder small">
+      <img src="PSS/pss-analytics.png" alt="Analytics screenshot">
+      <img src="PSS/pss-conversion.png" alt="Conversion data screenshot">
+    </div>
+
     <div class="method-grid fade-up">
       <div class="method-box">
         <div class="method-num">01</div>
@@ -1016,7 +954,7 @@
         <div class="method-body">Audited 6 months of site traffic and conversion data to identify where users were dropping off and which pages drove the most leads. The RFQ page was the clear conversion workhorse — but its UX was burying users in complexity.</div>
       </div>
       <div class="method-box">
-        <div class="method-title" style="margin-top:40px;">02</div>
+        <div class="method-num">02</div>
         <div class="method-title">Competitive Analysis</div>
         <div class="method-body">Analyzed Uline, Shelving Inc, Global Industrial, and Rack Engineering Division — examining navigation structures, product presentation hierarchy, and how each site handled customization complexity for B2B buyers.</div>
       </div>
@@ -1026,6 +964,7 @@
         <div class="method-body">One-on-one interviews with internal team members and client stakeholders. Key finding: buyers often arrive with very specific storage problems (die dimensions, load weights) but couldn't find confirmation that PSS could solve them without calling.</div>
       </div>
     </div>
+
     <div class="section-num" style="margin-top:48px;"><span>—</span> Key Findings</div>
 
     <div class="insight-grid fade-up">
@@ -1171,6 +1110,7 @@
         </div>
       </div>
     </div>
+
     <div class="solution-row fade-up">
       <div class="solution-num">03</div>
       <div>
@@ -1226,57 +1166,24 @@
         <div class="outcome-sub">Up from 1.48% baseline — now within B2B industry benchmark</div>
       </div>
     </div>
-<div class="before-after-grid">
 
-  <div class="before-after-card">
-    <div class="before-after-label">Before</div>
-
-    <div class="image-placeholder small">
-		<img 
-    src=PSS/pss-old-ui.png 
-    alt="NLB Corp homepage redesign mockup">
-		<img 
-    src=PSS/pss-detail.png 
-    alt="NLB Corp homepage redesign mockup">
-      <div class="image-placeholder-content">
-        <div class="image-placeholder-title">
-          Legacy Website UI
+    <div class="before-after-grid">
+      <div class="before-after-card">
+        <div class="before-after-label">Before</div>
+        <div class="image-placeholder small">
+          <img src="PSS/pss-old-ui.png" alt="Legacy website UI">
+          <img src="PSS/pss-detail.png" alt="Legacy detail page">
         </div>
-
-        <p class="image-placeholder-copy">
-          Screenshots of the original non-responsive
-          homepage, RFQ flow, or gallery experience.
-        </p>
+      </div>
+      <div class="before-after-card">
+        <div class="before-after-label after">After</div>
+        <div class="image-placeholder small">
+          <img src="PSS/pss-industries.png" alt="Redesigned industries page">
+          <img src="PSS/pss-gallery.png" alt="Redesigned gallery page">
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="before-after-card">
-    <div class="before-after-label after">
-      After
-    </div>
-
-    <div class="image-placeholder small">
-		<img 
-    src="PSS/pss-industries.png"
-    alt="NLB Corp homepage redesign mockup">
-		<img 
-    src="PSS/pss-gallery.png"
-    alt="NLB Corp homepage redesign mockup">
-      <div class="image-placeholder-content">
-        <div class="image-placeholder-title">
-          Redesigned UX Experience
-        </div>
-
-        <p class="image-placeholder-copy">
-          Polished desktop/mobile redesign visuals,
-          responsive layouts, and optimized CTA sections.
-        </p>
-      </div>
-    </div>
-  </div>
-
-</div>
     <div class="compare-grid fade-up" style="margin-top:0;">
       <div class="compare-panel">
         <div class="compare-label">Old UI — Before</div>
