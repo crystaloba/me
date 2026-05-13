@@ -363,7 +363,15 @@
     justify-content: center; text-align: center; padding: 32px;
     margin: 40px 0;
   }
+	.image-placeholder img {
+		width: 100%;
+  display: block;
+  object-fit: cover;}
   .image-placeholder.small { min-height: 240px; }
+	.image-placeholder.small img {
+		width: 100%;
+  display: block;
+  object-fit: cover;}
   .image-placeholder-label {
     font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--teal-600); margin-bottom: 10px;
@@ -490,7 +498,7 @@
 
     <div class="image-placeholder">
 		<img
-    src="Homepage.jpg"
+    src="Home Remedy/hr-hp.jpg"
     alt="Home Remedy redesigned homepage"
     class="hero-image">
     </div>
@@ -565,14 +573,9 @@
 
     <div class="image-placeholder small">
 		<img
-    src="Homepage.jpg"
-    alt="Home Remedy redesigned homepage"
-    class="image-placeholder small">
+    src="Home Remedy/hr-research.png"
+    alt="Home Remedy redesigned homepage">
       <div class="image-placeholder-label">Research Artifacts</div>
-    </div>
-    <div class="caption-box">
-      <label>Image Description</label>
-      <textarea placeholder="e.g., 'Analytics dashboard showing 7,029 total visits and 256 conversions, with lead source breakdown by channel.'"></textarea>
     </div>
 
     <div class="method-grid fade-up">
@@ -626,15 +629,13 @@
     <h2 class="section-h">From stakeholder brief<br>to <em>high-fidelity design</em></h2>
 
     <div class="image-placeholder">
+		<img
+    src="Home Remedy/hr-lofi.jpg"
+    alt="Home Remedy redesigned homepage">
       <div class="image-placeholder-label">Design Process</div>
       <div class="image-placeholder-title">Wireframes & Early Ideations</div>
-      <p class="image-placeholder-copy">Recommended: low-fidelity wireframe sketches, sitemap, or annotated layout explorations.</p>
+      <p class="image-placeholder-copy">Low-fidelity wireframe sketches, sitemap, or annotated layout explorations.</p>
     </div>
-    <div class="caption-box">
-      <label>Image Description</label>
-      <textarea placeholder="e.g., 'Early wireframe sketches showing homepage layout with hero carousel, service section with interior/exterior split, and gallery grid.'"></textarea>
-    </div>
-
     <div class="process-track fade-up">
       <div class="process-step">
         <div class="step-phase">Phase 01</div>
@@ -745,13 +746,12 @@
     </div>
 
     <div class="image-placeholder small" style="margin-top:32px;">
+		<img
+    src="Home Remedy/hr-blog.jpg"
+    alt="Home Remedy redesigned homepage">
       <div class="image-placeholder-label">Branding System</div>
       <div class="image-placeholder-title">Typography & Color Guide</div>
       <p class="image-placeholder-copy">Insert the full branding slide showing Europa headings, Arboria body text, and all color swatches.</p>
-    </div>
-    <div class="caption-box">
-      <label>Image Description</label>
-      <textarea placeholder="e.g., 'Branding guide showing Europa in 6 weights for headings, Arboria for eyebrow and body text, and the six-color palette from teal-600 to off-white.'"></textarea>
     </div>
   </section>
 
@@ -820,13 +820,21 @@
     </div>
 
     <div class="image-placeholder" style="margin-top:40px;">
+		<img
+    src="Home Remedy/hr-homepage-extended.jpg"
+    alt="Home Remedy redesigned homepage">
+		<img
+    src="Home Remedy/hr-detail.jpg"
+    alt="Home Remedy redesigned homepage">
+		<img
+    src="Home Remedy/hr-gallery.jpg"
+    alt="Home Remedy redesigned homepage">
+		<img
+    src="Home Remedy/hr-blog.jpg"
+    alt="Home Remedy redesigned homepage">
       <div class="image-placeholder-label">Hi-Fi Designs</div>
       <div class="image-placeholder-title">Homepage, Interior Page, Gallery & RFQ</div>
       <p class="image-placeholder-copy">Insert annotated hi-fi mockup screenshots showing the homepage hero, interior remodeling page with interactive service list, filterable gallery, and redesigned RFQ form.</p>
-    </div>
-    <div class="caption-box">
-      <label>Image Description</label>
-      <textarea placeholder="e.g., 'Hi-fi mockup of the Home Remedy homepage in MacBook Pro frame, showing teal nav with Google rating, rotating hero carousel, and dual CTA buttons for Interior and Exterior Remodeling.'"></textarea>
     </div>
   </section>
 
@@ -865,6 +873,12 @@
       <div class="before-after-card">
         <div class="before-after-label">Before</div>
         <div class="image-placeholder small">
+			<img
+    src="Home Remedy/hr-blog.jpg"
+    alt="Home Remedy redesigned homepage">
+			<img
+    src="Home Remedy/hr-blog.jpg"
+    alt="Home Remedy redesigned homepage">
           <div class="image-placeholder-label">Legacy UI</div>
           <div class="image-placeholder-title">Original Website</div>
           <p class="image-placeholder-copy">Insert screenshots of the original dark-teal homepage, generic nav, and basic RFQ form.</p>
