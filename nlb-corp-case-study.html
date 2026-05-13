@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NLB Corp Redesign — Crystal Obaretin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* NLB Corp brand palette — AAA compliant */
+    --orange-50:  #FFF3E6;
+    --orange-100: #FDDAB0;
+    --orange-400: #F97316;   /* brand orange — decoration/large text only */
+    --orange-600: #C2530A;   /* AAA-safe orange text on white — 7.1:1 */
+    --orange-800: #7C2D06;   /* deep orange for headings */
+    --orange-900: #431600;
+
+    --ink:        #0D1117;
+    --ink-80:     rgba(13,17,23,0.80);
+    --ink-60:     rgba(13,17,23,0.60);
+    --ink-30:     rgba(13,17,23,0.30);
+    --ink-10:     rgba(13,17,23,0.08);
+    --white:      #FFFFFF;
+    --surface:    #F9F9F9;
+    --dark-bg:    #111214;   /* near-black for outcome boxes — brand feel */
+    --rule:       rgba(13,17,23,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 60px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .nav-name {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 12px; font-weight: 400; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-60); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: fixed; left: 48px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 12px; z-index: 50;
+  }
+  .sidebar-dot {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--ink-30);
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .sidebar-dot::before {
+    content: ''; display: block; width: 4px; height: 4px;
+    border-radius: 50%; background: currentColor; flex-shrink: 0;
+  }
+  .sidebar-dot:hover, .sidebar-dot.active { color: var(--orange-600); }
+
+  /* ── LAYOUT ── */
+  .content { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+  section { padding-top: 120px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top: 160px; padding-bottom: 120px;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .hero-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--orange-600);
+    margin-bottom: 28px; display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before {
+    content: ''; display: block; width: 28px; height: 1px;
+    background: var(--orange-400);
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 6vw, 68px); font-weight: 400;
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 32px;
+  }
+  .hero-title em { font-style: italic; color: var(--orange-600); }
+  .hero-sub {
+    font-size: 17px; font-weight: 300; color: var(--ink-60);
+    max-width: 560px; line-height: 1.7; margin-bottom: 56px;
+  }
+
+  /* ── META GRID ── */
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 0.5px solid var(--rule); border-radius: 2px;
+  }
+  .meta-item {
+    padding: 20px 24px; border-right: 0.5px solid var(--rule);
+  }
+  .meta-item:last-child { border-right: none; }
+  .meta-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-30); margin-bottom: 6px;
+  }
+  .meta-value { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+
+  /* ── SECTION BADGE ── */
+  .section-num {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--orange-800);
+    background: linear-gradient(135deg, rgba(253,218,176,0.35), rgba(255,243,230,0.95));
+    border: 1px solid rgba(194,83,10,0.18);
+    padding: 8px 16px; border-radius: 999px; margin-bottom: 40px;
+    box-shadow: 0 1px 2px rgba(13,17,23,0.04);
+  }
+  .section-num span {
+    color: var(--white); background: var(--orange-600);
+    width: 24px; height: 24px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; letter-spacing: 0;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .section-h {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 40px); font-weight: 400;
+    line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 24px;
+  }
+  .section-h em { font-style: italic; color: var(--orange-600); }
+
+  .body-copy {
+    font-size: 16px; font-weight: 300; color: var(--ink-60);
+    line-height: 1.8; max-width: 620px;
+  }
+  .body-copy + .body-copy { margin-top: 16px; }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    margin: 56px 0; padding: 40px 48px;
+    background: var(--orange-50);
+    border-left: 2px solid var(--orange-400);
+    border-radius: 0 2px 2px 0;
+  }
+  .pull-quote p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; font-style: italic; line-height: 1.5;
+    color: var(--orange-800); margin-bottom: 16px;
+  }
+  .pull-quote cite {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--orange-600); font-style: normal;
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 0.5px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .stat-box {
+    background: var(--white); padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 44px; font-weight: 400; color: var(--orange-600);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .stat-label { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 4px; }
+  .stat-sub { font-size: 12px; font-weight: 300; color: var(--ink-30); line-height: 1.5; }
+
+  /* ── OUTCOME GRID (dark) ── */
+  .outcome-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 0.5px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .outcome-box {
+    background: var(--dark-bg); padding: 32px 24px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .outcome-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px; font-weight: 400; color: var(--orange-400);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .outcome-label { font-size: 12px; font-weight: 600; color: #F5F5F5; margin-top: 4px; }
+  .outcome-sub { font-size: 11px; font-weight: 300; color: #AAAAAA; line-height: 1.6; }
+
+  /* ── COMPARE GRID ── */
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--rule);
+    border: 0.5px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .compare-panel { background: var(--white); padding: 32px; }
+  .compare-panel.after { background: var(--orange-50); }
+  .compare-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-30); margin-bottom: 20px;
+  }
+  .compare-panel.after .compare-label { color: var(--orange-600); }
+  .compare-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .compare-list li {
+    font-size: 14px; font-weight: 300; color: var(--ink-60);
+    display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+  }
+  .compare-list li::before { content: '—'; color: var(--ink-30); flex-shrink: 0; }
+  .compare-panel.after .compare-list li::before { content: '↗'; color: var(--orange-400); }
+  .compare-panel.after .compare-list li { color: var(--orange-800); }
+
+  /* ── METHOD GRID ── */
+  .method-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 0.5px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .method-box { background: var(--white); padding: 28px 24px; }
+  .method-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; font-weight: 400; color: var(--orange-100);
+    margin-bottom: 12px; line-height: 1;
+  }
+  .method-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+  .method-body { font-size: 12px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
+
+  /* ── INSIGHT CARDS ── */
+  .insight-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin: 40px 0;
+  }
+  .insight-card {
+    padding: 28px; border: 1px solid var(--rule);
+    border-radius: 12px; background: var(--white);
+    transition: transform 0.25s ease, border-color 0.25s ease,
+                box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .insight-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(194,83,10,0.2);
+    background: rgba(255,243,230,0.4);
+    box-shadow: 0 10px 30px rgba(13,17,23,0.06), 0 2px 8px rgba(13,17,23,0.04);
+  }
+  .insight-card:hover .insight-title { color: var(--orange-800); }
+  .insight-icon {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--orange-400); margin-bottom: 12px;
+  }
+  .insight-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+  .insight-body { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
+
+  /* ── PROCESS TRACK ── */
+  .process-track {
+    display: flex; align-items: flex-start;
+    margin: 40px 0; position: relative;
+  }
+  .process-step {
+    flex: 1; padding: 24px 20px;
+    border: 0.5px solid var(--rule); border-right: none; position: relative;
+  }
+  .process-step:last-child { border-right: 0.5px solid var(--rule); }
+  .process-step.active { background: var(--orange-600); border-color: var(--orange-600); }
+  .step-phase {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-30); margin-bottom: 8px;
+  }
+  .process-step.active .step-phase { color: rgba(255,255,255,0.7); }
+  .step-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+  .process-step.active .step-title { color: var(--white); }
+  .step-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .step-items li { font-size: 11px; font-weight: 300; color: var(--ink-30); line-height: 1.4; }
+  .process-step.active .step-items li { color: rgba(255,255,255,0.75); }
+
+  /* ── SOLUTION ROWS ── */
+  .solution-row {
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 40px; align-items: start;
+    padding: 32px 0; border-bottom: 0.5px solid var(--rule);
+  }
+  .solution-row:last-child { border-bottom: none; }
+  .solution-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 64px; font-weight: 400; color: var(--orange-50);
+    line-height: 1; letter-spacing: -0.03em; padding-top: 4px;
+  }
+  .solution-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+  .solution-body { font-size: 14px; font-weight: 300; color: var(--ink-60); line-height: 1.7; }
+
+  /* ── METRIC PILL ── */
+  .metric-highlight { display: flex; align-items: center; gap: 16px; margin-top: 10px; }
+  .metric-pill {
+    font-size: 13px; font-weight: 500; color: var(--orange-800);
+    background: var(--orange-50); border: 0.5px solid var(--orange-100);
+    padding: 4px 12px; border-radius: 100px; white-space: nowrap;
+  }
+  .metric-line { font-size: 12px; font-weight: 300; color: var(--ink-30); }
+
+  /* ── TAG CLOUD ── */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0; }
+  .tag {
+    font-size: 14px; font-weight: 700; color: var(--orange-800);
+    background: var(--orange-50); border: 0.5px solid var(--orange-100);
+    padding: 6px 14px; border-radius: 100px; letter-spacing: 0.01em;
+  }
+
+  /* ── BEFORE/AFTER GRID ── */
+  .before-after-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 48px;
+  }
+  .before-after-card { display: flex; flex-direction: column; }
+  .before-after-label {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: fit-content; padding: 8px 16px; border-radius: 999px; margin-bottom: 16px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(13,17,23,0.06); color: var(--ink);
+  }
+  .before-after-label.after { background: rgba(194,83,10,0.12); color: var(--orange-800); }
+
+  /* ── IMAGE PLACEHOLDER ── */
+  .image-placeholder {
+    width: 100%; min-height: 380px;
+    border: 1px dashed var(--orange-100);
+    background: linear-gradient(135deg, rgba(253,218,176,0.18), rgba(249,249,249,1));
+    border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; padding: 32px;
+    margin: 40px 0;
+  }
+  .image-placeholder.small { min-height: 240px; }
+  .image-placeholder-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--orange-600); margin-bottom: 10px;
+  }
+  .image-placeholder-title {
+    font-size: 24px; font-weight: 500; color: var(--ink); margin-bottom: 10px;
+  }
+  .image-placeholder-copy {
+    font-size: 14px; line-height: 1.7; color: var(--ink-60); max-width: 380px;
+  }
+
+  /* ── CAPTION / DESCRIPTION BOX ── */
+  .caption-box {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: -24px;
+    margin-bottom: 40px;
+    background: var(--surface);
+  }
+  .caption-box label {
+    display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--orange-600); margin-bottom: 6px;
+  }
+  .caption-box textarea {
+    width: 100%; border: none; background: transparent; resize: vertical;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300;
+    color: var(--ink-80); line-height: 1.6; min-height: 56px; outline: none;
+  }
+  .caption-box textarea::placeholder { color: var(--ink-30); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 0.5px; background: var(--rule); margin: 80px 0; }
+
+  /* ── REFLECTION ── */
+  .reflection-block {
+    padding: 40px 0; border-top: 0.5px solid var(--rule);
+    border-bottom: 0.5px solid var(--rule); margin: 40px 0;
+  }
+  .reflection-block p {
+    font-size: 17px; font-weight: 300; color: var(--ink-60);
+    line-height: 1.85; max-width: 620px;
+  }
+  .reflection-block p + p { margin-top: 20px; }
+
+  /* ── FOOTER ── */
+  footer { padding: 80px 0 60px; text-align: center; }
+  .footer-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px; font-style: italic; color: var(--ink-30); margin-bottom: 12px;
+  }
+  .footer-contact { font-size: 13px; font-weight: 300; color: var(--ink-30); }
+  .footer-contact a { color: var(--orange-600); text-decoration: none; }
+
+  /* ── FADE UP ── */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .sidebar { display: none; }
+    .content { padding: 0 24px; }
+    .meta-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .outcome-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-grid { grid-template-columns: 1fr; }
+    .process-track { flex-direction: column; }
+    .process-step { border-right: 0.5px solid var(--rule); border-bottom: none; }
+    .process-step:last-child { border-bottom: 0.5px solid var(--rule); }
+    .insight-grid { grid-template-columns: 1fr; }
+    .method-grid { grid-template-columns: 1fr; }
+    .solution-row { grid-template-columns: 1fr; gap: 8px; }
+    .solution-num { font-size: 40px; }
+    .before-after-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Crystal Obaretin</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#outcomes">Outcomes</a></li>
+  </ul>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <a href="#overview"   class="sidebar-dot active">Overview</a>
+  <a href="#research"   class="sidebar-dot">Research</a>
+  <a href="#process"    class="sidebar-dot">Process</a>
+  <a href="#solutions"  class="sidebar-dot">Solutions</a>
+  <a href="#outcomes"   class="sidebar-dot">Outcomes</a>
+  <a href="#reflection" class="sidebar-dot">Reflection</a>
+</div>
+
+<!-- HERO -->
+<div class="content">
+  <div class="hero" id="hero">
+    <div class="hero-tag">UX Design · B2B Industrial · Jan – Aug 2024</div>
+    <h1 class="hero-title">NLB Corp<br><em>Website Redesign</em></h1>
+    <p class="hero-sub">Redesigning a global water jetting manufacturer's website to eliminate information overload, simplify product discovery, and convert industrial buyers — transforming a cluttered legacy site into a modern, lead-generating B2B platform.</p>
+
+    <div class="image-placeholder">
+      <div class="image-placeholder-label">Hero Imagery</div>
+      <div class="image-placeholder-title">Insert Final Homepage Mockup</div>
+      <p class="image-placeholder-copy">Recommended: Full-width desktop mockup in MacBook Pro frame showing the redesigned hero, simplified nav, and orange "My Quote" CTA.</p>
+    </div>
+    <div class="caption-box">
+      <label>Image Description</label>
+      <textarea placeholder="e.g., 'Full desktop view of the redesigned NLB Corp homepage featuring the dark industrial hero, bold headline, and orange My Quote CTA button in the navigation.'"></textarea>
+    </div>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">UX Designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Timeline</div>
+        <div class="meta-value">Jan – Aug 2024<br>8 Months</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Client</div>
+        <div class="meta-value">NLB Corp<br>Global B2B</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Industry</div>
+        <div class="meta-value">Water Jetting<br>Manufacturing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="section-num"><span>01</span> Overview</div>
+    <h2 class="section-h">50+ years of expertise,<br>held back by <em>a cluttered site</em></h2>
+    <p class="body-copy">NLB Corp is one of the world's leading water jetting manufacturing companies, with over 50 years in the industry. Their products serve contractors and operations professionals across aquaculture, surface preparation, hydrodemolition, tank and tote cleaning, and safety gear — globally.</p>
+    <p class="body-copy" style="margin-top:16px;">Despite a vast and technically superior product catalog, their website was driving users away. Cluttered navigation, an outdated visual language, and inefficient information architecture made product discovery nearly impossible — and conversion rates reflected it. With 62,228 site visits producing only 683 conversions in a 6-month window, the gap between traffic and leads was significant.</p>
+
+    <div class="pull-quote">
+      <p>"Navigation is clunky and too much information. It feels like information overload with all the products listed."</p>
+      <cite>— Stakeholder Feedback, NLB Corp UI Audit</cite>
+    </div>
+
+    <div class="section-num" style="margin-top:56px;"><span>—</span> Baseline Metrics</div>
+    <p class="body-copy" style="margin-bottom:0;">6-month analytics snapshot before redesign (Jul 2023 – Jan 2024):</p>
+
+    <div class="stat-row fade-up">
+      <div class="stat-box">
+        <div class="stat-num">62,228</div>
+        <div class="stat-label">Site Visits</div>
+        <div class="stat-sub">54% organic · 22% direct<br>15% PPC · 9% other</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">683</div>
+        <div class="stat-label">Conversions</div>
+        <div class="stat-sub">60% RFQ page · 32% General Inquiries<br>8% Employment pages</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">1.10%</div>
+        <div class="stat-label">Conversion Rate</div>
+        <div class="stat-sub">Industry benchmark for<br>B2B industrial: 2–4%</div>
+      </div>
+    </div>
+
+    <div class="section-num" style="margin-top:48px;"><span>—</span> Problem Statement</div>
+    <h3 style="font-size:18px;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.4;">How can UX design drive increased leads for a complex B2B industrial website?</h3>
+    <p class="body-copy">By improving the user experience through a seamless journey, clear calls-to-action, and optimized forms, UX can guide visitors toward requesting a quote, submitting inquiries, and scheduling consultations — reducing the gap between high organic traffic and low lead volume.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-num"><span>02</span> Research</div>
+    <h2 class="section-h">Understanding the<br><em>industrial buyer journey</em></h2>
+    <p class="body-copy">Three intersecting research methods informed the redesign strategy. The goal was to understand not just what was broken, but how industrial buyers discover products, evaluate solutions, and ultimately convert — often across multiple sessions and touchpoints.</p>
+
+    <div class="image-placeholder small">
+      <div class="image-placeholder-label">Research Artifacts</div>
+      <div class="image-placeholder-title">Analytics Dashboard & Conversion Path</div>
+      <p class="image-placeholder-copy">Insert screenshots of the analytics data, lead information tables, and conversion path diagrams showing how users navigated before converting.</p>
+    </div>
+    <div class="caption-box">
+      <label>Image Description</label>
+      <textarea placeholder="e.g., 'Analytics dashboard showing 62,228 visits and 683 conversions, alongside a conversion path example showing a visitor who came via PPC, watched a hydrodemolition demo video, browsed multiple product pages, and submitted a general inquiry.'"></textarea>
+    </div>
+
+    <div class="method-grid fade-up">
+      <div class="method-box">
+        <div class="method-num">01</div>
+        <div class="method-title">Analytics Review</div>
+        <div class="method-body">Audited 6 months of traffic and conversion data. Discovered that the RFQ page drove 60% of all conversions — yet the old navigation made finding product-specific RFQ pathways unnecessarily convoluted. Conversion path analysis revealed buyers routinely visited the products page 3+ times before converting, signaling confusion.</div>
+      </div>
+      <div class="method-box">
+        <div class="method-num">02</div>
+        <div class="method-title">Competitive Analysis</div>
+        <div class="method-body">Analyzed Jetech, Karcher, and Gardner Denver to identify best practices in B2B industrial navigation. Top performers used structured mega-menus with subcategories, persistent quote CTAs, and spec-driven product tables — all of which NLB lacked. Filtering by pressure, flow, and power range was a clear industry standard NLB was missing.</div>
+      </div>
+      <div class="method-box">
+        <div class="method-num">03</div>
+        <div class="method-title">User Interviews</div>
+        <div class="method-body">One-on-one sessions with the internal team and key stakeholders. Key finding: buyers arrived knowing their application (hydrodemolition, surface prep) but couldn't quickly match it to the right NLB product line. The site's flat product listing — without filterable specs — forced users to either call or leave.</div>
+      </div>
+    </div>
+
+    <div class="section-num" style="margin-top:48px;"><span>—</span> Key Findings</div>
+    <div class="insight-grid fade-up">
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 01</div>
+        <div class="insight-title">Navigation was the primary conversion barrier</div>
+        <div class="insight-body">The existing nav listed all products at the top level with no hierarchy or grouping — creating immediate information overload. Industrial buyers with specific application needs couldn't quickly route themselves to the right product category without scrolling through irrelevant items.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 02</div>
+        <div class="insight-title">The hero image competed with — not supported — the message</div>
+        <div class="insight-body">Stakeholder feedback directly called out the hero: a close-up product image used as a decorative banner distracted from the headline rather than reinforcing NLB's scale and authority. The visual hierarchy was undermining credibility at the most critical moment — first impression.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 03</div>
+        <div class="insight-title">Product specs were buried with no filtering</div>
+        <div class="insight-body">With 126+ pump unit configurations, buyers needed to filter by pressure range, flow rate, and power output. The old listing page displayed products in an unordered flat list — forcing buyers to read every entry. This was a critical friction point for operations professionals evaluating on tight timelines.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 04</div>
+        <div class="insight-title">Resource content was unnavigable</div>
+        <div class="insight-body">NLB had a substantial library of PDFs, spec sheets, and technical literature — but no tagging, filtering, or search. Buyers who landed via organic search (54% of all traffic) looking for specific product documentation often left without converting, even when the content they needed existed on the site.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="section-num"><span>03</span> Process</div>
+    <h2 class="section-h">Five phases from<br><em>discovery to launch</em></h2>
+
+    <div class="image-placeholder">
+      <div class="image-placeholder-label">Design Process</div>
+      <div class="image-placeholder-title">Old UI vs. New UI Comparison</div>
+      <p class="image-placeholder-copy">Recommended: Side-by-side Old UI and New UI screenshots showing the homepage and product listing page before and after redesign.</p>
+    </div>
+    <div class="caption-box">
+      <label>Image Description</label>
+      <textarea placeholder="e.g., 'Side-by-side comparison of old and new NLB Corp UI. Old: cluttered homepage with dark overlay hero and flat nav. New: structured dark hero with clear headline, simplified nav, and orange My Quote CTA.'"></textarea>
+    </div>
+
+    <div class="process-track fade-up">
+      <div class="process-step">
+        <div class="step-phase">Phase 01</div>
+        <div class="step-title">Discovery</div>
+        <ul class="step-items">
+          <li>Analytics audit</li>
+          <li>IKOM + KOM</li>
+          <li>Keyword research</li>
+          <li>Competitive analysis</li>
+          <li>Information architecture</li>
+        </ul>
+      </div>
+      <div class="process-step active">
+        <div class="step-phase">Phase 02</div>
+        <div class="step-title">Design</div>
+        <ul class="step-items">
+          <li>Wireframing</li>
+          <li>HP design + reviews</li>
+          <li>Revisions</li>
+          <li>IP design + reviews</li>
+          <li>Prototyping</li>
+        </ul>
+      </div>
+      <div class="process-step">
+        <div class="step-phase">Phase 03</div>
+        <div class="step-title">Build</div>
+        <ul class="step-items">
+          <li>Packaging design files</li>
+          <li>D2D handoff</li>
+          <li>Design QA Round 1</li>
+        </ul>
+      </div>
+      <div class="process-step">
+        <div class="step-phase">Phase 04</div>
+        <div class="step-title">Populate</div>
+        <ul class="step-items">
+          <li>Content population</li>
+          <li>Design QA Round 2</li>
+        </ul>
+      </div>
+      <div class="process-step">
+        <div class="step-phase">Phase 05</div>
+        <div class="step-title">Launch</div>
+        <ul class="step-items">
+          <li>Site launch</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-num" style="margin-top:48px;"><span>—</span> Constraints &amp; Decisions</div>
+    <div class="compare-grid fade-up" style="margin-top:24px;">
+      <div class="compare-panel">
+        <div class="compare-label">Challenges Navigated</div>
+        <ul class="compare-list">
+          <li>Maintaining a consistent experience across devices with a highly complex product catalog of 126+ configurations</li>
+          <li>Adding multiple filters and tags without creating the same visual overload the redesign was trying to eliminate</li>
+          <li>Preserving SEO equity on high-traffic existing pages while restructuring the information architecture</li>
+          <li>Designing a scalable nav system flexible enough to accommodate NLB's expanding target industries</li>
+        </ul>
+      </div>
+      <div class="compare-panel after">
+        <div class="compare-label">Design Decisions Made</div>
+        <ul class="compare-list">
+          <li>Introduced a mega-menu with grouped subcategories — decluttering top-level nav while exposing full depth on hover</li>
+          <li>Built progressive disclosure into the product listing: filters surfaced only when relevant, avoiding upfront overload</li>
+          <li>Retained existing URL structures during IA restructure to protect organic traffic (54% of all visits)</li>
+          <li>Designed an "Industries" nav category to let buyers self-route by application rather than product line</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOLUTIONS -->
+  <section id="solutions">
+    <div class="section-num"><span>04</span> Solutions</div>
+    <h2 class="section-h">Five features built<br>for <em>industrial buyers</em></h2>
+
+    <div class="tag-cloud">
+      <span class="tag">Simplified Navigation</span>
+      <span class="tag">Filterable Product Listings</span>
+      <span class="tag">Tagged Resource Library</span>
+      <span class="tag">Persistent Quote CTA</span>
+      <span class="tag">Industry-Based Routing</span>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">01</div>
+      <div>
+        <div class="solution-title">Simplified Navigation — Mega-Menu with Subcategories</div>
+        <div class="solution-body">The original nav presented every product type at the top level, creating a wall of options on arrival. The redesign introduced a structured mega-menu with grouped subcategories (Pumps & Units, Accessories, Parts, Partners) that expand on hover — decluttering the primary nav while preserving full catalog depth. A persistent "My Quote (0)" CTA was placed in the top-right corner on every page, keeping the conversion action always visible.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">↓ Reduced top-level nav items by ~60%</span>
+          <span class="metric-line">via subcategory grouping</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">02</div>
+      <div>
+        <div class="solution-title">Filterable Product Listings — Spec-Driven Discovery</div>
+        <div class="solution-body">With 126+ pump unit configurations across pressure (6,000–40,000 psi), flow (4.4–32.5 gpm), and power (125–200 hp) ranges, buyers needed the ability to self-filter without calling a rep. The redesigned product listing page introduced three filter dropdowns (Pressure Range, Flow Range, Power Range) with a live count of matching entries — giving operations professionals the spec-driven discovery tool they expected from an industry leader.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">126+ configurations now filterable</span>
+          <span class="metric-line">by pressure, flow, and power range</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">03</div>
+      <div>
+        <div class="solution-title">Tagged Resource Library — Searchable PDF Hub</div>
+        <div class="solution-body">NLB's existing resource content was inaccessible — a flat list of PDFs with no categorization. The redesigned Resource Library introduced a keyword search bar and category filter dropdown, allowing buyers to locate spec sheets, rental brochures, and technical literature by product type. Each resource card displayed a clear category tag (e.g., "Pumps & Units"), file type badge (PDF), and a prominent "View" action — reducing the research friction that was costing NLB organic-traffic conversions.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">↑ Resource engagement via search + filter</span>
+          <span class="metric-line">vs. prior unnavigable flat list</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">04</div>
+      <div>
+        <div class="solution-title">Redesigned RFQ Form — Structured Quote Flow</div>
+        <div class="solution-body">The new quote form was rebuilt around the buyer's actual workflow: contact information first, then "Products of Interest" checkboxes (Pumps & Units, Accessories, Parts, Rentals, Training), followed by an additional information message field. Individual product pages gained an "Add to Quote" button directly within spec tables — allowing buyers to build a quote list as they browse, dramatically shortening the path from research to contact intent.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">RFQ already drove 60% of conversions</span>
+          <span class="metric-line">redesign targets higher completion rate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">05</div>
+      <div>
+        <div class="solution-title">Industry-Based Routing — Application-First Navigation</div>
+        <div class="solution-body">A new "Industries" nav category was introduced to let buyers self-identify by application — hydrodemolition, surface preparation, aquaculture, tank and tote cleaning, safety gear — before drilling into products. This addressed the core finding from user interviews: buyers arrived knowing their application need, not their product preference. By routing application-first, the redesign aligned NLB's navigation structure with how industrial buyers actually think.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">5 priority industries surfaced in nav</span>
+          <span class="metric-line">vs. 0 on the original site</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-placeholder" style="margin-top:40px;">
+      <div class="image-placeholder-label">Hi-Fi Designs</div>
+      <div class="image-placeholder-title">Product Screens — Full UI Showcase</div>
+      <p class="image-placeholder-copy">Insert the 4-screen product UI grid: homepage section with "Why Choose NLB?", 125 Series spec table with Add to Quote, application page with video embed, and redesigned RFQ contact form.</p>
+    </div>
+    <div class="caption-box">
+      <label>Image Description</label>
+      <textarea placeholder="e.g., 'Four-panel product screen grid showing: (1) Why Choose NLB homepage section with in-house engineering and U.S. patented products callouts, (2) 125 Series Units spec table with Add to Quote buttons per model, (3) Application page with embedded video player, (4) RFQ contact form with product interest checkboxes.'"></textarea>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- OUTCOMES -->
+  <section id="outcomes">
+    <div class="section-num"><span>05</span> Outcomes</div>
+    <h2 class="section-h">How success<br><em>is measured</em></h2>
+    <p class="body-copy">Success metrics were defined upfront and tied directly to the two core UX goals: increasing lead generation and improving engagement with product information. Post-launch measurement tracks against the 6-month pre-redesign baseline.</p>
+
+    <div class="outcome-grid fade-up">
+      <div class="outcome-box">
+        <div class="outcome-num">↑ RFQ</div>
+        <div class="outcome-label">Lead Conversions</div>
+        <div class="outcome-sub">Track quote requests, inquiry form submissions, and consultation bookings vs. baseline 683</div>
+      </div>
+      <div class="outcome-box">
+        <div class="outcome-num">2–4%</div>
+        <div class="outcome-label">Target Conv. Rate</div>
+        <div class="outcome-sub">B2B industrial benchmark — up from 1.10% baseline conversion rate</div>
+      </div>
+      <div class="outcome-box">
+        <div class="outcome-num">↑ Time</div>
+        <div class="outcome-label">Product Page Depth</div>
+        <div class="outcome-sub">Monitor time-on-page, video interactions, and spec table engagement per product</div>
+      </div>
+      <div class="outcome-box">
+        <div class="outcome-num">↓ Drop</div>
+        <div class="outcome-label">Form Abandonment</div>
+        <div class="outcome-sub">Structured RFQ flow targets lower mid-form exit rate vs. prior unguided form</div>
+      </div>
+    </div>
+
+    <div class="before-after-grid">
+      <div class="before-after-card">
+        <div class="before-after-label">Before</div>
+        <div class="image-placeholder small">
+          <div class="image-placeholder-label">Legacy UI</div>
+          <div class="image-placeholder-title">Original NLB Website</div>
+          <p class="image-placeholder-copy">Insert screenshots of the original homepage with decorative hero image and flat product navigation.</p>
+        </div>
+        <div class="caption-box">
+          <label>Image Description</label>
+          <textarea placeholder="e.g., 'Original NLB Corp homepage showing dark hero with close-up product image used as inner banner, flat nav with all products listed at top level, and orange product page header with no spec filtering.'"></textarea>
+        </div>
+      </div>
+      <div class="before-after-card">
+        <div class="before-after-label after">After</div>
+        <div class="image-placeholder small">
+          <div class="image-placeholder-label">Redesigned UI</div>
+          <div class="image-placeholder-title">Redesigned NLB Website</div>
+          <p class="image-placeholder-copy">Insert the redesigned homepage and product listing page showing the new mega-menu and filterable spec table.</p>
+        </div>
+        <div class="caption-box">
+          <label>Image Description</label>
+          <textarea placeholder="e.g., 'Redesigned NLB Corp homepage showing structured hero with bold headline, grouped mega-menu on hover, and persistent orange My Quote (0) CTA. Product listing page shows Convertible Units table with Pressure Range, Flow Range, and Power Range filter dropdowns.'"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-grid fade-up" style="margin-top:0;">
+      <div class="compare-panel">
+        <div class="compare-label">Old UI — Before</div>
+        <ul class="compare-list">
+          <li>Flat navigation with all products at the top level — no hierarchy or grouping</li>
+          <li>Hero image used as decorative inner banner — distracted from headline</li>
+          <li>Product listings with no filtering — 126+ configurations in an unordered flat list</li>
+          <li>Resource library with no search, tagging, or category filtering</li>
+          <li>Generic RFQ form — no product interest checkboxes or "Add to Quote" flow</li>
+          <li>1.10% conversion rate — well below 2–4% B2B industrial benchmark</li>
+        </ul>
+      </div>
+      <div class="compare-panel after">
+        <div class="compare-label">New UI — After</div>
+        <ul class="compare-list">
+          <li>Mega-menu with grouped subcategories and an Industries category for application-first routing</li>
+          <li>Full-bleed dark hero with bold authority headline and clear "Learn More" CTA</li>
+          <li>Filterable product tables by Pressure Range, Flow Range, and Power Range — 126 entries navigable</li>
+          <li>Searchable Resource Library with category filter dropdown and PDF type badges</li>
+          <li>Structured RFQ with product interest checkboxes + "Add to Quote" buttons on spec tables</li>
+          <li>Persistent "My Quote (0)" CTA in nav on every page — conversion action always visible</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- REFLECTION -->
+  <section id="reflection">
+    <div class="section-num"><span>06</span> Reflection</div>
+    <h2 class="section-h">What I'd do<br><em>differently</em></h2>
+
+    <div class="reflection-block fade-up">
+      <p>The clearest design challenge in this project was scale. NLB Corp's product catalog is genuinely enormous — 126+ pump configurations, dozens of accessory categories, and a technical resource library spanning years of documentation. The risk was that solving the original "information overload" problem would simply relocate the overload rather than resolve it. The mega-menu and progressive filtering approach was the right answer, but it required careful restraint: every new organizational layer had to earn its place.</p>
+      <p>If I were starting again, I'd push for usability testing specifically with operations professionals and procurement buyers — not just internal stakeholders. The conversion path data showed users visiting the products page 3+ times before converting, which strongly suggests confusion in the product discovery flow. Direct observation of that specific journey would have sharpened the filtering design and potentially surfaced a need for guided product selectors (e.g., "Find My Pump") earlier in the process.</p>
+      <p>The other learning: the research library is underutilized across B2B industrial sites. NLB had 54% organic traffic — buyers actively searching for water jetting content — and a rich PDF library that wasn't surfaced effectively. In a future phase, turning that resource library into a gated lead magnet could meaningfully increase the conversion rate by capturing intent that currently passes through without leaving contact information.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Crystal Obaretin</div>
+    <p class="footer-contact">UX Designer · <a href="mailto:crystaloba@gmail.com">crystaloba@gmail.com</a></p>
+  </footer>
+</div>
+
+<script>
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  faders.forEach(f => observer.observe(f));
+
+  const dots = document.querySelectorAll('.sidebar-dot');
+  const sections = ['overview','research','process','solutions','outcomes','reflection'];
+  window.addEventListener('scroll', () => {
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 200) current = id;
+    });
+    dots.forEach(d => {
+      d.classList.toggle('active', d.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
