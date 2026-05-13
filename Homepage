@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Obaretin — UX Designer</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --bg: #FFFDF8;
+  --surface: #FFFFFF;
+
+  --ink: #1A1A1A;
+  --ink-soft: #4A4A4A;
+  --rule: rgba(26,26,26,0.12);
+
+  --pearl: #F3E6BD;
+  --apricot: #D8973C;
+  --cotton: #FD9BB7;
+  --brown-red: #AD2831;
+  --black-cherry: #640D14;
+
+  --accent-primary: #640D14;
+  --accent-secondary: #AD2831;
+
+  --success: #1D6B43;
+  --white: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CUSTOM CURSOR */
+body {
+  cursor: none;
+}
+
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--black-cherry);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+}
+
+.cursor.hover {
+  width: 44px;
+  height: 44px;
+  background: rgba(100,13,20,0.08);
+  border: 1px solid var(--black-cherry);
+}
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 72px;
+  padding: 0 28px;
+
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(100,13,20,0.08);
+  border-radius: 999px;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--black-cherry);
+  text-decoration: none;
+}
+
+.nav-logo span {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--black-cherry);
+}
+
+.nav-cta {
+  text-decoration: none;
+  background: var(--black-cherry);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.nav-cta:hover {
+  background: var(--brown-red);
+  transform: translateY(-2px);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 140px 56px 80px;
+  gap: 48px;
+}
+
+.hero-left,
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* HERO PROFILE IMAGE */
+
+/* ================================================= */
+/* HERO IMAGE HALO / GLOW EFFECT */
+/* Replace your current hero-image-wrap CSS */
+/* ================================================= */
+
+.hero-image-wrap {
+  width: 100%;
+  max-width: 420px;
+
+  margin-bottom: 32px;
+
+  border-radius: 36px;
+
+  overflow: visible;
+
+  position: relative;
+
+  isolation: isolate;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+
+  animation: floatImage 6s ease-in-out infinite;
+}
+
+/* GLOW BACKGROUND */
+
+.hero-image-wrap::before {
+  content: '';
+
+  position: absolute;
+
+  inset: -18px;
+
+  border-radius: 48px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(253,155,183,0.32),
+      rgba(216,151,60,0.18),
+      rgba(100,13,20,0)
+    );
+
+  filter: blur(28px);
+
+  opacity: 0;
+
+  transform: scale(0.94);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+
+  z-index: -1;
+}
+
+/* HOVER GLOW */
+
+.hero-image-wrap:hover::before {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+/* IMAGE */
+
+.hero-image {
+  width: 100%;
+  height: auto;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 36px;
+
+  border: 1px solid rgba(100,13,20,0.08);
+
+  box-shadow:
+    0 24px 70px rgba(0,0,0,0.12),
+    0 6px 24px rgba(0,0,0,0.06);
+
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    filter 0.5s ease;
+}
+
+/* IMAGE HOVER */
+
+.hero-image-wrap:hover .hero-image {
+
+  transform:
+    scale(1.025)
+    translateY(-4px);
+
+  filter:
+    brightness(1.02)
+    saturate(1.05);
+
+  box-shadow:
+    0 30px 90px rgba(100,13,20,0.18),
+    0 10px 40px rgba(253,155,183,0.14);
+}
+
+/* FLOATING MOTION */
+
+@keyframes floatImage {
+
+  0%,100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.hero-image-wrap:hover .hero-image {
+  transform: scale(1.03);
+}
+
+/* Optional subtle gradient overlay */
+
+.hero-image-wrap::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.08),
+      rgba(0,0,0,0)
+    );
+
+  pointer-events: none;
+}
+
+/* Floating animation */
+
+@keyframes floatImage {
+
+  0%,100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+}
+.hero-eyebrow {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-red);
+  margin-bottom: 32px;
+}
+
+.hero-name {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(64px, 8vw, 108px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  color: var(--black-cherry);
+}
+
+.hero-name em {
+  display: block;
+  font-style: normal;
+  color: var(--brown-red);
+  font-weight: 500;
+}
+
+.hero-role {
+  margin-top: 32px;
+  max-width: 520px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 56px;
+
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 36px;
+  overflow: hidden;
+}
+
+.hero-stat {
+  padding: 28px;
+  border-right: 1px solid var(--rule);
+}
+
+.hero-stat:last-child {
+  border-right: none;
+}
+
+.hero-stat-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--black-cherry);
+}
+
+.hero-stat-label {
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.hero-available {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  width: fit-content;
+
+  background: rgba(29,107,67,0.08);
+  border: 1px solid rgba(29,107,67,0.18);
+
+  color: var(--success);
+
+  padding: 12px 18px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  margin-bottom: 40px;
+}
+
+.hero-available-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.8); opacity: 0.5; }
+}
+
+.hero-desc {
+  max-width: 500px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  overflow: hidden;
+  padding: 24px 0;
+  background: var(--black-cherry);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  width: max-content;
+  animation: marquee 18s linear infinite;
+}
+
+.marquee-item {
+  color: rgba(255,255,255,0.75);
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* SECTION */
+.work-section,
+.contact-section {
+  padding: 120px 56px;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 32px;
+
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-red);
+}
+
+.section-label::before {
+  content: attr(data-num);
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--black-cherry);
+  color: white;
+
+  border-radius: 999px;
+}
+
+.work-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 72px;
+}
+
+.work-title,
+.contact-heading,
+.about-heading {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--black-cherry);
+}
+
+.work-title em,
+.contact-heading em,
+.about-heading em {
+  color: var(--brown-red);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.work-count {
+  color: var(--ink-soft);
+}
+
+/* CASE STUDIES */
+.case-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.case-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  background: var(--surface);
+
+  border: 1px solid var(--rule);
+  border-radius: 42px;
+
+  overflow: hidden;
+
+  text-decoration: none;
+  color: inherit;
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.case-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.08);
+}
+
+.card-left,
+.card-right {
+  padding: 48px;
+}
+
+.card-left {
+  border-right: 1px solid var(--rule);
+}
+
+.card-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 84px;
+  font-weight: 800;
+  color: rgba(100,13,20,0.12);
+  margin-bottom: 20px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.card-tag {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: rgba(100,13,20,0.06);
+  border: 1px solid rgba(100,13,20,0.12);
+
+  color: var(--black-cherry);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.card-client {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--black-cherry);
+}
+
+.card-client em {
+  color: var(--brown-red);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.card-meta-row {
+  display: flex;
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.card-meta-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-red);
+  margin-bottom: 6px;
+}
+
+.card-meta-value {
+  color: var(--ink-soft);
+}
+
+.card-desc {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.card-metrics {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+  margin: 40px 0;
+}
+
+.card-metric {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid var(--rule);
+  border-radius: 28px;
+  padding: 24px;
+}
+
+.card-metric-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--black-cherry);
+}
+
+.card-metric-label {
+  margin-top: 6px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--black-cherry);
+
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-arrow {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  border: 1px solid var(--black-cherry);
+
+  transition: all 0.3s ease;
+}
+
+.case-card:hover .card-arrow {
+  background: var(--black-cherry);
+  color: white;
+}
+
+/* PROCESS */
+.process-strip {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 18px;
+  padding: 0 56px 120px;
+}
+
+.process-item {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 28px;
+  padding: 32px;
+}
+
+.process-phase {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-red);
+  margin-bottom: 10px;
+}
+
+.process-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--black-cherry);
+  margin-bottom: 16px;
+}
+
+.process-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.process-items li {
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ABOUT */
+.about-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  background: var(--black-cherry);
+
+  margin: 0 56px;
+
+  border-radius: 42px;
+
+  overflow: hidden;
+}
+
+.about-left,
+.about-right {
+  padding: 72px;
+}
+
+.about-heading {
+  color: white;
+  margin-bottom: 24px;
+}
+
+.about-heading em {
+  color: var(--cotton);
+}
+
+.about-body {
+  max-width: 520px;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.9;
+}
+
+.about-skill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.about-skill-name {
+  color: white;
+  font-weight: 600;
+}
+
+.about-skill-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.about-skill-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+/* CONTACT */
+.contact-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-item {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid var(--rule);
+  border-radius: 28px;
+  padding: 28px;
+}
+
+.contact-item-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-red);
+  margin-bottom: 8px;
+}
+
+.contact-item-value,
+.contact-item-value a {
+  color: var(--black-cherry);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  color: var(--ink-soft);
+}
+
+.footer-back {
+  text-decoration: none;
+  color: var(--black-cherry);
+  font-weight: 700;
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+
+  body {
+    cursor: auto;
+  }
+
+  .cursor {
+    display: none;
+  }
+
+  nav {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    padding: 0 18px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 140px 24px 80px;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stat {
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero-stat:last-child {
+    border-bottom: none;
+  }
+
+  .work-section,
+  .contact-section {
+    padding: 80px 24px;
+  }
+
+  .work-header {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .case-card {
+    grid-template-columns: 1fr;
+  }
+
+  .card-left {
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .card-left,
+  .card-right {
+    padding: 32px 24px;
+  }
+
+  .card-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .process-strip {
+    grid-template-columns: 1fr;
+    padding: 0 24px 80px;
+  }
+
+  .about-strip {
+    grid-template-columns: 1fr;
+    margin: 0 24px;
+  }
+
+  .about-left,
+  .about-right {
+    padding: 48px 24px;
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    padding: 32px 24px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+}
+
+</style>
+</head>
+<body id="top">
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo">
+    Crystal <span>Obaretin</span>
+  </a>
+
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a href="mailto:crystaloba@gmail.com" class="nav-cta">
+      Hire Me
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-left reveal">
+
+    <div class="hero-eyebrow">
+      UX Designer · Product Strategy · B2B UX
+    </div>
+
+    <h1 class="hero-name">
+      Crystal
+      <em>Obaretin</em>
+    </h1>
+
+    <p class="hero-role">
+      I design modern B2B digital experiences that simplify complexity, increase conversions, and help organizations create measurable business growth.
+    </p>
+
+    <div class="hero-stats">
+
+      <div class="hero-stat">
+        <div class="hero-stat-num">3+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+
+      <div class="hero-stat">
+        <div class="hero-stat-num">8+</div>
+        <div class="hero-stat-label">Projects Shipped</div>
+      </div>
+
+      <div class="hero-stat">
+        <div class="hero-stat-num">34%</div>
+        <div class="hero-stat-label">Average Lead Growth</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="hero-right reveal">
+
+  <!-- PROFILE IMAGE -->
+  <div class="hero-image-wrap">
+    <img 
+      src="crystal.jpg" 
+      alt="Portrait of Crystal Obaretin"
+      class="hero-image"
+    >
+  </div>
+
+  <div class="hero-available">
+      <div class="hero-available-dot"></div>
+      Open to Full-Time Opportunities
+    </div>
+
+    <p class="hero-desc">
+      Specializing in UX design for healthcare, enterprise, manufacturing, and service industries — where thoughtful user experience directly impacts adoption, conversion, and operational efficiency.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">UX Design</span>
+    <span class="marquee-item">Product Strategy</span>
+    <span class="marquee-item">Accessibility</span>
+    <span class="marquee-item">B2B UX</span>
+    <span class="marquee-item">Research</span>
+    <span class="marquee-item">Design Systems</span>
+    <span class="marquee-item">Conversion Optimization</span>
+    <span class="marquee-item">UX Design</span>
+    <span class="marquee-item">Product Strategy</span>
+    <span class="marquee-item">Accessibility</span>
+    <span class="marquee-item">B2B UX</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work-section" id="work">
+
+  <div class="work-header reveal">
+    <div>
+      <div class="section-label" data-num="01">
+        Selected Work
+      </div>
+
+      <h2 class="work-title">
+        Case Studies That<br>
+        <em>Moved Numbers</em>
+      </h2>
+    </div>
+
+    <div class="work-count">
+      3 Featured Projects
+    </div>
+  </div>
+
+  <div class="case-grid reveal">
+
+    <a href="nlb-corp-case-study.html" class="case-card">
+
+      <div class="card-left">
+
+        <div class="card-num">01</div>
+
+        <div class="card-tags">
+          <span class="card-tag">B2B UX</span>
+          <span class="card-tag">Lead Generation</span>
+          <span class="card-tag">Information Architecture</span>
+        </div>
+
+        <div class="card-client">
+          NLB<br>
+          <em>Corporation</em>
+        </div>
+
+        <div class="card-meta-row">
+          <div>
+            <div class="card-meta-label">Industry</div>
+            <div class="card-meta-value">Industrial Manufacturing</div>
+          </div>
+
+          <div>
+            <div class="card-meta-label">Role</div>
+            <div class="card-meta-value">UX Designer</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-right">
+
+        <p class="card-desc">
+          Redesigned a global industrial manufacturing website to simplify complex product discovery and improve qualified lead generation through navigation restructuring and product-focused UX improvements.
+        </p>
+
+        <div class="card-metrics">
+
+          <div class="card-metric">
+            <div class="card-metric-num">62K</div>
+            <div class="card-metric-label">Monthly Site Visits</div>
+          </div>
+
+          <div class="card-metric">
+            <div class="card-metric-num">683</div>
+            <div class="card-metric-label">Conversions Pre-Redesign</div>
+          </div>
+
+          <div class="card-metric">
+            <div class="card-metric-num">4%</div>
+            <div class="card-metric-label">Target Conversion Rate</div>
+          </div>
+
+        </div>
+
+        <div class="card-cta">
+          View Case Study
+          <div class="card-arrow">↗</div>
+			
+        </div>
+
+      </div>
+
+    </a>
+<!-- ================================================= -->
+<!-- ADD THESE 2 CASE STUDY CARDS BELOW THE FIRST CARD -->
+<!-- Place inside: <div class="case-grid reveal"> -->
+<!-- ================================================= -->
+
+<!-- HOME REMEDY -->
+<a href="home-remedy-case-study.html" class="case-card">
+
+  <div class="card-left">
+
+    <div class="card-num">02</div>
+
+    <div class="card-tags">
+      <span class="card-tag">Local Services</span>
+      <span class="card-tag">Lead Generation</span>
+      <span class="card-tag">UX Strategy</span>
+    </div>
+
+    <div class="card-client">
+      Home Remedy<br>
+      <em>LLC</em>
+    </div>
+
+    <div class="card-meta-row">
+
+      <div>
+        <div class="card-meta-label">Industry</div>
+        <div class="card-meta-value">Home Remodeling</div>
+      </div>
+
+      <div>
+        <div class="card-meta-label">Role</div>
+        <div class="card-meta-value">UX Designer</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card-right">
+
+    <p class="card-desc">
+      Redesigned a local remodeling company's digital experience to improve trust, simplify navigation, and attract higher-quality leads through better service architecture and conversion-focused UX.
+    </p>
+
+    <div class="card-metrics">
+
+      <div class="card-metric">
+        <div class="card-metric-num">44%</div>
+        <div class="card-metric-label">Bathroom Remodeling Lead Share</div>
+      </div>
+
+      <div class="card-metric">
+        <div class="card-metric-num">4.9★</div>
+        <div class="card-metric-label">Google Rating Visibility</div>
+      </div>
+
+      <div class="card-metric">
+        <div class="card-metric-num">7K+</div>
+        <div class="card-metric-label">Monthly Site Visits</div>
+      </div>
+
+    </div>
+
+    <div class="card-cta">
+      View Case Study
+      <div class="card-arrow">↗</div>
+    </div>
+
+  </div>
+
+</a>
+
+
+<!-- PROPER STORAGE SYSTEMS -->
+<a href="proper-storage-systems.html" class="case-card">
+
+  <div class="card-left">
+
+    <div class="card-num">03</div>
+
+    <div class="card-tags">
+      <span class="card-tag">Industrial UX</span>
+      <span class="card-tag">Responsive Design</span>
+      <span class="card-tag">RFQ Optimization</span>
+    </div>
+
+    <div class="card-client">
+      Proper Storage<br>
+      <em>Systems</em>
+    </div>
+
+    <div class="card-meta-row">
+
+      <div>
+        <div class="card-meta-label">Industry</div>
+        <div class="card-meta-value">Industrial Manufacturing</div>
+      </div>
+
+      <div>
+        <div class="card-meta-label">Role</div>
+        <div class="card-meta-value">UX Designer</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card-right">
+
+    <p class="card-desc">
+      Modernized a legacy industrial storage manufacturer website with a mobile-first responsive experience, RFQ optimization strategy, and improved visual hierarchy for enterprise buyers.
+    </p>
+
+    <div class="card-metrics">
+
+      <div class="card-metric">
+        <div class="card-metric-num">+34%</div>
+        <div class="card-metric-label">RFQ Submission Growth</div>
+      </div>
+
+      <div class="card-metric">
+        <div class="card-metric-num">-22%</div>
+        <div class="card-metric-label">Form Abandonment Reduction</div>
+      </div>
+
+      <div class="card-metric">
+        <div class="card-metric-num">2.7%</div>
+        <div class="card-metric-label">Conversion Rate</div>
+      </div>
+
+    </div>
+
+    <div class="card-cta">
+      View Case Study
+      <div class="card-arrow">↗</div>
+    </div>
+
+  </div>
+
+</a>
+  </div>
+
+</section>
+
+<!-- PROCESS -->
+<div class="process-strip reveal">
+
+  <div class="process-item">
+    <div class="process-phase">Phase 01</div>
+    <div class="process-name">Research</div>
+    <ul class="process-items">
+      <li>Stakeholder Interviews</li>
+      <li>Analytics Audits</li>
+      <li>User Research</li>
+    </ul>
+  </div>
+
+  <div class="process-item">
+    <div class="process-phase">Phase 02</div>
+    <div class="process-name">Architecture</div>
+    <ul class="process-items">
+      <li>Information Architecture</li>
+      <li>User Flows</li>
+      <li>Wireframing</li>
+    </ul>
+  </div>
+
+  <div class="process-item">
+    <div class="process-phase">Phase 03</div>
+    <div class="process-name">Design</div>
+    <ul class="process-items">
+      <li>UI Design</li>
+      <li>Design Systems</li>
+      <li>Prototyping</li>
+    </ul>
+  </div>
+
+  <div class="process-item">
+    <div class="process-phase">Phase 04</div>
+    <div class="process-name">Testing</div>
+    <ul class="process-items">
+      <li>QA Reviews</li>
+      <li>Accessibility Audits</li>
+      <li>Iteration</li>
+    </ul>
+  </div>
+
+  <div class="process-item">
+    <div class="process-phase">Phase 05</div>
+    <div class="process-name">Launch</div>
+    <ul class="process-items">
+      <li>Deployment</li>
+      <li>Optimization</li>
+      <li>Performance Tracking</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ABOUT -->
+<section class="about-strip reveal" id="about">
+
+  <div class="about-left">
+
+    <div class="section-label" data-num="02">
+      About
+    </div>
+
+    <h2 class="about-heading">
+      Design That<br>
+      <em>Earns Its Keep</em>
+    </h2>
+
+    <p class="about-body">
+      I focus on creating user experiences that balance accessibility, usability, and measurable business outcomes. My work lives at the intersection of research, strategy, and modern digital product design.
+    </p>
+
+  </div>
+
+  <div class="about-right">
+
+    <div class="about-skill">
+      <div class="about-skill-name">UX Strategy</div>
+      <div class="about-skill-bar">
+        <div class="about-skill-fill" style="width:92%; background:#D8973C;"></div>
+      </div>
+    </div>
+
+    <div class="about-skill">
+      <div class="about-skill-name">Figma & UI Design</div>
+      <div class="about-skill-bar">
+        <div class="about-skill-fill" style="width:95%; background:#FD9BB7;"></div>
+      </div>
+    </div>
+
+    <div class="about-skill">
+      <div class="about-skill-name">Accessibility</div>
+      <div class="about-skill-bar">
+        <div class="about-skill-fill" style="width:88%; background:#F3E6BD;"></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+
+  <div class="reveal">
+
+    <div class="section-label" data-num="03">
+      Contact
+    </div>
+
+    <h2 class="contact-heading">
+      Let's Build<br>
+      Something That<br>
+      <em>Works</em>
+    </h2>
+
+  </div>
+
+  <div class="contact-right reveal">
+
+    <div class="contact-item">
+      <div class="contact-item-label">Email</div>
+      <div class="contact-item-value">
+        <a href="mailto:crystaloba@gmail.com">crystaloba@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-item-label">Location</div>
+      <div class="contact-item-value">Texas · Open to Remote</div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-item-label">Specialization</div>
+      <div class="contact-item-value">B2B UX · Product Design · Accessibility</div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">
+    © 2026 Crystal Obaretin. All rights reserved.
+  </div>
+
+  <a href="#top" class="footer-back">
+    Back To Top ↑
+  </a>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+const cursor = document.getElementById('cursor');
+
+window.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.classList.add('hover');
+  });
+
+  el.addEventListener('mouseleave', () => {
+    cursor.classList.remove('hover');
+  });
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+
+  });
+
+}, {
+  threshold: 0.1
+});
+
+document.querySelectorAll('.reveal').forEach(el => {
+  revealObserver.observe(el);
+});
+
+</script>
+
+</body>
+</html>
+```
+
+<body>
+</body>
+</html>
