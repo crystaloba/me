@@ -57,7 +57,7 @@
   height: auto;
   display: block;
 	}
-  .nav-name {
+  .-name {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -824,6 +824,11 @@
   padding: 32px;
   margin: 40px 0;
 }
+	.image-placeholder {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
 
 .image-placeholder-content {
   max-width: 420px;
@@ -854,6 +859,11 @@
 .image-placeholder.small {
   min-height: 260px;
 }
+	.image-placeholder.small img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
 
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
@@ -877,9 +887,7 @@
 
 <!-- NAV -->
 <nav>
- <a href="#" class="nav-logo">
-  <img src="crystal%20obaretin%20logo.svg" alt="Logo">
-</a>
+  <a href="/me" class="nav-name">Crystal Obaretin</a>
   <ul class="nav-links">
     <li><a href="#overview">Overview</a></li>
     <li><a href="#research">Research</a></li>
@@ -905,11 +913,14 @@
     <h1 class="hero-title">Proper Storage<br><em>Systems</em> Redesign</h1>
     <p class="hero-sub">Redesigning an industrial B2B website to be responsive, modern, and conversion-optimized — turning a 7-year-old static site into a lead generation machine for OEM, aerospace, and automotive buyers.</p>
 	  <div class="image-placeholder">
+		  <img 
+    src=PSS/pss-hp-hero.png 
+    alt="homepage-hero">
   <div class="image-placeholder-content">
     <div class="image-placeholder-label">Hero Imagery</div>
-    <div class="image-placeholder-title">Insert Final Homepage Mockup</div>
+    <div class="image-placeholder-title">Final Homepage Mockup</div>
     <p class="image-placeholder-copy">
-      Recommended: Full-width desktop mockup, responsive layout preview,
+      Full-width desktop mockup, responsive layout preview,
       or before/after comparison imagery.
     </p>
   </div>
@@ -920,21 +931,7 @@
     font-weight: 500;
     letter-spacing: 0.04em;
     color: var(--blue-600);
-    margin-bottom: 16px;
-  ">
-    Click here to interact with prototype
-  </p>
-
-  <iframe
-    style="
-      width: 100%;
-      height: 700px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    "
-    src="https://embed.figma.com/proto/0auQT9UXw3BmeONqICUhES/NLB-Corp-Wordpress----Web-Design?node-id=3233-3055&viewport=218%2C-380%2C0.08&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=288%3A1&page-id=288%3A0&embed-host=share"
-    allowfullscreen>
-  </iframe>
+    margin-bottom: 16px;">
 </div>
 	  <meta name="description" content="A Figma prototype of the redesign site.">
     <div class="meta-grid">
@@ -1003,13 +1000,13 @@
     <h2 class="section-h">Understanding the<br><em>industrial buyer</em></h2>
     <p class="body-copy">Three intersecting research methods informed the redesign. The goal: understand not just what users want to see, but what decisions they're making and how fast they need to make them.</p>
 	  <div class="image-placeholder small">
+		  <img 
+    src=PSS/pss-analytics.png 
+    alt="homepage-hero">
+		    <img 
+    src=PSS/pss-conversion.png 
+    alt="homepage-hero">
   <div class="image-placeholder-content">
-    <div class="image-placeholder-label">Research Artifacts</div>
-    <div class="image-placeholder-title">Competitive Analysis / Analytics</div>
-    <p class="image-placeholder-copy">
-      Insert screenshots of analytics dashboards, competitor audits,
-      affinity mapping, or stakeholder interview notes.
-    </p>
   </div>
 </div>
     <div class="method-grid fade-up">
@@ -1061,16 +1058,7 @@
   <section id="process">
     <div class="section-num"><span>03</span> Process</div>
     <h2 class="section-h">Five phases from<br><em>discovery to launch</em></h2>
-<div class="image-placeholder">
-  <div class="image-placeholder-content">
-    <div class="image-placeholder-label">Design Process</div>
-    <div class="image-placeholder-title">Wireframes & UX Exploration</div>
-    <p class="image-placeholder-copy">
-      Recommended: Low-fidelity wireframes, user flows,
-      sitemap visuals, or iterative design screenshots.
-    </p>
-  </div>
-</div>
+
     <div class="process-track fade-up">
       <div class="process-step">
         <div class="step-phase">Phase 01</div>
@@ -1244,13 +1232,16 @@
     <div class="before-after-label">Before</div>
 
     <div class="image-placeholder small">
+		<img 
+    src=PSS/pss-old-ui.png 
+    alt="NLB Corp homepage redesign mockup">
       <div class="image-placeholder-content">
         <div class="image-placeholder-title">
           Legacy Website UI
         </div>
 
         <p class="image-placeholder-copy">
-          Add screenshots of the original non-responsive
+          Screenshots of the original non-responsive
           homepage, RFQ flow, or gallery experience.
         </p>
       </div>
@@ -1263,13 +1254,16 @@
     </div>
 
     <div class="image-placeholder small">
+		<img 
+    src="PSS/pss-industries.png"
+    alt="NLB Corp homepage redesign mockup">
       <div class="image-placeholder-content">
         <div class="image-placeholder-title">
           Redesigned UX Experience
         </div>
 
         <p class="image-placeholder-copy">
-          Add polished desktop/mobile redesign visuals,
+          Polished desktop/mobile redesign visuals,
           responsive layouts, and optimized CTA sections.
         </p>
       </div>
