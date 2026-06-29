@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://use.typekit.net/ijj8qre.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WGU Strategic Partnerships Redesign — Crystal Obaretin</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/ijj8qre.css">
+<style>
 
   /* ─────────────────────────────────────────
      WGU BRAND TOKENS
@@ -46,9 +44,9 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'elma-sans', Arial, sans-serif;
+    font-family: 'futura-pt', sans-serif;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 400; /* Futura PT Book */
     line-height: 1.75;
     color: var(--ink);
     background: var(--white);
@@ -63,13 +61,13 @@
     background: var(--blue-midnight);
   }
   .nav-name {
-    font-family: 'elma-sans', Arial, sans-serif;
+    font-family: 'futura-pt', sans-serif;
     font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--white); text-decoration: none;
   }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
-    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    font-size: 11px; font-weight: 700; /* Futura PT Medium → use Bold */ letter-spacing: 0.1em;
     text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none;
     transition: color 0.2s;
   }
@@ -93,7 +91,7 @@
   .sidebar-dot {
     display: flex; align-items: center; gap: 10px;
     text-decoration: none; color: var(--ink-30);
-    font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    font-size: 10px; font-weight: 700; /* Futura PT Medium → use Bold */ letter-spacing: 0.1em; text-transform: uppercase;
     transition: color 0.2s;
   }
   .sidebar-dot::before {
@@ -114,7 +112,7 @@
     border-bottom: 1px solid var(--rule);
   }
   .hero-tag {
-    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    font-size: 11px; font-weight: 700; /* Futura PT Medium → use Bold */ letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--medium-blue);
     margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
   }
@@ -123,9 +121,9 @@
     background: var(--medium-blue);
   }
   .hero-title {
-    font-family: 'elma-sans', Arial, sans-serif;
+    font-family: 'futura-pt-bold', sans-serif;
     font-size: clamp(40px, 6vw, 64px);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.0; letter-spacing: -0.01em;
     color: var(--midnight); margin-bottom: 28px;
     text-transform: uppercase;
@@ -135,7 +133,7 @@
     color: var(--medium-blue);
   }
   .hero-sub {
-    font-size: 18px; font-weight: 300; color: var(--ink-60);
+    font-size: 18px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60);
     max-width: 580px; line-height: 1.7; margin-bottom: 56px;
   }
 
@@ -151,7 +149,7 @@
     font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--medium-blue); margin-bottom: 6px;
   }
-  .meta-value { font-size: 14px; font-weight: 500; color: var(--midnight); line-height: 1.4; }
+  .meta-value { font-size: 14px; font-weight: 700; /* Futura PT Medium → use Bold */ color: var(--midnight); line-height: 1.4; }
 
   /* ── SECTION BADGE ── */
   .section-num {
@@ -172,9 +170,9 @@
   /* ── TYPOGRAPHY ── */
   /* H2 = Futura PT Medium, H3 = Futura PT Heavy per brand spec */
   .section-h {
-    font-family: 'elma-sans', Arial, sans-serif;
+    font-family: 'futura-pt-bold', sans-serif;
     font-size: clamp(26px, 3.5vw, 38px);
-    font-weight: 500;
+    font-weight: 700;
     line-height: 1.1; letter-spacing: 0em;
     color: var(--midnight); margin-bottom: 24px;
     text-transform: uppercase;
@@ -182,7 +180,7 @@
   .section-h em { font-style: normal; color: var(--medium-blue); }
 
   .body-copy {
-    font-size: 18px; font-weight: 300; color: var(--ink-60);
+    font-size: 18px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60);
     line-height: 1.8; max-width: 640px;
   }
   .body-copy + .body-copy { margin-top: 16px; }
@@ -194,8 +192,8 @@
     border-radius: 2px;
   }
   .pull-quote p {
-    font-family: 'elma-sans', Arial, sans-serif;
-    font-size: 20px; font-weight: 500; font-style: italic;
+    font-family: 'futura-pt', sans-serif;
+    font-size: 20px; font-weight: 700; /* Futura PT Medium → use Bold */ font-style: italic;
     line-height: 1.55;
     color: var(--white); margin-bottom: 20px;
   }
@@ -216,14 +214,14 @@
     display: flex; flex-direction: column; gap: 6px;
   }
   .stat-num {
-    font-family: 'elma-sans', Arial, sans-serif;
-    font-size: 48px; font-weight: 800;
+    font-family: 'futura-pt-bold', sans-serif;
+    font-size: 48px; font-weight: 700;
     color: var(--medium-blue);
     line-height: 1; letter-spacing: -0.01em;
     text-transform: uppercase;
   }
   .stat-label { font-size: 14px; font-weight: 700; color: var(--midnight); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .stat-sub { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.5; }
+  .stat-sub { font-size: 13px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60); line-height: 1.5; }
 
   /* ── OUTCOME GRID (dark) ── */
   .outcome-grid {
@@ -237,8 +235,8 @@
     display: flex; flex-direction: column; gap: 8px;
   }
   .outcome-num {
-    font-family: 'elma-sans', Arial, sans-serif;
-    font-size: 44px; font-weight: 800;
+    font-family: 'futura-pt-bold', sans-serif;
+    font-size: 44px; font-weight: 700;
     color: var(--lime);
     line-height: 1; letter-spacing: -0.01em;
   }
@@ -246,7 +244,7 @@
     font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--white); margin-top: 4px;
   }
-  .outcome-sub { font-size: 12px; font-weight: 300; color: var(--grey); line-height: 1.6; }
+  .outcome-sub { font-size: 12px; font-weight: 400; /* Futura PT Book */ color: var(--grey); line-height: 1.6; }
 
   /* ── COMPARE GRID ── */
   .compare-grid {
@@ -264,7 +262,7 @@
   .compare-panel.after .compare-label { color: var(--medium-blue); }
   .compare-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
   .compare-list li {
-    font-size: 14px; font-weight: 300; color: var(--ink-60);
+    font-size: 14px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60);
     display: flex; align-items: flex-start; gap: 10px; line-height: 1.55;
   }
   .compare-list li::before { content: '—'; color: var(--grey); flex-shrink: 0; }
@@ -280,8 +278,8 @@
   }
   .method-box { background: var(--white); padding: 28px 24px; }
   .method-num {
-    font-family: 'elma-sans', Arial, sans-serif;
-    font-size: 32px; font-weight: 800;
+    font-family: 'futura-pt-bold', sans-serif;
+    font-size: 32px; font-weight: 700;
     color: var(--light-blue); margin-bottom: 12px; line-height: 1;
   }
   .method-title {
@@ -290,7 +288,7 @@
   }
   .method-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-top: 8px; }
   .method-list li {
-    font-size: 13px; font-weight: 300; color: var(--ink-60);
+    font-size: 13px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60);
     line-height: 1.5; padding-left: 14px; position: relative;
   }
   .method-list li::before {
@@ -324,7 +322,7 @@
     text-transform: uppercase; color: var(--midnight);
     margin-bottom: 10px; line-height: 1.3;
   }
-  .insight-body { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
+  .insight-body { font-size: 13px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60); line-height: 1.65; }
 
   /* ── PROCESS TRACK ── */
   .process-track {
@@ -346,7 +344,7 @@
   }
   .process-step.active .step-title { color: var(--white); }
   .step-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-  .step-items li { font-size: 11px; font-weight: 300; color: var(--grey); line-height: 1.4; }
+  .step-items li { font-size: 11px; font-weight: 400; /* Futura PT Book */ color: var(--grey); line-height: 1.4; }
   .process-step.active .step-items li { color: rgba(255,255,255,0.75); }
 
   /* ── SOLUTION ROWS ── */
@@ -357,8 +355,8 @@
   }
   .solution-row:last-child { border-bottom: none; }
   .solution-num {
-    font-family: 'elma-sans', Arial, sans-serif;
-    font-size: 72px; font-weight: 800;
+    font-family: 'futura-pt-bold', sans-serif;
+    font-size: 72px; font-weight: 700;
     color: var(--light-blue);
     line-height: 1; letter-spacing: -0.02em;
   }
@@ -366,7 +364,7 @@
     font-size: 15px; font-weight: 700; letter-spacing: 0.04em;
     text-transform: uppercase; color: var(--midnight); margin-bottom: 10px;
   }
-  .solution-body { font-size: 14px; font-weight: 300; color: var(--ink-60); line-height: 1.75; }
+  .solution-body { font-size: 14px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60); line-height: 1.75; }
   .metric-highlight { display: flex; align-items: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
   .metric-pill {
     font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
@@ -377,7 +375,7 @@
     padding: 5px 14px;
     white-space: nowrap;
   }
-  .metric-line { font-size: 12px; font-weight: 300; color: var(--grey); }
+  .metric-line { font-size: 12px; font-weight: 400; /* Futura PT Book */ color: var(--grey); }
 
   /* ── TAG CLOUD ── */
   .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0; }
@@ -407,12 +405,12 @@
     text-transform: uppercase; color: var(--medium-blue); margin-bottom: 10px;
   }
   .image-placeholder-title {
-    font-family: 'elma-sans', Arial, sans-serif;
+    font-family: 'futura-pt', sans-serif;
     font-size: 22px; font-weight: 700; letter-spacing: 0.02em;
     text-transform: uppercase; color: var(--midnight); margin-bottom: 10px;
   }
   .image-placeholder-copy {
-    font-size: 14px; font-weight: 300; line-height: 1.7;
+    font-size: 14px; font-weight: 400; /* Futura PT Book */ line-height: 1.7;
     color: var(--ink-60); max-width: 380px;
   }
 
@@ -438,7 +436,7 @@
     margin: 40px 0;
   }
   .reflection-block p {
-    font-size: 18px; font-weight: 300; color: var(--ink-60);
+    font-size: 18px; font-weight: 400; /* Futura PT Book */ color: var(--ink-60);
     line-height: 1.85; max-width: 640px;
   }
   .reflection-block p + p { margin-top: 20px; }
@@ -452,13 +450,13 @@
     padding: 72px 0 56px; text-align: center;
   }
   .footer-name {
-    font-family: 'elma-sans', Arial, sans-serif;
-    font-size: 36px; font-weight: 800;
+    font-family: 'futura-pt-bold', sans-serif;
+    font-size: 36px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.02em;
     color: var(--white); margin-bottom: 12px;
   }
   .footer-name span { color: var(--sky-blue); }
-  .footer-contact { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.6); }
+  .footer-contact { font-size: 14px; font-weight: 400; /* Futura PT Book */ color: rgba(255,255,255,0.6); }
   .footer-contact a { color: var(--lime); text-decoration: none; }
 
   /* ── FADE UP ── */
