@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WGU Strategic Partnerships Redesign — Crystal Obaretin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<style>
+
+  /* ─────────────────────────────────────────
+     WGU BRAND TOKENS
+     Source: brand.wgu.edu/web-color-palette
+     ───────────────────────────────────────── */
+  :root {
+    /* Primary */
+    --midnight:      #001731;
+    --blue-midnight: #002855;
+
+    /* Accents */
+    --medium-blue:   #0070F0;
+    --sky-blue:      #46B1EF;
+    --lime:          #97E152;
+
+    /* Neutrals */
+    --light-blue:    #EEF6F9;
+    --light-grey:    #F1F1F1;
+    --grey:          #A7A7A7;
+
+    /* Gradients */
+    --grad-midnight: linear-gradient(135deg, #001731, #002855);
+    --grad-blue:     linear-gradient(135deg, #002855, #0070F0);
+
+    /* Functional */
+    --white:         #FFFFFF;
+    --ink:           #001731;
+    --ink-60:        rgba(0,23,49,0.60);
+    --ink-30:        rgba(0,23,49,0.30);
+    --rule:          rgba(0,23,49,0.10);
+    --surface:       #F8FBFD;
+    --dark-bg:       #001731;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+    background: var(--blue-midnight);
+  }
+  .nav-name {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--white); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-back {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--blue-midnight);
+    background: var(--lime);
+    padding: 8px 20px; border-radius: 2px;
+    transition: opacity 0.2s;
+  }
+  .nav-back:hover { opacity: 0.85; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: fixed; left: 40px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 14px; z-index: 50;
+  }
+  .sidebar-dot {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--ink-30);
+    font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .sidebar-dot::before {
+    content: ''; display: block; width: 4px; height: 4px;
+    border-radius: 50%; background: currentColor; flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .sidebar-dot:hover, .sidebar-dot.active { color: var(--medium-blue); }
+  .sidebar-dot.active::before { transform: scale(2); }
+
+  /* ── LAYOUT ── */
+  .content { max-width: 800px; margin: 0 auto; padding: 0 32px; }
+  section { padding-top: 120px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top: 140px; padding-bottom: 100px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--medium-blue);
+    margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+  }
+  .hero-tag::before {
+    content: ''; display: block; width: 32px; height: 2px;
+    background: var(--medium-blue);
+  }
+  .hero-title {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.0; letter-spacing: -0.01em;
+    color: var(--midnight); margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--medium-blue);
+  }
+  .hero-sub {
+    font-size: 18px; font-weight: 300; color: var(--ink-60);
+    max-width: 580px; line-height: 1.7; margin-bottom: 56px;
+  }
+
+  /* ── META GRID ── */
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--rule); border-radius: 2px;
+    background: var(--rule);
+    gap: 1px; overflow: hidden;
+  }
+  .meta-item { padding: 20px 24px; background: var(--white); }
+  .meta-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--medium-blue); margin-bottom: 6px;
+  }
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--midnight); line-height: 1.4; }
+
+  /* ── SECTION BADGE ── */
+  .section-num {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue-midnight);
+    background: var(--light-blue);
+    border: 1px solid rgba(0,112,240,0.15);
+    padding: 8px 16px; border-radius: 2px; margin-bottom: 36px;
+  }
+  .section-num span {
+    color: var(--white); background: var(--medium-blue);
+    width: 22px; height: 22px; border-radius: 2px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; letter-spacing: 0;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  /* H2 = Futura PT Medium, H3 = Futura PT Heavy per brand spec */
+  .section-h {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 500;
+    line-height: 1.1; letter-spacing: 0em;
+    color: var(--midnight); margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .section-h em { font-style: normal; color: var(--medium-blue); }
+
+  .body-copy {
+    font-size: 18px; font-weight: 300; color: var(--ink-60);
+    line-height: 1.8; max-width: 640px;
+  }
+  .body-copy + .body-copy { margin-top: 16px; }
+
+  /* ── PULL QUOTE — uses "Quote - Futura PT Medium Italic" per brand spec ── */
+  .pull-quote {
+    margin: 56px 0; padding: 40px 48px;
+    background: var(--grad-midnight);
+    border-radius: 2px;
+  }
+  .pull-quote p {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 20px; font-weight: 500; font-style: italic;
+    line-height: 1.55;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .pull-quote cite {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--sky-blue); font-style: normal;
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .stat-box {
+    background: var(--white); padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .stat-num {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 48px; font-weight: 800;
+    color: var(--medium-blue);
+    line-height: 1; letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .stat-label { font-size: 14px; font-weight: 700; color: var(--midnight); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stat-sub { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.5; }
+
+  /* ── OUTCOME GRID (dark) ── */
+  .outcome-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .outcome-box {
+    background: var(--dark-bg); padding: 36px 28px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .outcome-num {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 44px; font-weight: 800;
+    color: var(--lime);
+    line-height: 1; letter-spacing: -0.01em;
+  }
+  .outcome-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--white); margin-top: 4px;
+  }
+  .outcome-sub { font-size: 12px; font-weight: 300; color: var(--grey); line-height: 1.6; }
+
+  /* ── COMPARE GRID ── */
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .compare-panel { background: var(--white); padding: 32px; }
+  .compare-panel.after { background: var(--light-blue); }
+  .compare-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--grey); margin-bottom: 20px;
+  }
+  .compare-panel.after .compare-label { color: var(--medium-blue); }
+  .compare-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .compare-list li {
+    font-size: 14px; font-weight: 300; color: var(--ink-60);
+    display: flex; align-items: flex-start; gap: 10px; line-height: 1.55;
+  }
+  .compare-list li::before { content: '—'; color: var(--grey); flex-shrink: 0; }
+  .compare-panel.after .compare-list li::before { content: '↗'; color: var(--medium-blue); flex-shrink: 0; }
+  .compare-panel.after .compare-list li { color: var(--midnight); }
+
+  /* ── METHOD GRID ── */
+  .method-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 2px;
+    overflow: hidden; margin: 40px 0;
+  }
+  .method-box { background: var(--white); padding: 28px 24px; }
+  .method-num {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 32px; font-weight: 800;
+    color: var(--light-blue); margin-bottom: 12px; line-height: 1;
+  }
+  .method-title {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--midnight); margin-bottom: 10px;
+  }
+  .method-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-top: 8px; }
+  .method-list li {
+    font-size: 13px; font-weight: 300; color: var(--ink-60);
+    line-height: 1.5; padding-left: 14px; position: relative;
+  }
+  .method-list li::before {
+    content: ''; position: absolute; left: 0; top: 8px;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--medium-blue);
+  }
+
+  /* ── INSIGHT CARDS ── */
+  .insight-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin: 40px 0;
+  }
+  .insight-card {
+    padding: 28px;
+    border: 1px solid var(--rule);
+    background: var(--white);
+    transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+  }
+  .insight-card:hover {
+    border-color: rgba(0,112,240,0.25);
+    background: var(--light-blue);
+    box-shadow: 0 8px 24px rgba(0,40,85,0.08);
+  }
+  .insight-icon {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--medium-blue); margin-bottom: 12px;
+  }
+  .insight-title {
+    font-size: 15px; font-weight: 700; letter-spacing: 0.02em;
+    text-transform: uppercase; color: var(--midnight);
+    margin-bottom: 10px; line-height: 1.3;
+  }
+  .insight-body { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
+
+  /* ── PROCESS TRACK ── */
+  .process-track {
+    display: flex; align-items: stretch;
+    margin: 40px 0;
+    border: 1px solid var(--rule); overflow: hidden;
+    background: var(--rule); gap: 1px;
+  }
+  .process-step { flex: 1; padding: 24px 18px; background: var(--white); }
+  .process-step.active { background: var(--grad-blue); }
+  .step-phase {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--grey); margin-bottom: 8px;
+  }
+  .process-step.active .step-phase { color: rgba(255,255,255,0.65); }
+  .step-title {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--midnight); margin-bottom: 10px;
+  }
+  .process-step.active .step-title { color: var(--white); }
+  .step-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .step-items li { font-size: 11px; font-weight: 300; color: var(--grey); line-height: 1.4; }
+  .process-step.active .step-items li { color: rgba(255,255,255,0.75); }
+
+  /* ── SOLUTION ROWS ── */
+  .solution-row {
+    display: grid; grid-template-columns: 72px 1fr;
+    gap: 40px; align-items: start;
+    padding: 36px 0; border-bottom: 1px solid var(--rule);
+  }
+  .solution-row:last-child { border-bottom: none; }
+  .solution-num {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 72px; font-weight: 800;
+    color: var(--light-blue);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .solution-title {
+    font-size: 15px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--midnight); margin-bottom: 10px;
+  }
+  .solution-body { font-size: 14px; font-weight: 300; color: var(--ink-60); line-height: 1.75; }
+  .metric-highlight { display: flex; align-items: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+  .metric-pill {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--blue-midnight);
+    background: var(--light-blue);
+    border: 1px solid rgba(0,112,240,0.2);
+    padding: 5px 14px;
+    white-space: nowrap;
+  }
+  .metric-line { font-size: 12px; font-weight: 300; color: var(--grey); }
+
+  /* ── TAG CLOUD ── */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0; }
+  .tag {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--midnight);
+    background: var(--light-blue);
+    border: 1px solid rgba(0,112,240,0.18);
+    padding: 6px 14px;
+  }
+
+  /* ── IMAGE PLACEHOLDER ── */
+  .image-placeholder {
+    width: 100%; min-height: 380px;
+    border: 1px dashed rgba(0,112,240,0.25);
+    background: var(--light-blue);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; padding: 32px;
+    margin: 40px 0;
+  }
+  .image-placeholder img { width: 100%; display: block; object-fit: cover; }
+  .image-placeholder.small { min-height: 240px; }
+  .image-placeholder.small img { width: 100%; display: block; object-fit: cover; }
+  .image-placeholder-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--medium-blue); margin-bottom: 10px;
+  }
+  .image-placeholder-title {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 22px; font-weight: 700; letter-spacing: 0.02em;
+    text-transform: uppercase; color: var(--midnight); margin-bottom: 10px;
+  }
+  .image-placeholder-copy {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-60); max-width: 380px;
+  }
+
+  /* ── BEFORE/AFTER GRID ── */
+  .before-after-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 48px;
+  }
+  .before-after-card { display: flex; flex-direction: column; }
+  .before-after-label {
+    display: inline-flex; align-items: center;
+    width: fit-content; padding: 6px 16px; margin-bottom: 16px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--light-grey); color: var(--midnight);
+  }
+  .before-after-label.after { background: var(--medium-blue); color: var(--white); }
+
+  /* ── REFLECTION ── */
+  .reflection-block {
+    padding: 40px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 40px 0;
+  }
+  .reflection-block p {
+    font-size: 18px; font-weight: 300; color: var(--ink-60);
+    line-height: 1.85; max-width: 640px;
+  }
+  .reflection-block p + p { margin-top: 20px; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--rule); margin: 80px 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--grad-midnight);
+    padding: 72px 0 56px; text-align: center;
+  }
+  .footer-name {
+    font-family: 'elma-sans', Arial, sans-serif;
+    font-size: 36px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.02em;
+    color: var(--white); margin-bottom: 12px;
+  }
+  .footer-name span { color: var(--sky-blue); }
+  .footer-contact { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.6); }
+  .footer-contact a { color: var(--lime); text-decoration: none; }
+
+  /* ── FADE UP ── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .sidebar { display: none; }
+    .content { padding: 0 24px; }
+    .meta-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .outcome-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-grid { grid-template-columns: 1fr; }
+    .process-track { flex-direction: column; }
+    .insight-grid { grid-template-columns: 1fr; }
+    .method-grid { grid-template-columns: 1fr; }
+    .solution-row { grid-template-columns: 1fr; gap: 8px; }
+    .solution-num { font-size: 48px; }
+    .before-after-grid { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-name">Crystal Obaretin</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#outcomes">Outcomes</a></li>
+  </ul>
+  <a href="index.html" class="nav-back">← All Work</a>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <a href="#overview"   class="sidebar-dot active">Overview</a>
+  <a href="#research"   class="sidebar-dot">Research</a>
+  <a href="#process"    class="sidebar-dot">Process</a>
+  <a href="#solutions"  class="sidebar-dot">Solutions</a>
+  <a href="#outcomes"   class="sidebar-dot">Outcomes</a>
+  <a href="#reflection" class="sidebar-dot">Reflection</a>
+</div>
+
+<div class="content">
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <div class="hero" id="hero">
+    <div class="hero-tag">B2B UX · Higher Education · 16-Week Engagement · 2024</div>
+    <h1 class="hero-title">WGU Strategic<br><em>Partnerships</em><br>Redesign</h1>
+    <p class="hero-sub">Redesigning WGU's partner-facing digital experience to eliminate audience confusion, surface ROI evidence before the sales call, and convert three distinct partner types — employers, workforce boards, and community colleges — through tailored, structured journeys.</p>
+
+    <div class="image-placeholder">
+      <img src="wgu-partnerships-preview.jpg" alt="WGU Strategic Partnerships redesign new UI">
+      <div class="image-placeholder-label">Hero Mockup</div>
+      <div class="image-placeholder-title">Redesigned Partnership Hub</div>
+      <p class="image-placeholder-copy">Desktop view of the new audience-routed entry experience with partner-specific messaging and ROI evidence surfaced before the CTA.</p>
+    </div>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Lead UX Designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Timeline</div>
+        <div class="meta-value">16 Weeks · 2024</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Client</div>
+        <div class="meta-value">Western Governors University</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Industry</div>
+        <div class="meta-value">Higher Education · Workforce Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ 01 OVERVIEW ═══════════════════════ -->
+  <section id="overview">
+    <div class="section-num"><span>01</span> Overview</div>
+    <h2 class="section-h">A strong product buried inside<br><em>a confusing experience</em></h2>
+    <p class="body-copy">WGU Workforce Solutions offered genuine value for employers, workforce boards, and community colleges. The UX failed to communicate it. Different audiences arrived at the same page and left without understanding what partnerships included, how employees benefited, or how to take the next step.</p>
+    <p class="body-copy">Every partner type landed on the same undifferentiated page, faced the same generic content, and hit the same dead-end "Contact Us" button with nothing to justify the inquiry. The gap between WGU's actual product and what partners could perceive online was significant — and costing qualified leads at every stage.</p>
+
+    <div class="pull-quote">
+      <p>"When a prospective partner asks, 'What do you offer?' — we don't have a consistent answer. Our website shows one thing, our marketing materials say another, and depending on who is pitching, the answer could vary wildly."</p>
+      <cite>— Internal Stakeholder Discovery, WGU Strategic Partnerships</cite>
+    </div>
+
+    <div class="section-num" style="margin-top:56px;"><span>—</span> Three Core Problems</div>
+    <p class="body-copy" style="margin-bottom:0;">Three distinct failure modes were compounding to suppress partner conversion:</p>
+
+    <div class="stat-row fade-up">
+      <div class="stat-box">
+        <div class="stat-num">01</div>
+        <div class="stat-label">No audience differentiation</div>
+        <div class="stat-sub">Employers, workforce boards, and colleges landed on identical pages despite having completely different needs, language, and decision criteria</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">02</div>
+        <div class="stat-label">Unclear product architecture</div>
+        <div class="stat-sub">Partners could not tell what they were buying, what employees would experience, or how WGU differed from competing workforce vendors</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">03</div>
+        <div class="stat-label">No ROI before the sales call</div>
+        <div class="stat-sub">Decision-makers needed business-case evidence and retention data before they could build internal buy-in — none existed in the experience</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════ 02 RESEARCH ═══════════════════════ -->
+  <section id="research">
+    <div class="section-num"><span>02</span> Research</div>
+    <h2 class="section-h">Three partner types,<br><em>three distinct journeys</em></h2>
+    <p class="body-copy">Before designing anything, I needed to understand why partners were landing and leaving without converting. Research spanned three intersecting tracks — each surfacing a different layer of the problem.</p>
+
+    <div class="image-placeholder small">
+      <img src="wgu-research.jpg" alt="WGU research artifacts and journey maps">
+      <div class="image-placeholder-label">Research Artifacts</div>
+      <div class="image-placeholder-title">Journey Maps & Competitive Analysis</div>
+      <p class="image-placeholder-copy">Partner journey maps, stakeholder interview synthesis, and competitive benchmarking across Guild Education, Bright Horizons, and Workforce Edge.</p>
+    </div>
+
+    <div class="method-grid fade-up">
+      <div class="method-box">
+        <div class="method-num">01</div>
+        <div class="method-title">Stakeholder Interviews</div>
+        <ul class="method-list">
+          <li>HR and L&amp;D decision-makers at corporate partners</li>
+          <li>Academic leads at community college articulation teams</li>
+          <li>Program officers at government workforce boards</li>
+          <li>Internal WGU sales and partnership teams</li>
+        </ul>
+      </div>
+      <div class="method-box">
+        <div class="method-num">02</div>
+        <div class="method-title">Competitive Analysis</div>
+        <ul class="method-list">
+          <li>Benchmarked Guild Education, Bright Horizons, Workforce Edge</li>
+          <li>Identified where competitors clearly structured partner value</li>
+          <li>Spotted gaps: no outcome data, no partner-specific routing</li>
+          <li>Captured visual and content differentiation opportunities</li>
+        </ul>
+      </div>
+      <div class="method-box">
+        <div class="method-num">03</div>
+        <div class="method-title">Analytics & Context</div>
+        <ul class="method-list">
+          <li>41% of employees leave due to lack of career development</li>
+          <li>Avg. replacement cost per frontline worker exceeds $1,500</li>
+          <li>78% of HR leaders cannot differentiate workforce education vendors</li>
+          <li>High bounce rates on all Workforce Solutions landing pages</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-num" style="margin-top:48px;"><span>—</span> Market Context</div>
+    <p class="body-copy" style="margin-bottom:0;">Partners arrived needing a business case — not a product pitch. The redesign had to surface ROI data and outcomes before any sales interaction.</p>
+
+    <div class="stat-row fade-up">
+      <div class="stat-box">
+        <div class="stat-num">41%</div>
+        <div class="stat-label">Employees leaving jobs</div>
+        <div class="stat-sub">Due to lack of career development — a retention crisis partners needed WGU to solve</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">$1.5K</div>
+        <div class="stat-label">Avg. replacement cost</div>
+        <div class="stat-sub">Per frontline employee — the ROI anchor the redesign had to surface before the CTA</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">78%</div>
+        <div class="stat-label">HR can't differentiate</div>
+        <div class="stat-sub">Workforce education vendors — WGU had to stand out with evidence, not messaging alone</div>
+      </div>
+    </div>
+
+    <div class="section-num" style="margin-top:48px;"><span>—</span> Key Findings</div>
+    <div class="insight-grid fade-up">
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 01</div>
+        <div class="insight-title">Undifferentiated entry was the primary barrier</div>
+        <div class="insight-body">All three audience types arrived at the same page. With completely different decision criteria and evidence needs, a single page couldn't address any of them effectively — it was failing everyone at once.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 02</div>
+        <div class="insight-title">WGU's ROI data existed but was invisible digitally</div>
+        <div class="insight-body">Strong outcome data, case studies, and retention figures existed in sales decks and internal PDFs — but none of it was surfaced in the digital experience. Partners who needed a business case to justify a conversation couldn't find one.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 03</div>
+        <div class="insight-title">Competitors were significantly clearer on product</div>
+        <div class="insight-body">Guild Education and Bright Horizons both offered named tiers, clear feature sets, and outcome data visible before any sales interaction. WGU's experience compared unfavorably to partners who had already evaluated the category.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">↗ Finding 04</div>
+        <div class="insight-title">What partners needed to see</div>
+        <div class="insight-body">85% needed a clear partnership tier structure. 72% needed employee retention ROI data. 64% needed to understand the downstream employee experience. All three were absent from the original digital experience.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════ 03 PROCESS ═══════════════════════ -->
+  <section id="process">
+    <div class="section-num"><span>03</span> Process</div>
+    <h2 class="section-h">Five phases across<br><em>16 weeks</em></h2>
+
+    <div class="image-placeholder">
+      <img src="wgu-partnerships-detail.jpg" alt="WGU wireframes and high-fidelity screens">
+      <div class="image-placeholder-label">Design Process</div>
+      <div class="image-placeholder-title">Wireframes → High-Fidelity Screens</div>
+      <p class="image-placeholder-copy">Partner routing flow and IA structure stress-tested in wireframe before committing to visual design. Each partner journey reviewed 3–5 rounds internally before moving to high fidelity.</p>
+    </div>
+
+    <div class="process-track fade-up">
+      <div class="process-step">
+        <div class="step-phase">Phase 01</div>
+        <div class="step-title">Discovery</div>
+        <ul class="step-items">
+          <li>Stakeholder interviews</li>
+          <li>Analytics review</li>
+          <li>Competitive benchmarking</li>
+          <li>Audience mapping</li>
+        </ul>
+      </div>
+      <div class="process-step">
+        <div class="step-phase">Phase 02</div>
+        <div class="step-title">Research</div>
+        <ul class="step-items">
+          <li>Partner-group synthesis</li>
+          <li>Journey mapping</li>
+          <li>Content audit</li>
+          <li>Pain point prioritisation</li>
+        </ul>
+      </div>
+      <div class="process-step active">
+        <div class="step-phase">Phase 03</div>
+        <div class="step-title">Define</div>
+        <ul class="step-items">
+          <li>IA restructure</li>
+          <li>Partner routing logic</li>
+          <li>Content strategy</li>
+          <li>Design principles</li>
+        </ul>
+      </div>
+      <div class="process-step">
+        <div class="step-phase">Phase 04</div>
+        <div class="step-title">Design</div>
+        <ul class="step-items">
+          <li>Wireframes</li>
+          <li>Component library</li>
+          <li>Hi-fidelity screens</li>
+          <li>Responsive specs</li>
+        </ul>
+      </div>
+      <div class="process-step">
+        <div class="step-phase">Phase 05</div>
+        <div class="step-title">Validate</div>
+        <ul class="step-items">
+          <li>Prototype testing</li>
+          <li>Stakeholder review</li>
+          <li>Usability scoring</li>
+          <li>Iteration</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-num" style="margin-top:48px;"><span>—</span> Constraints & Decisions</div>
+    <div class="compare-grid fade-up" style="margin-top:24px;">
+      <div class="compare-panel">
+        <div class="compare-label">Constraints Navigated</div>
+        <ul class="compare-list">
+          <li>Three audience types needed fundamentally different experiences without requiring three separate builds</li>
+          <li>Strong ROI data existed in sales decks and PDFs — invisible to any digital visitor</li>
+          <li>B2B decision cycles are long — the experience had to support return visitors building internal business cases over weeks</li>
+          <li>Corporate, academic, and workforce board teams each had different priorities for how the product should be presented</li>
+        </ul>
+      </div>
+      <div class="compare-panel after">
+        <div class="compare-label">Design Decisions Made</div>
+        <ul class="compare-list">
+          <li>Built a shared component system with partner-specific content modules — routing logic at entry determined which appeared</li>
+          <li>Ran a content audit alongside competitive analysis and mapped existing evidence to the moments partners needed it most</li>
+          <li>Designed for progressive commitment: first visit builds credibility, second delivers the ROI case, third triggers the inquiry</li>
+          <li>Used research synthesis to establish a shared problem definition before design — one artefact aligned what meetings could not</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════ 04 SOLUTIONS ═══════════════════════ -->
+  <section id="solutions">
+    <div class="section-num"><span>04</span> Solutions</div>
+    <h2 class="section-h">Three features built for<br><em>the partner decision journey</em></h2>
+
+    <div class="tag-cloud">
+      <span class="tag">Audience-Specific Routing</span>
+      <span class="tag">Structured Partnership Tiers</span>
+      <span class="tag">ROI Evidence Before CTA</span>
+      <span class="tag">Lead Qualification Form</span>
+      <span class="tag">Industry Pathway Pages</span>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">01</div>
+      <div>
+        <div class="solution-title">Partner-Specific Routing — Audience Selector at Entry</div>
+        <div class="solution-body">All three audience types previously landed on the same undifferentiated page. The redesign introduced an audience selector at entry that routes employers, workforce boards, and colleges to tailored journeys — each with distinct messaging, evidence calibrated to their decision criteria, and CTAs matched to their stage in a long B2B buying cycle.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">Each partner type now sees the evidence most relevant to their decision</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">02</div>
+      <div>
+        <div class="solution-title">Structured Partnership Tiers — Scannable Before Contact</div>
+        <div class="solution-body">Partners could not tell what they were buying or how tiers differed. The redesign introduced a clear tier architecture with named packages, included features per level, and outcome data tied to each tier — all visible before any sales conversation. Partners could now self-qualify and arrive at the inquiry stage knowing which tier fit their needs.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">Product clarity reduced friction and shortened the path to inquiry</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-row fade-up">
+      <div class="solution-num">03</div>
+      <div>
+        <div class="solution-title">ROI Evidence Before the CTA — Business Case Built In</div>
+        <div class="solution-body">Decision-makers could not build internal buy-in without retention and cost data. Retention ROI figures, replacement cost savings, and employee outcome metrics now appear above every primary call to action across all partner journeys — giving champions the numbers they need to sell WGU internally before ever speaking to a rep.</div>
+        <div class="metric-highlight">
+          <span class="metric-pill">↑ 83% task completion</span>
+          <span class="metric-line">for identifying partnership value and next steps in usability testing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-placeholder" style="margin-top:40px;">
+      <img src="wgu-partnerships-screens.jpg" alt="WGU hi-fi partner screens">
+      <div class="image-placeholder-label">Hi-Fi Designs</div>
+      <div class="image-placeholder-title">Partner Journey — Full UI Showcase</div>
+      <p class="image-placeholder-copy">Audience selector, employer journey, partnership tier comparison, and ROI evidence modules across desktop and mobile breakpoints.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════ 05 OUTCOMES ═══════════════════════ -->
+  <section id="outcomes">
+    <div class="section-num"><span>05</span> Outcomes</div>
+    <h2 class="section-h">How success<br><em>is measured</em></h2>
+    <p class="body-copy">Success metrics were defined upfront and tied directly to the three core redesign goals: improving partner inquiry quality, increasing task completion and clarity, and reducing early bounce. Results were measured through prototype testing and usability scoring rounds against the original experience.</p>
+
+    <div class="outcome-grid fade-up">
+      <div class="outcome-box">
+        <div class="outcome-num">4.2×</div>
+        <div class="outcome-label">Partner Inquiry Growth</div>
+        <div class="outcome-sub">Increase in qualified partner inquiries from the redesigned journey vs. the original during prototype testing</div>
+      </div>
+      <div class="outcome-box">
+        <div class="outcome-num">83%</div>
+        <div class="outcome-label">Task Completion Rate</div>
+        <div class="outcome-sub">4.6/5 avg. usability score across testing rounds for identifying partnership value, tier structure, and next steps</div>
+      </div>
+      <div class="outcome-box">
+        <div class="outcome-num">71%</div>
+        <div class="outcome-label">Bounce Rate Reduction</div>
+        <div class="outcome-sub">Projected reduction in landing page exits before any partner-type engagement or content interaction</div>
+      </div>
+    </div>
+
+    <div class="before-after-grid">
+      <div class="before-after-card">
+        <div class="before-after-label">Before</div>
+        <div class="image-placeholder small">
+          <img src="wgu-partnerships-before.jpg" alt="WGU old UI">
+          <div class="image-placeholder-label">Legacy UI</div>
+          <div class="image-placeholder-title">Original Partnership Pages</div>
+          <p class="image-placeholder-copy">One undifferentiated page for all partner types with no routing, no tier structure, and a generic Contact Us button.</p>
+        </div>
+      </div>
+      <div class="before-after-card">
+        <div class="before-after-label after">After</div>
+        <div class="image-placeholder small">
+          <img src="wgu-partnerships-after.jpg" alt="WGU new UI">
+          <div class="image-placeholder-label">Redesigned UI</div>
+          <div class="image-placeholder-title">Redesigned Partnership Hub</div>
+          <p class="image-placeholder-copy">Audience selector, tailored journeys, structured tiers, and ROI evidence surfaced before every CTA.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-grid fade-up" style="margin-top:0;">
+      <div class="compare-panel">
+        <div class="compare-label">Old Experience — Before</div>
+        <ul class="compare-list">
+          <li>One undifferentiated page for employers, colleges, and workforce boards</li>
+          <li>No tier structure — partners could not determine what was included or how packages differed</li>
+          <li>A generic Contact Us button with no supporting evidence or next-step guidance</li>
+          <li>ROI data and outcome metrics hidden in sales decks — invisible to digital visitors</li>
+          <li>High bounce rates across all Workforce Solutions landing pages</li>
+        </ul>
+      </div>
+      <div class="compare-panel after">
+        <div class="compare-label">New Experience — After</div>
+        <ul class="compare-list">
+          <li>Audience selector routes each partner to a tailored journey with relevant evidence and CTAs</li>
+          <li>Named tiers with scannable feature sets, outcome data, and pricing context visible before contact</li>
+          <li>ROI data, retention metrics, and a guided inquiry flow that prepares the partner for the first call</li>
+          <li>Industry pathway pages letting partners self-identify by workforce need before exploring programs</li>
+          <li>4.2× increase in qualified partner inquiries during prototype testing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════ 06 REFLECTION ═══════════════════════ -->
+  <section id="reflection">
+    <div class="section-num"><span>06</span> Reflection</div>
+    <h2 class="section-h">What I'd do<br><em>differently</em></h2>
+
+    <div class="reflection-block fade-up">
+      <p>The clearest challenge in this project was serving three fundamentally different audiences within a single platform without fragmenting the experience or tripling the maintenance burden. The routing logic and shared component system was the right architectural answer — but it required careful discipline. Every content module had to work across partner contexts before we could justify building partner-specific variants on top.</p>
+      <p>If I were starting again, I would run the content audit in week one, not week six. Discovering that strong ROI data — retention figures, replacement cost savings, employee outcome metrics — already existed in internal sales decks midway through design cost a week of unnecessary stakeholder back-and-forth. That data was the single most valuable design input in the entire project. Finding it earlier would have sharpened the information architecture from the first wireframe.</p>
+      <p>The other lesson: involve partner representatives in the Define phase, not just Research. Their input on the routing logic and tier naming would have sharpened both much earlier in the process. Research-phase-only involvement meant some Define-phase decisions had to be relitigated once real partners reviewed the wireframes — adding unnecessary revision rounds that could have been avoided entirely.</p>
+    </div>
+  </section>
+
+</div><!-- /content -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Crystal <span>Obaretin</span></div>
+  <p class="footer-contact">Lead UX Designer &nbsp;·&nbsp; <a href="mailto:crystaloba@gmail.com">crystaloba@gmail.com</a> &nbsp;·&nbsp; <a href="index.html">Back to Portfolio</a></p>
+</footer>
+
+<script>
+  const faders = document.querySelectorAll('.fade-up');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  faders.forEach(f => obs.observe(f));
+
+  const dots = document.querySelectorAll('.sidebar-dot');
+  const sects = ['overview','research','process','solutions','outcomes','reflection'];
+  window.addEventListener('scroll', () => {
+    let cur = 'overview';
+    sects.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 220) cur = id;
+    });
+    dots.forEach(d => d.classList.toggle('active', d.getAttribute('href') === '#' + cur));
+  });
+</script>
+</body>
+</html>
