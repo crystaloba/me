@@ -75,6 +75,7 @@ nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-o
 }
 .hero p { margin-top: 24px; max-width: 42ch; color: var(--muted); font-size: 19px; }
 .hero p a { color: var(--cherry); text-underline-offset: 3px; }
+.hero p strong { color: var(--ink); font-weight: 700; }
 
 /* NOTES BOARD — the one memorable thing */
 .board-wrap { display: flex; flex-direction: column; gap: 14px; }
@@ -108,7 +109,7 @@ nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-o
 .photo {
   aspect-ratio: 1; background: #E9E4E5; overflow: hidden; position: relative;
 }
-.photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.92) contrast(1.03); }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; image-rendering: auto; backface-visibility: hidden; }
 .photo .photo-fallback {
   position: absolute; inset: 0; display: none; place-items: center; text-align: center;
   font-family: var(--hand); font-size: clamp(16px, 3.6cqi, 22px); color: var(--muted); padding: 10%;
@@ -201,6 +202,10 @@ h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.0
 }
 .works li:first-child .work-media { aspect-ratio: 16 / 8; }
 .work-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .work-media img { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+  .work:hover .work-media img, .work:focus-visible .work-media img { transform: scale(1.05); }
+}
 .work-media .fallback {
   position: absolute; inset: 0; display: none; place-items: center;
   font-size: clamp(22px, 3vw, 34px); font-weight: 500; letter-spacing: -0.02em; color: var(--cherry);
@@ -279,7 +284,7 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
   <section class="hero" aria-labelledby="intro">
     <div>
       <h1 id="intro">Hi, I'm Crystal!</h1>
-      <p>I'm a UX designer at Western Governors University, designing partnership experiences and internal tools. Before that I worked in agency and civic tech. <a href="#work">See the work</a></p>
+      <p>I'm a <strong>UX designer at Western Governors University</strong>, designing partnership experiences and internal tools. Before that I worked in agency and civic tech. <a href="#work">See the work</a></p>
     </div>
 
     <div class="board-wrap">
@@ -287,12 +292,12 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
         <div class="board" id="board" role="group" aria-label="About me: my photo, how I work, and what I'm into">
           <figure class="item polaroid">
             <div class="photo">
-              <img src="ux-hero-pic.png" alt="Crystal Obaretin" onerror="this.parentElement.classList.add('no-img')">
+              <img src="ux-hero-pic.png" alt="Crystal Obaretin" decoding="async" onerror="this.parentElement.classList.add('no-img')">
               <span class="photo-fallback" aria-hidden="true">your photo goes here</span>
             </div>
             <figcaption class="scribble">
               <strong>Crystal</strong>
-              <span>music fanatic & hotpot enthusiast</span>
+              <span>music fanatic &amp; hotpot enthusiast</span>
             </figcaption>
           </figure>
           <div class="item note n-pearl i1"><small>How I work</small>Talk to users and stakeholders before anything gets designed</div>
