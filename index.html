@@ -7,13 +7,13 @@
 <meta name="description" content="Crystal Obaretin is a UX designer at Western Governors University, designing B2B partnership experiences and internal tools.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Brandon Grotesque via Adobe Fonts: replace YOUR-KIT-ID with your kit's ID from fonts.adobe.com -->
-<link rel="stylesheet" href="https://use.typekit.net/YOUR-KIT-ID.css">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #FFFFFF;
+  --paper: #F6F3EE;
   --ink: #241F20;
+  --flower-orange: #E36A2C;
+  --flower-pink: #E7A8C4;
   --muted: #625A5C;          /* 6.6:1 on white */
   --cherry: #640D14;         /* brand accent, 13:1 on white */
   --line: #E7E2E3;
@@ -42,21 +42,46 @@ a { color: inherit; }
 .skip {
   position: absolute; left: 16px; top: -60px;
   background: var(--cherry); color: #fff; padding: 10px 16px; border-radius: 6px;
-  text-decoration: none; z-index: 10;
+  text-decoration: none; z-index: 100;
 }
-.skip:focus { top: 16px; }
+.skip:focus { top: calc(16px + env(safe-area-inset-top, 0px)); }
 .wrap { width: var(--page); margin-inline: auto; }
 
-/* HEADER */
+/* HEADER — sticky, transparent, floating pill nav */
 header {
-  padding-top: calc(28px + env(safe-area-inset-top, 0px));
-  padding-bottom: 28px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  padding-bottom: 14px;
+  pointer-events: none; /* lets clicks pass through the transparent margin around the pill */
 }
-.header-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-.logo { font-weight: 700; font-size: 18px; text-decoration: none; letter-spacing: 0.01em; }
-nav ul { display: flex; gap: 24px; list-style: none; }
-nav a { text-decoration: none; color: var(--muted); font-size: 16px; }
-nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-offset: 4px; }
+.header-row {
+  pointer-events: auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: rgba(246, 243, 238, 0.6);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(231, 226, 227, 0.7);
+  border-radius: 999px;
+  padding: 11px 10px 11px 22px;
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.04), 0 10px 28px -14px rgba(36, 31, 32, 0.22);
+  transition: box-shadow .35s ease, background .35s ease, border-color .35s ease;
+}
+header.is-stuck .header-row {
+  background: rgba(246, 243, 238, 0.85);
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.06), 0 14px 32px -14px rgba(36, 31, 32, 0.3);
+  border-color: rgba(231, 226, 227, 0.95);
+}
+.logo { font-family: var(--hand); font-weight: 600; font-size: 24px; text-decoration: none; letter-spacing: 0.01em; color: var(--cherry); }
+nav ul { display: flex; gap: 6px; list-style: none; }
+nav a {
+  display: inline-block;
+  text-decoration: none; color: var(--muted); font-size: 15px;
+  padding: 8px 16px; border-radius: 999px;
+  transition: color .2s ease, background .2s ease;
+}
+nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 13, 20, 0.07); }
 
 /* HERO */
 .hero {
@@ -64,8 +89,9 @@ nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-o
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   gap: 56px;
   align-items: center;
-  padding: 56px 0 96px;
+  padding: 40px 0 96px;
 }
+.hero { position: relative; }
 .hero h1 {
   font-size: clamp(38px, 5.4vw, 64px);
   font-weight: 500;
@@ -73,13 +99,82 @@ nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-o
   letter-spacing: -0.01em;
   max-width: 15ch;
 }
+.hero h1 .accent {
+  font-family: var(--hand);
+  font-weight: 600;
+  color: var(--cherry);
+  font-size: 1.12em;
+}
+.hero h1 .name-doodle {
+  position: relative;
+  display: inline-block;
+  font-family: var(--hand);
+  font-weight: 600;
+  color: var(--cherry);
+  font-size: 1.1em;
+  padding: 0 0.3em;
+}
+.name-doodle .heart {
+  position: absolute;
+  width: 0.42em; height: 0.42em;
+  color: var(--flower-pink);
+}
+.name-doodle .heart-left { left: -0.22em; top: -0.15em; transform: rotate(-14deg); }
+.name-doodle .heart-right { right: -0.2em; bottom: -0.1em; transform: rotate(16deg); }
 .hero p { margin-top: 24px; max-width: 42ch; color: var(--muted); font-size: 19px; }
 .hero p a { color: var(--cherry); text-underline-offset: 3px; }
 .hero p strong { color: var(--ink); font-weight: 700; }
 
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 28px;
+  background: var(--ink); color: #fff;
+  text-decoration: none;
+  font-weight: 600; font-size: 16px;
+  padding: 14px 22px 14px 26px;
+  border-radius: 999px;
+  transition: background .2s ease, transform .2s ease, gap .2s ease;
+}
+.hero-cta svg { width: 16px; height: 16px; transition: transform .2s ease; }
+.hero-cta:hover, .hero-cta:focus-visible {
+  background: var(--cherry);
+  gap: 14px;
+}
+.hero-cta:hover svg, .hero-cta:focus-visible svg { transform: translateX(3px); }
+
+/* Doodle accents — loose, decorative, ignored by assistive tech */
+.doodle { position: absolute; pointer-events: none; z-index: 0; }
+.doodle-flower { top: -6px; left: 46%; width: clamp(46px, 5.5vw, 64px); color: var(--flower-orange); }
+.doodle-blob { top: 10%; left: 63%; width: clamp(52px, 6vw, 72px); color: var(--flower-pink); }
+@media (max-width: 860px) {
+  .doodle-flower { top: -2px; left: 4%; }
+  .doodle-blob { top: 2%; left: 78%; }
+}
+
+/* Tilted "currently" sticker — stuck on the polaroid's corner, Jessa-style */
+.badge-sticker {
+  position: absolute; top: -9%; right: -11%;
+  background: #fff; border: 1.5px solid var(--ink); border-radius: 7px;
+  padding: 1.3cqi 1.6cqi 1.5cqi; transform: rotate(9deg);
+  box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 16px -10px rgba(36,31,32,0.32);
+  line-height: 1.25; z-index: 20; white-space: nowrap;
+}
+.badge-sticker .tag {
+  display: block; width: max-content;
+  background: var(--cherry); color: #fff;
+  font-family: var(--sans); font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 4px; margin-bottom: 3px;
+  font-size: clamp(7px, 1.15cqi, 9.5px);
+}
+.badge-sticker .role { font-family: var(--hand); font-weight: 600; color: var(--ink); font-size: clamp(12px, 2.5cqi, 16px); }
+@container (max-width: 519px) {
+  .badge-sticker { top: -7%; right: -9%; transform: rotate(10deg); }
+}
+
 /* NOTES BOARD — the one memorable thing */
-.board-wrap { display: flex; flex-direction: column; gap: 14px; }
-.board-shell { container-type: inline-size; }
+.board-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.board-shell { container-type: inline-size; width: 100%; }
 .board {
   position: relative;
   aspect-ratio: 10 / 8;
@@ -172,7 +267,8 @@ nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-o
 }
 
 .board-toggle {
-  align-self: flex-start;
+  align-self: center;
+  margin-top: 4px;
   font: inherit; font-size: 15px; font-weight: 500;
   background: none; border: 1.5px solid var(--ink); color: var(--ink);
   padding: 8px 16px; border-radius: 8px; cursor: pointer;
@@ -180,14 +276,22 @@ nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-o
 .board-toggle:hover { background: var(--ink); color: #fff; }
 
 /* SECTIONS */
-section { scroll-margin-top: 24px; }
+section { scroll-margin-top: 90px; }
 .section-head {
   display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
   border-top: 1.5px solid var(--ink);
   padding-top: 18px; margin-bottom: 36px;
 }
-h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.005em; line-height: 1.1; }
+h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.005em; line-height: 1.1; display: flex; align-items: center; gap: 12px; }
 .section-head p { color: var(--muted); font-size: 15px; }
+.doodle-inline { width: 0.7em; height: 0.7em; flex: none; }
+.doodle-inline.star { color: var(--flower-orange); }
+.doodle-inline.spiral { color: var(--note-sage); filter: saturate(1.4) brightness(0.75); }
+
+.squiggle-divider { width: min(180px, 40%); margin: 0 auto 8px; color: var(--muted); opacity: .55; }
+
+.contact h2 .doodle-inline { width: 0.55em; height: 0.55em; }
+.contact h2 .doodle-inline.heart { color: var(--flower-pink); }
 
 /* WORK */
 .works { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 40px; list-style: none; padding-bottom: 120px; }
@@ -251,46 +355,65 @@ h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.0
 footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
 
 @media (max-width: 860px) {
-  .hero { grid-template-columns: 1fr; gap: 40px; padding: 32px 0 72px; }
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 24px 0 72px; }
   .works { grid-template-columns: 1fr; gap: 44px; padding-bottom: 88px; }
   .works li:first-child .work-media { aspect-ratio: 4 / 3; }
   .about-grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 88px; }
   .work-caption { flex-direction: column; gap: 6px; }
 }
+@media (max-width: 520px) {
+  .header-row { padding: 9px 8px 9px 18px; }
+  nav ul { gap: 2px; }
+  nav a { padding: 7px 12px; font-size: 14px; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .note { transition: none; }
+  .header-row { transition: none; }
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="wrap">
-  <div class="header-row">
-    <a href="#main" class="logo">Crystal Obaretin</a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+<header id="siteHeader">
+  <div class="wrap">
+    <div class="header-row">
+      <a href="#main" class="logo">Crystal Obaretin</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
 <main id="main" class="wrap">
 
   <section class="hero" aria-labelledby="intro">
+    <svg class="doodle doodle-flower" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+      <path d="M32 4 L37 22 L54 14 L40 28 L58 32 L40 36 L54 50 L37 42 L32 60 L27 42 L10 50 L24 36 L6 32 L24 28 L10 14 L27 22 Z" fill="currentColor"/>
+    </svg>
+    <svg class="doodle doodle-blob" viewBox="0 0 72 72" fill="none" aria-hidden="true" focusable="false">
+      <path d="M36 4C50 2 66 14 68 30C70 46 58 60 42 66C26 72 8 64 4 48C0 32 8 16 22 8C27 5 31 4.5 36 4Z" fill="currentColor"/>
+    </svg>
     <div>
-      <h1 id="intro">Hi, I'm Crystal!</h1>
-      <p>I'm a <strong>UX designer at Western Governors University</strong>, designing partnership experiences and internal tools. Before that I worked in agency and civic tech. <a href="#work">See the work</a></p>
+      <h1 id="intro">Hi, I'm <span class="name-doodle">Crystal</span>!<br>I architect <span class="accent">delightful</span> partnership&nbsp;experiences.</h1>
+      <p>I'm a <strong>UX Designer at Western Governors University</strong>, designing partnership experiences and internal tools. Before that I worked in agency and civic tech.</p>
+      <a class="hero-cta" href="#work">View Work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
     </div>
 
     <div class="board-wrap">
       <div class="board-shell">
         <div class="board" id="board" role="group" aria-label="About me: my photo, how I work, and what I'm into">
           <figure class="item polaroid">
+            <div class="badge-sticker" aria-hidden="true">
+              <span class="tag">Currently</span>
+              <span class="role">Designing @ WGU</span>
+            </div>
             <div class="photo">
               <img src="ux-hero-pic.png" alt="Crystal Obaretin" decoding="async" onerror="this.parentElement.classList.add('no-img')">
               <span class="photo-fallback" aria-hidden="true">your photo goes here</span>
@@ -314,7 +437,7 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
 
   <section id="work" aria-labelledby="work-h">
     <div class="section-head">
-      <h2 id="work-h">Work</h2>
+      <h2 id="work-h"><svg class="doodle-inline star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.3 6.9L21 9l-5.5 4.4L17.4 21 12 16.9 6.6 21l1.9-7.6L3 9l6.7-1.1L12 1z"/></svg>Work</h2>
     </div>
     <ul class="works">
       <li>
@@ -382,7 +505,7 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
 
   <section id="about" aria-labelledby="about-h">
     <div class="section-head">
-      <h2 id="about-h">About</h2>
+      <h2 id="about-h"><svg class="doodle-inline spiral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 12c3 0 5-1.5 5-4s-2-4-5-4-6 2-6 6 3 7 7 7 8-3 8-8-4-8-9-8"/></svg>About</h2>
       <p>Research, systems, accessibility</p>
     </div>
     <div class="about-grid">
@@ -403,8 +526,10 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
     </div>
   </section>
 
+  <svg class="squiggle-divider" viewBox="0 0 180 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 10c8-10 16 10 24 0s16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0"/></svg>
+
   <section id="contact" class="contact" aria-labelledby="contact-h">
-    <h2 id="contact-h">Let's work together!</h2>
+    <h2 id="contact-h"><svg class="doodle-inline heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.2-4.6-10-9.3C.3 8.6 2 4.8 5.6 4.1 8 3.6 10.3 4.7 12 7c1.7-2.3 4-3.4 6.4-2.9 3.6.7 5.3 4.5 3.6 7.6C19.2 16.4 12 21 12 21Z"/></svg>Let's work together!<svg class="doodle-inline heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.2-4.6-10-9.3C.3 8.6 2 4.8 5.6 4.1 8 3.6 10.3 4.7 12 7c1.7-2.3 4-3.4 6.4-2.9 3.6.7 5.3 4.5 3.6 7.6C19.2 16.4 12 21 12 21Z"/></svg></h2>
     <div class="contact-links">
       <a href="mailto:crystaloba@gmail.com">Email me</a>
       <a href="https://www.linkedin.com/in/crystaloba0510">LinkedIn</a>
@@ -424,6 +549,11 @@ toggle.addEventListener('click', () => {
   toggle.setAttribute('aria-pressed', String(spread));
   toggle.textContent = spread ? 'Stack the notes' : 'Spread the notes';
 });
+
+const siteHeader = document.getElementById('siteHeader');
+const setStuck = () => siteHeader.classList.toggle('is-stuck', window.scrollY > 8);
+setStuck();
+window.addEventListener('scroll', setStuck, { passive: true });
 </script>
 </body>
 </html>
