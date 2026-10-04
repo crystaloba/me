@@ -2,965 +2,537 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Remedy LLC — Crystal Obaretin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Home Remedy LLC redesign, Crystal Obaretin</title>
+<meta name="description" content="Case study: modernizing Home Remedy LLC's remodeling site to sharpen lead quality and conversion.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-	<style>
-  :root {
-    /* Home Remedy brand palette — adapted for AAA compliance */
-    --teal-50:  #E6F7F9;
-    --teal-100: #AEDFE4;
-    --teal-400: #08A4B8;
-    --teal-600: #067A8A;   /* darkened from #08A4B8 for text on white — AAA 7:1 */
-    --teal-800: #0C3F46;   /* original brand dark teal */
-    --teal-900: #072A30;
-
-    --amber-300: #FFC266;  /* brand accent — for decoration only, never small text on white */
-    --amber-600: #8A5E00;  /* AAA-safe amber text on white */
-    --amber-bg:  #FFF8EC;  /* light amber background */
-
-    --ink:      #0D1117;
-    --ink-80:   rgba(13,17,23,0.80);
-    --ink-60:   rgba(13,17,23,0.60);
-    --ink-30:   rgba(13,17,23,0.30);
-    --ink-10:   rgba(13,17,23,0.08);
-    --white:    #FFFFFF;
-    --surface:  #F6FAFB;
-    --rule:     rgba(13,17,23,0.10);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Lexend', sans-serif;
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--ink);
-    background: var(--white);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 48px; height: 60px;
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(14px);
-    border-bottom: 0.5px solid var(--rule);
-  }
-  .nav-name {
-    font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
-    color: var(--ink); text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-size: 12px; font-weight: 400; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--ink-60); text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--teal-800); }
-
-  /* ── SIDEBAR ── */
-  .sidebar {
-    position: fixed; left: 48px; top: 50%;
-    transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 12px; z-index: 50;
-  }
-  .sidebar-dot {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none; color: var(--ink-30);
-    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .sidebar-dot::before {
-    content: ''; display: block; width: 4px; height: 4px;
-    border-radius: 50%; background: currentColor; flex-shrink: 0;
-  }
-  .sidebar-dot:hover, .sidebar-dot.active { color: var(--teal-600); }
-
-  /* ── LAYOUT ── */
-  .content { max-width: 780px; margin: 0 auto; padding: 0 32px; }
-  section { padding-top: 120px; }
-
-  /* ── HERO ── */
-  .hero {
-    padding-top: 160px; padding-bottom: 120px;
-    border-bottom: 0.5px solid var(--rule);
-  }
-	.hero-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 20px;
-  object-fit: cover;
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FFFFFF;
+  --ink: #241F20;
+  --muted: #625A5C;
+  --cherry: #640D14;
+  --line: #E7E2E3;
+  --note-pearl: #F6ECC9;
+  --note-cotton: #FCD3DE;
+  --note-apricot: #F4CF9E;
+  --note-sage: #D9E6D3;
+  --tint: #FAF4E1;
+  --sans: 'brandon-grotesque', 'Brandon Grotesque', 'Futura PT', Futura, 'Century Gothic', system-ui, sans-serif;
+  --hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  --wide: min(1120px, 100% - 48px);
+  --read: min(720px, 100% - 48px);
 }
-  .hero-tag {
-    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--teal-600);
-    margin-bottom: 28px; display: flex; align-items: center; gap: 10px;
-  }
-  .hero-tag::before {
-    content: ''; display: block; width: 28px; height: 1px;
-    background: var(--teal-400);
-  }
-  .hero-title {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: clamp(40px, 6vw, 68px); font-weight: 400;
-    line-height: 1.05; letter-spacing: -0.02em;
-    color: var(--ink); margin-bottom: 32px;
-  }
-  .hero-title em { font-style: italic; color: var(--teal-600); }
-  .hero-sub {
-    font-size: 17px; font-weight: 300; color: var(--ink-60);
-    max-width: 560px; line-height: 1.7; margin-bottom: 56px;
-  }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 18px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--cherry); outline-offset: 3px; border-radius: 4px; }
+.skip { position: absolute; left: 16px; top: -60px; background: var(--cherry); color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none; z-index: 10; }
+.skip:focus { top: 16px; }
+.wide { width: var(--wide); margin-inline: auto; }
+.read { width: var(--read); margin-inline: auto; }
+.solutions-wrap { width: min(880px, 100% - 48px); }
 
-  /* ── META GRID ── */
-  .meta-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    border: 0.5px solid var(--rule); border-radius: 2px;
-  }
-  .meta-item {
-    padding: 20px 24px; border-right: 0.5px solid var(--rule);
-  }
-  .meta-item:last-child { border-right: none; }
-  .meta-label {
-    font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink-30); margin-bottom: 6px;
-  }
-  .meta-value { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+/* HEADER — sticky, transparent, floating pill (unchanged — matches the homepage nav exactly) */
+header#siteHeader {
+  position: sticky; top: 0; z-index: 100;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  padding-bottom: 14px;
+  pointer-events: none;
+}
+.header-row {
+  pointer-events: auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: rgba(247, 246, 244, 0.6);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(231, 226, 227, 0.7);
+  border-radius: 999px;
+  padding: 11px 10px 11px 22px;
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.04), 0 10px 28px -14px rgba(36, 31, 32, 0.22);
+  transition: box-shadow .35s ease, background .35s ease, border-color .35s ease;
+}
+header#siteHeader.is-stuck .header-row {
+  background: rgba(247, 246, 244, 0.85);
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.06), 0 14px 32px -14px rgba(36, 31, 32, 0.3);
+  border-color: rgba(231, 226, 227, 0.95);
+}
+.logo { font-family: var(--hand); font-weight: 600; font-size: 24px; text-decoration: none; letter-spacing: 0.01em; color: var(--cherry); }
+header#siteHeader nav ul { display: flex; gap: 6px; list-style: none; }
+header#siteHeader nav a {
+  display: inline-block; text-decoration: none; color: var(--muted); font-size: 15px;
+  font-weight: 400; letter-spacing: normal; text-transform: none;
+  padding: 8px 16px; border-radius: 999px;
+  transition: color .2s ease, background .2s ease;
+}
+header#siteHeader nav a:hover, header#siteHeader nav a:focus-visible { color: var(--cherry); background: rgba(100,13,20,0.07); }
+@media (max-width: 520px) {
+  .header-row { padding: 9px 8px 9px 18px; }
+  header#siteHeader nav ul { gap: 2px; }
+  header#siteHeader nav a { padding: 7px 12px; font-size: 14px; }
+}
 
-  /* ── SECTION BADGE ── */
-  .section-num {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--teal-800);
-    background: linear-gradient(135deg, rgba(174,223,228,0.35), rgba(230,247,249,0.95));
-    border: 1px solid rgba(6,122,138,0.18);
-    padding: 8px 16px; border-radius: 999px; margin-bottom: 40px;
-    box-shadow: 0 1px 2px rgba(13,17,23,0.04);
-  }
-  .section-num span {
-    color: var(--white); background: var(--teal-600);
-    width: 24px; height: 24px; border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 10px; letter-spacing: 0;
-  }
+/* INTRO */
+.intro { padding: 48px 0 40px; }
+.back { display: inline-block; color: var(--muted); font-size: 16px; text-underline-offset: 4px; margin-bottom: 28px; }
+.back:hover { color: var(--cherry); }
+h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; max-width: 100%; text-wrap: balance; }
+h1 em, h2 em {
+  font-family: inherit; font-weight: inherit; font-style: normal;
+  text-transform: inherit; letter-spacing: inherit; color: inherit;
+}
+.lede { margin-top: 24px; font-size: 21px; color: var(--muted); max-width: 100%; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 44px; padding-top: 18px; border-top: 1.5px solid var(--ink); }
+.facts dt { color: var(--muted); font-size: 15px; }
+.facts dd { font-weight: 500; line-height: 1.35; margin-top: 2px; }
 
-  /* ── TYPOGRAPHY ── */
-  .section-h {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: clamp(28px, 4vw, 40px); font-weight: 400;
-    line-height: 1.1; letter-spacing: -0.01em;
-    color: var(--ink); margin-bottom: 24px;
-  }
-  .section-h em { font-style: italic; color: var(--teal-600); }
+/* FIGURES */
+figure { margin: 40px auto; }
+.frame { background: var(--tint); border-radius: 14px; overflow: hidden; position: relative; }
+.frame img { width: 100%; height: auto; }
+.frame .missing { display: none; padding: 64px 24px; text-align: center; color: var(--muted); font-size: 16px; }
+.frame.no-img .missing { display: block; }
+.frame.no-img img { display: none; }
+figcaption { margin: 12px auto 0; color: var(--muted); font-size: 15px; max-width: 64ch; text-align: center; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.pair figure { margin: 0; }
 
-  .body-copy {
-    font-size: 16px; font-weight: 300; color: var(--ink-60);
-    line-height: 1.8; max-width: 620px;
-  }
-  .body-copy + .body-copy { margin-top: 16px; }
+/* SECTIONS */
+section { padding-top: 96px; scroll-margin-top: 24px; }
+.section-head { border-top: 1.5px solid var(--ink); padding-top: 18px; margin-bottom: 28px; }
+h2 { font-size: clamp(24px, 3.8vw, 46px); font-weight: 700; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; max-width: 100%; color: var(--ink); text-wrap: balance; }
+#branding-h { font-size: clamp(18px, 4.6vw, 32px); max-width: none; white-space: nowrap; }
+#solutions-h { font-size: clamp(20px, 4.4vw, 36px); max-width: none; white-space: nowrap; }
+.kicker { color: var(--muted); font-size: 16px; margin-bottom: 6px; }
+h3 { font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: 0.05em; text-transform: uppercase; margin: 48px 0 12px; text-wrap: balance; }
+p + p { margin-top: 16px; }
+.read p { max-width: 64ch; }
 
-  /* ── PULL QUOTE ── */
-  .pull-quote {
-    margin: 56px 0; padding: 40px 48px;
-    background: var(--teal-50);
-    border-left: 2px solid var(--teal-400);
-    border-radius: 0 2px 2px 0;
-  }
-  .pull-quote p {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: 22px; font-style: italic; line-height: 1.5;
-    color: var(--teal-800); margin-bottom: 16px;
-  }
-  .pull-quote cite {
-    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--teal-600); font-style: normal;
-  }
+/* QUOTE */
+blockquote { margin: 48px 0; padding-left: 24px; border-left: 3px solid var(--cherry); }
+blockquote p { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.35; font-weight: 500; }
+blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
+.insight { margin: 48px 0; padding: 24px; background: var(--tint); border-radius: 8px; }
+.insight p { font-size: 18px; line-height: 1.5; font-weight: 500; color: var(--ink); }
+.insight footer { margin-top: 12px; color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
 
-  /* ── STAT ROW ── */
-  .stat-row {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--rule);
-    border: 0.5px solid var(--rule); border-radius: 2px;
-    overflow: hidden; margin: 40px 0;
-  }
-  .stat-box {
-    background: var(--white); padding: 32px 28px;
-    display: flex; flex-direction: column; gap: 6px;
-  }
-  .stat-num {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: 44px; font-weight: 400; color: var(--teal-600);
-    line-height: 1; letter-spacing: -0.02em;
-  }
-  .stat-label { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 4px; }
-  .stat-sub { font-size: 12px; font-weight: 300; color: var(--ink-30); line-height: 1.5; }
+/* NUMBERS */
+.numbers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+.numbers div { border-top: 1px solid var(--line); padding-top: 14px; }
+.big { font-size: clamp(36px, 4.4vw, 52px); font-weight: 500; line-height: 1; color: var(--cherry); }
+.numbers strong { display: block; margin-top: 8px; font-weight: 700; }
+.numbers span { display: block; color: var(--muted); font-size: 15px; line-height: 1.45; margin-top: 2px; }
 
-  /* ── OUTCOME GRID (dark) ── */
-  .outcome-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1px; background: var(--rule);
-    border: 0.5px solid var(--rule); border-radius: 2px;
-    overflow: hidden; margin: 40px 0;
-  }
-  .outcome-box {
-    background: var(--teal-800); padding: 32px 24px;
-    display: flex; flex-direction: column; gap: 6px;
-  }
-  .outcome-num {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: 38px; font-weight: 400; color: var(--white);
-    line-height: 1; letter-spacing: -0.02em;
-  }
-  .outcome-label { font-size: 12px; font-weight: 600; color: #D4F0F3; margin-top: 4px; }
-  .outcome-sub { font-size: 11px; font-weight: 300; color: #9DD4DA; line-height: 1.6; }
+/* METHODS */
+.methods { list-style: none; margin-top: 8px; }
+.methods li { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.methods li:first-child { border-top: 1px solid var(--line); }
+.methods strong { font-weight: 700; }
 
-  /* ── COMPARE GRID ── */
-  .compare-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--rule);
-    border: 0.5px solid var(--rule); border-radius: 2px;
-    overflow: hidden; margin: 40px 0;
-  }
-  .compare-panel { background: var(--white); padding: 32px; }
-  .compare-panel.after { background: var(--teal-50); }
-  .compare-label {
-    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--ink-30); margin-bottom: 20px;
-  }
-  .compare-panel.after .compare-label { color: var(--teal-600); }
-  .compare-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .compare-list li {
-    font-size: 14px; font-weight: 300; color: var(--ink-60);
-    display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
-  }
-  .compare-list li::before { content: '—'; color: var(--ink-30); flex-shrink: 0; }
-  .compare-panel.after .compare-list li::before { content: '↗'; color: var(--teal-400); }
-  .compare-panel.after .compare-list li { color: var(--teal-800); }
+/* FINDINGS: sticky notes */
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 32px; }
+.note {
+  padding: 26px 26px 28px; border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 18px -8px rgba(36,31,32,0.28);
+}
+.note:nth-child(1) { background: var(--note-pearl); transform: rotate(-1deg); }
+.note:nth-child(2) { background: var(--note-sage); transform: rotate(0.8deg); }
+.note:nth-child(3) { background: var(--note-cotton); transform: rotate(0.6deg); }
+.note:nth-child(4) { background: var(--note-apricot); transform: rotate(-0.8deg); }
+.note h4 { font-family: var(--hand); font-weight: 600; font-size: 27px; line-height: 1.08; color: #2B2324; margin-bottom: 12px; }
+.note p { font-size: 16px; line-height: 1.55; color: #3A3133; }
 
-  /* ── METHOD GRID ── */
-  .method-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--rule);
-    border: 0.5px solid var(--rule); border-radius: 2px;
-    overflow: hidden; margin: 40px 0;
-  }
-  .method-box { background: var(--white); padding: 28px 24px; }
-  .method-num {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: 28px; font-weight: 400; color: var(--teal-100);
-    margin-bottom: 12px; line-height: 1;
-  }
-  .method-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
-  .method-body { font-size: 12px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
+/* PROCESS */
+.phases { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; margin-top: 32px; }
+.phases li { border-top: 3px solid var(--note-pearl); padding-top: 14px; }
+.phases strong { display: block; font-size: 20px; margin: 2px 0 8px; }
+.phases ul { list-style: none; color: var(--muted); font-size: 15px; line-height: 1.5; }
 
-  /* ── INSIGHT CARDS ── */
-  .insight-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 16px; margin: 40px 0;
-  }
-  .insight-card {
-    padding: 28px; border: 1px solid var(--rule);
-    border-radius: 12px; background: var(--white);
-    transition: transform 0.25s ease, border-color 0.25s ease,
-                box-shadow 0.25s ease, background 0.25s ease;
-  }
-  .insight-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(6,122,138,0.2);
-    background: rgba(230,247,249,0.35);
-    box-shadow: 0 10px 30px rgba(13,17,23,0.06), 0 2px 8px rgba(13,17,23,0.04);
-  }
-  .insight-card:hover .insight-title { color: var(--teal-800); }
-  .insight-icon {
-    font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--teal-400); margin-bottom: 12px;
-  }
-  .insight-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
-  .insight-body { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
+/* TWO-COLUMN LISTS */
+.columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 28px; }
+.columns h4 { font-size: 17px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); margin-bottom: 4px; }
+.columns ul { list-style: none; }
+.columns li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 1.5; }
+.columns .after h4 { color: var(--cherry); border-color: var(--cherry); }
 
-  /* ── PROCESS TRACK ── */
-  .process-track {
-    display: flex; align-items: flex-start;
-    margin: 40px 0; position: relative;
-  }
-  .process-step {
-    flex: 1; padding: 24px 20px;
-    border: 0.5px solid var(--rule); border-right: none; position: relative;
-  }
-  .process-step:last-child { border-right: 0.5px solid var(--rule); }
-  .process-step.active { background: var(--teal-600); border-color: var(--teal-600); }
-  .step-phase {
-    font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink-30); margin-bottom: 8px;
-  }
-  .process-step.active .step-phase { color: rgba(255,255,255,0.7); }
-  .step-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
-  .process-step.active .step-title { color: var(--white); }
-  .step-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  .step-items li { font-size: 11px; font-weight: 300; color: var(--ink-30); line-height: 1.4; }
-  .process-step.active .step-items li { color: rgba(255,255,255,0.75); }
+/* SOLUTIONS */
+.solutions { list-style: none; margin-top: 8px; }
+.solutions li { padding: 28px 0; border-bottom: 1px solid var(--line); }
+.solutions li:first-child { border-top: 1px solid var(--line); }
+.solutions h3 { margin: 0; font-size: 24px; color: var(--cherry); }
+.solutions .sub { color: var(--muted); font-size: 17px; margin-top: 2px; }
+.solutions p { margin-top: 12px; }
+.solutions .detail { margin-top: 12px; font-size: 15px; color: var(--cherry); font-weight: 500; }
+.solutions figure { margin: 24px 0 0; }
+.solutions .pair { margin-top: 24px; }
+.solutions .pair figure { margin: 0; }
 
-  /* ── SOLUTION ROWS ── */
-  .solution-row {
-    display: grid; grid-template-columns: 1fr 2fr;
-    gap: 40px; align-items: start;
-    padding: 32px 0; border-bottom: 0.5px solid var(--rule);
-  }
-  .solution-row:last-child { border-bottom: none; }
-  .solution-num {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: 64px; font-weight: 400; color: var(--teal-50);
-    line-height: 1; letter-spacing: -0.03em; padding-top: 4px;
-  }
-  .solution-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
-  .solution-body { font-size: 14px; font-weight: 300; color: var(--ink-60); line-height: 1.7; }
+/* TARGETS */
+.targets { list-style: none; margin-top: 24px; }
+.targets li { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.targets li:first-child { border-top: 1px solid var(--line); }
+.targets .big { font-size: 34px; }
+.targets strong { display: block; font-weight: 700; }
+.targets span { color: var(--muted); font-size: 16px; }
 
-  /* ── METRIC PILL ── */
-  .metric-highlight { display: flex; align-items: center; gap: 16px; margin-top: 10px; }
-  .metric-pill {
-    font-size: 13px; font-weight: 500; color: var(--teal-800);
-    background: var(--teal-50); border: 0.5px solid var(--teal-100);
-    padding: 4px 12px; border-radius: 100px; white-space: nowrap;
-  }
-  .metric-line { font-size: 12px; font-weight: 300; color: var(--ink-30); }
+/* BRANDING SWATCHES */
+.swatch-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+.swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.swatch-circle { width: 52px; height: 52px; border-radius: 50%; border: 0.5px solid rgba(0,0,0,0.08); }
+.swatch-hex { font-size: 12px; font-weight: 500; color: var(--muted); }
 
-  /* ── TAG CLOUD ── */
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0; }
-  .tag {
-    font-size: 14px; font-weight: 700; color: var(--teal-800);
-    background: var(--teal-50); border: 0.5px solid var(--teal-100);
-    padding: 6px 14px; border-radius: 100px; letter-spacing: 0.01em;
-  }
+/* END */
+.next { margin: 120px auto 0; padding-top: 18px; border-top: 1.5px solid var(--ink); display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+.next a { text-decoration: none; }
+.next .label { color: var(--muted); font-size: 16px; }
+.next .title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; line-height: 1.1; text-wrap: balance; }
+.next a:hover .title { color: var(--cherry); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.site-footer { padding: 48px 0 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.site-footer a { color: var(--cherry); }
 
-  /* ── BEFORE/AFTER GRID ── */
-  .before-after-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 24px; margin-top: 48px;
-  }
-  .before-after-card { display: flex; flex-direction: column; }
-  .before-after-label {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: fit-content; padding: 8px 16px; border-radius: 999px; margin-bottom: 16px;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    background: rgba(13,17,23,0.06); color: var(--ink);
-  }
-  .before-after-label.after { background: rgba(6,122,138,0.12); color: var(--teal-800); }
-
-  /* ── IMAGE PLACEHOLDER ── */
-  .image-placeholder {
-    width: 100%; min-height: 380px;
-    border: 1px dashed var(--teal-100);
-    background: linear-gradient(135deg, rgba(174,223,228,0.2), rgba(246,250,251,1));
-    border-radius: 8px;
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; text-align: center; padding: 32px;
-    margin: 40px 0;
-  }
-	.image-placeholder img {
-		width: 100%;
-  display: block;
-  object-fit: cover;}
-  .image-placeholder.small { min-height: 240px; }
-	.image-placeholder.small img {
-		width: 100%;
-  display: block;
-  object-fit: cover;}
-  .image-placeholder-label {
-    font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--teal-600); margin-bottom: 10px;
-  }
-  .image-placeholder-title {
-    font-size: 24px; font-weight: 500; color: var(--ink); margin-bottom: 10px;
-  }
-  .image-placeholder-copy {
-    font-size: 14px; line-height: 1.7; color: var(--ink-60); max-width: 380px;
-  }
-
-  /* ── CAPTION / DESCRIPTION BOX ── */
-  .caption-box {
-    width: 100%;
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin-top: -24px;
-    margin-bottom: 40px;
-    background: var(--surface);
-  }
-  .caption-box label {
-    display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--teal-600); margin-bottom: 6px;
-  }
-  .caption-box textarea {
-    width: 100%; border: none; background: transparent; resize: vertical;
-    font-family: 'Lexend', sans-serif; font-size: 13px; font-weight: 300;
-    color: var(--ink-80); line-height: 1.6; min-height: 56px; outline: none;
-  }
-  .caption-box textarea::placeholder { color: var(--ink-30); }
-
-  /* ── BRANDING SWATCH ROW ── */
-  .swatch-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 32px 0; }
-  .swatch {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-  }
-  .swatch-circle {
-    width: 52px; height: 52px; border-radius: 50%;
-    border: 0.5px solid rgba(0,0,0,0.08);
-  }
-  .swatch-hex { font-size: 11px; font-weight: 500; color: var(--ink-60); }
-
-  /* ── DIVIDER ── */
-  .divider { height: 0.5px; background: var(--rule); margin: 80px 0; }
-
-  /* ── REFLECTION ── */
-  .reflection-block {
-    padding: 40px 0; border-top: 0.5px solid var(--rule);
-    border-bottom: 0.5px solid var(--rule); margin: 40px 0;
-  }
-  .reflection-block p {
-    font-size: 17px; font-weight: 300; color: var(--ink-60);
-    line-height: 1.85; max-width: 620px;
-  }
-  .reflection-block p + p { margin-top: 20px; }
-
-  /* ── FOOTER ── */
-  footer { padding: 80px 0 60px; text-align: center; }
-  .footer-name {
-    font-family: 'Zalando Sans Expanded', serif;
-    font-size: 32px; font-style: italic; color: var(--ink-30); margin-bottom: 12px;
-  }
-  .footer-contact { font-size: 13px; font-weight: 300; color: var(--ink-30); }
-  .footer-contact a { color: var(--teal-600); text-decoration: none; }
-
-  /* ── FADE UP ── */
-  .fade-up {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .sidebar { display: none; }
-    .content { padding: 0 24px; }
-    .meta-grid { grid-template-columns: repeat(2, 1fr); }
-    .stat-row { grid-template-columns: repeat(2, 1fr); }
-    .outcome-grid { grid-template-columns: repeat(2, 1fr); }
-    .compare-grid { grid-template-columns: 1fr; }
-    .process-track { flex-direction: column; }
-    .process-step { border-right: 0.5px solid var(--rule); border-bottom: none; }
-    .process-step:last-child { border-bottom: 0.5px solid var(--rule); }
-    .insight-grid { grid-template-columns: 1fr; }
-    .method-grid { grid-template-columns: 1fr; }
-    .solution-row { grid-template-columns: 1fr; gap: 8px; }
-    .solution-num { font-size: 40px; }
-    .before-after-grid { grid-template-columns: 1fr; }
-  }
+@media (max-width: 860px) {
+  .solutions .pair { grid-template-columns: 1fr; }
+  body { font-size: 17px; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .numbers, .pair, .notes, .columns { grid-template-columns: 1fr; }
+  .methods li, .targets li { grid-template-columns: 1fr; gap: 6px; }
+  .phases { grid-template-columns: 1fr; gap: 16px; }
+  .note { transform: none !important; }
+  section { padding-top: 72px; }
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<!-- NAV -->
-<nav>
-  <a href="/me" class="nav-name">Crystal Obaretin</a>
-  <ul class="nav-links">
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#solutions">Solutions</a></li>
-    <li><a href="#outcomes">Outcomes</a></li>
-  </ul>
-</nav>
+<header id="siteHeader">
+  <div class="wide header-row">
+    <a href="index.html" class="logo">Crystal Obaretin</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-  <a href="#overview"   class="sidebar-dot active">Overview</a>
-  <a href="#research"   class="sidebar-dot">Research</a>
-  <a href="#process"    class="sidebar-dot">Process</a>
-  <a href="#branding"   class="sidebar-dot">Branding</a>
-  <a href="#solutions"  class="sidebar-dot">Solutions</a>
-  <a href="#outcomes"   class="sidebar-dot">Outcomes</a>
-  <a href="#reflection" class="sidebar-dot">Reflection</a>
-</div>
+<main id="main">
 
-<!-- HERO -->
-<div class="content">
-  <div class="hero" id="hero">
-    <div class="hero-tag">UX Design · Local Home Services · 2023</div>
-    <h1 class="hero-title">Home Remedy<br><em>LLC Redesign</em></h1>
-    <p class="hero-sub">Adding sophistication to a Houston home remodeling contractor's website — modernizing an outdated UI, expanding bathroom service categories, and redesigning the RFQ flow to sharpen lead quality and conversion.</p>
-
-    <div class="image-placeholder">
-		<img
-    src="Home Remedy/hr-hp.jpg"
-    alt="Home Remedy redesigned homepage"
-    class="hero-image">
-    </div>
-
-    <div class="meta-grid">
-      <div class="meta-item">
-        <div class="meta-label">Role</div>
-        <div class="meta-value">UX Designer</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-label">Tools</div>
-        <div class="meta-value">Figma</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-label">Client</div>
-        <div class="meta-value">Home Remedy LLC<br>Houston, TX</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-label">Industry</div>
-        <div class="meta-value">Home Remodeling<br>Local Services</div>
-      </div>
-    </div>
+  <div class="intro wide">
+    <a class="back" href="index.html#work">Back to all work</a>
+    <h1>Home Remedy LLC <em>redesign</em></h1>
+    <p class="lede">Adding sophistication to a Houston home remodeling contractor's website: modernizing an outdated UI, expanding bathroom service categories, and redesigning the RFQ flow to sharpen lead quality and conversion.</p>
+    <dl class="facts">
+      <div><dt>Role</dt><dd>UX Designer</dd></div>
+      <div><dt>Tools</dt><dd>Figma</dd></div>
+      <div><dt>Client</dt><dd>Home Remedy LLC, Houston, TX</dd></div>
+      <div><dt>Industry</dt><dd>Home remodeling, local services</dd></div>
+    </dl>
   </div>
 
+  <figure class="wide">
+    <div class="frame">
+      <img src="Home Remedy/hr-hp.jpg" alt="Home Remedy redesigned homepage" onerror="this.parentElement.classList.add('no-img')">
+      <p class="missing">hr-hp.jpg</p>
+    </div>
+    <figcaption>The redesigned homepage: a lighter palette, professional photography, and trust signals brought above the fold.</figcaption>
+  </figure>
+
   <!-- OVERVIEW -->
-  <section id="overview">
-    <div class="section-num"><span>01</span> Overview</div>
-    <h2 class="section-h">A trusted contractor with<br>a site that didn't <em>show it</em></h2>
-    <p class="body-copy">Home Remedy is a Houston home remodeling contractor serving Spring Branch and the greater Houston area. With a 4.9-star Google rating, Houzz awards, and a proven track record in bathroom, kitchen, and exterior remodeling — the quality of their work was never in question. Their website was.</p>
-    <p class="body-copy" style="margin-top:16px;">The existing site used bold, saturated colors that made navigation visually overwhelming, failed to communicate their craftsmanship, and offered a basic RFQ form that attracted poorly-qualified leads. The goal: redesign the site to reflect the quality of the business — and make the most-requested service, bathroom remodeling, easier to find and explore.</p>
+  <section id="overview" class="read" aria-labelledby="overview-h">
+    <div class="section-head">
+      <p class="kicker">Overview</p>
+      <h2 id="overview-h">Redesigning a site to reflect the luxury clients they were wanting to attract</h2>
+    </div>
+    <p>Home Remedy is a Houston home remodeling contractor serving Spring Branch and the greater Houston area. They came to us wanting a fresh, modern look for their website and a stronger pipeline of leads.</p>
+    <p>The existing site used bold, saturated colors that made navigation visually overwhelming, failed to communicate their craftsmanship, and offered a basic RFQ form that attracted poorly-qualified leads.</p>
 
-    <div class="pull-quote">
-      <p>"They wanted to revamp and modernize their site and improve lead generation specifically targeting qualified bathroom remodeling leads."</p>
-      <cite>— Project Brief, Home Remedy LLC</cite>
+    <div class="insight">
+      <p>They wanted to revamp and modernize their site and improve lead generation, specifically targeting qualified bathroom remodeling leads.</p>
+      <footer>Observed in stakeholder interviews</footer>
     </div>
 
-    <div class="section-num" style="margin-top:56px;"><span></span> Baseline Metrics</div>
-    <p class="body-copy" style="margin-bottom:0;">Analytics snapshot from the 6 months prior to redesign kickoff:</p>
-
-    <div class="stat-row fade-up">
-      <div class="stat-box">
-        <div class="stat-num">7,029</div>
-        <div class="stat-label">Total Visits</div>
-        <div class="stat-sub">Across all traffic channels<br>in the 6-month window</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">256</div>
-        <div class="stat-label">Conversions by Goal</div>
-        <div class="stat-sub">Form submissions tracked<br>across 3 conversion channels</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">44%</div>
-        <div class="stat-label">Bathroom Remodeling Leads</div>
-        <div class="stat-sub">116 of 264 form leads were<br>specifically bathroom-related</div>
-      </div>
+    <h3>Baseline metrics</h3>
+    <p>Analytics snapshot from the six months prior to redesign kickoff:</p>
+    <div class="numbers">
+      <div><p class="big">7,029</p><strong>Total visits</strong><span>Across all traffic channels in the six-month window</span></div>
+      <div><p class="big">256</p><strong>Conversions by goal</strong><span>Form submissions tracked across three conversion channels</span></div>
+      <div><p class="big">44%</p><strong>Bathroom remodeling leads</strong><span>116 of 264 form leads were specifically bathroom-related</span></div>
     </div>
 
-    <div class="section-num" style="margin-top:48px;"><span>—</span> Problem Statement</div>
-    <h3 style="font-size:18px;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.4;">How can UX design help a local remodeling business attract higher-quality leads while better reflecting the quality of their work?</h3>
-    <p class="body-copy">By improving visual credibility, restructuring the service navigation around the highest-demand category (bathroom remodeling), and redesigning the RFQ form to capture better-qualified submissions, UX can directly improve both lead quality and conversion volume.</p>
+    <h3>Problem statement</h3>
+    <p style="font-size:22px; font-weight:500; color:var(--ink);">How can UX design help a local remodeling business attract higher-quality leads while better reflecting the quality of their work?</p>
   </section>
 
   <!-- RESEARCH -->
-  <section id="research">
-    <div class="section-num"><span>02</span> Research</div>
-    <h2 class="section-h">Understanding<br><em>homeowner intent</em></h2>
-    <p class="body-copy">Before touching design, I collaborated with the marketing and analytics teams to understand where leads were coming from and how users were interacting with the site. I then conducted stakeholder Q&A sessions to align on business goals and desired outcomes.</p>
-
-    <div class="image-placeholder small">
-		<img
-    src="Home Remedy/hr-research.png"
-    alt="Home Remedy redesigned homepage">
-      <div class="image-placeholder-label">Research Artifacts</div>
+  <section id="research" class="read" aria-labelledby="research-h">
+    <div class="section-head">
+      <p class="kicker">Research</p>
+      <h2 id="research-h">Understanding <em>homeowner intent</em></h2>
     </div>
+    <p>Before touching design, I collaborated with the marketing and analytics teams to understand where leads were coming from and how users were interacting with the site. I then conducted stakeholder Q&amp;A sessions to align on business goals and desired outcomes.</p>
 
-    <div class="method-grid fade-up">
-      <div class="method-box">
-        <div class="method-num">01</div>
-        <div class="method-title">Analytics Review</div>
-        <div class="method-body">Audited 6 months of site traffic and conversion data. Found that 44% of all form submissions were specifically about bathroom remodeling — confirming that the nav structure needed to surface this service prominently, not bury it under a generic "Remodeling Services" dropdown.</div>
+    <figure>
+      <div class="frame">
+        <img src="Home Remedy/hr-research.png" alt="Home Remedy research artifacts" onerror="this.parentElement.classList.add('no-img')">
+        <p class="missing">hr-research.png</p>
       </div>
-      <div class="method-box">
-        <div class="method-num">02</div>
-        <div class="method-title">Stakeholder Q&A</div>
-        <div class="method-body">One-on-one sessions with the client revealed their desire for an "elegant" use of their existing teal and orange palette — citing local competitors who used bright, white-centric designs. They also wanted to prominently feature their 4.9-star Google rating and Houzz awards.</div>
-      </div>
-      <div class="method-box">
-        <div class="method-num">03</div>
-        <div class="method-title">Competitor Analysis</div>
-        <div class="method-body">Reviewed local and regional home remodeling sites to understand how top performers presented service hierarchies, photography, and trust signals. Light, professional photography paired with clear service breakdowns consistently outperformed bold, dark-heavy layouts in this category.</div>
-      </div>
-    </div>
+      <figcaption>Research artifacts: analytics review, stakeholder Q&amp;A, and competitive analysis.</figcaption>
+    </figure>
 
-    <div class="section-num" style="margin-top:48px;"><span>—</span> Key Findings</div>
-    <div class="insight-grid fade-up">
-      <div class="insight-card">
-        <div class="insight-icon">↗ Finding 01</div>
-        <div class="insight-title">Bold colors were creating navigation friction</div>
-        <div class="insight-body">The existing dark, saturated palette made the site feel visually overwhelming and difficult to scan. Users struggled to distinguish between sections, slowing their path to the services they were looking for.</div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-icon">↗ Finding 02</div>
-        <div class="insight-title">Bathroom remodeling was undersold in navigation</div>
-        <div class="insight-body">Despite driving 44% of all form leads, bathroom remodeling was not broken out into specific sub-services (bathtub, shower, vanities). Users had to call to understand their options — adding unnecessary friction before contact.</div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-icon">↗ Finding 03</div>
-        <div class="insight-title">The RFQ form was attracting unqualified leads</div>
-        <div class="insight-body">A basic, generic inquiry form with minimal fields generated leads that required extensive back-and-forth to qualify. A more specific form structure was needed to surface intent and project scope upfront.</div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-icon">↗ Finding 04</div>
-        <div class="insight-title">Trust signals were present but buried</div>
-        <div class="insight-body">A 4.9-star Google rating and multiple Houzz awards were among the business's strongest differentiators but they were not prominently featured. Homeowners evaluating contractors need social proof above the fold.</div>
-      </div>
+    <ul class="methods">
+      <li><strong>Analytics review</strong>
+        <p>Audited six months of site traffic and conversion data. Found that 44% of all form submissions were specifically about bathroom remodeling, confirming that the nav structure needed to surface this service prominently, not bury it under a generic "Remodeling Services" dropdown.</p>
+      </li>
+      <li><strong>Stakeholder Q&amp;A</strong>
+        <p>One-on-one sessions with the client revealed their desire for an "elegant" use of their existing teal and orange palette, citing local competitors who used bright, white-centric designs. They also wanted to prominently feature their 4.9-star Google rating and Houzz awards.</p>
+      </li>
+      <li><strong>Competitor analysis</strong>
+        <p>Reviewed local and regional home remodeling sites to understand how top performers presented service hierarchies, photography, and trust signals. Light, professional photography paired with clear service breakdowns consistently outperformed bold, dark-heavy layouts in this category.</p>
+      </li>
+    </ul>
+
+    <h3>What we found</h3>
+    <div class="notes">
+      <article class="note">
+        <h4>Bold colors were creating friction</h4>
+        <p>The existing dark, saturated palette made the site feel visually overwhelming and difficult to scan. Users struggled to distinguish between sections, slowing their path to the services they were looking for.</p>
+      </article>
+      <article class="note">
+        <h4>Bathroom remodeling was undersold</h4>
+        <p>Despite driving 44% of all form leads, bathroom remodeling was not broken out into specific sub-services (bathtub, shower, vanities). Users had to call to understand their options, adding unnecessary friction before contact.</p>
+      </article>
+      <article class="note">
+        <h4>The RFQ form attracted unqualified leads</h4>
+        <p>A basic, generic inquiry form with minimal fields generated leads that required extensive back-and-forth to qualify. A more specific form structure was needed to surface intent and project scope upfront.</p>
+      </article>
+      <article class="note">
+        <h4>Trust signals were buried</h4>
+        <p>A 4.9-star Google rating and multiple Houzz awards were among the business's strongest differentiators, but they weren't prominently featured. Homeowners evaluating contractors need social proof above the fold.</p>
+      </article>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <!-- PROCESS -->
-  <section id="process">
-    <div class="section-num"><span>03</span> Process</div>
-    <h2 class="section-h">From stakeholder brief<br>to <em>high-fidelity design</em></h2>
-
-    <div class="image-placeholder">
-		<img
-    src="Home Remedy/hr-lofi.jpg"
-    alt="Home Remedy redesigned homepage">
-      <div class="image-placeholder-label">Design Process</div>
-      <div class="image-placeholder-title">Wireframes & Early Ideations</div>
-      <p class="image-placeholder-copy">Low-fidelity wireframe sketches, sitemap, or annotated layout explorations.</p>
-    </div>
-    <div class="process-track fade-up">
-      <div class="process-step">
-        <div class="step-phase">Phase 01</div>
-        <div class="step-title">Discovery</div>
-        <ul class="step-items">
-          <li>Analytics audit</li>
-          <li>Stakeholder Q&A</li>
-          <li>Competitor review</li>
-          <li>Lead data analysis</li>
-        </ul>
-      </div>
-      <div class="process-step active">
-        <div class="step-phase">Phase 02</div>
-        <div class="step-title">Architecture</div>
-        <ul class="step-items">
-          <li>Information architecture</li>
-          <li>Sitemap restructure</li>
-          <li>User flow mapping</li>
-          <li>Wireframing</li>
-        </ul>
-      </div>
-      <div class="process-step">
-        <div class="step-phase">Phase 03</div>
-        <div class="step-title">Design</div>
-        <ul class="step-items">
-          <li>Branding refinement</li>
-          <li>Hi-fi mockups</li>
-          <li>Client reviews</li>
-          <li>Prototyping</li>
-        </ul>
-      </div>
-      <div class="process-step">
-        <div class="step-phase">Phase 04</div>
-        <div class="step-title">Handoff</div>
-        <ul class="step-items">
-          <li>Design file handoff</li>
-          <li>Copywriter collab</li>
-          <li>QA rounds</li>
-        </ul>
-      </div>
-      <div class="process-step">
-        <div class="step-phase">Phase 05</div>
-        <div class="step-title">Launch</div>
-        <ul class="step-items">
-          <li>Content population</li>
-          <li>Final QA</li>
-          <li>Site launch</li>
-        </ul>
+  <section id="process" aria-labelledby="process-h">
+    <div class="read">
+      <div class="section-head">
+        <p class="kicker">Process</p>
+        <h2 id="process-h">From stakeholder brief to <em>high-fidelity design</em></h2>
       </div>
     </div>
 
-    <div class="section-num" style="margin-top:48px;"><span>—</span> Constraints &amp; Decisions</div>
-    <div class="compare-grid fade-up" style="margin-top:24px;">
-      <div class="compare-panel">
-        <div class="compare-label">Challenges Navigated</div>
-        <ul class="compare-list">
-          <li>Retain the client's existing teal and orange brand colors while making them feel refined, not overwhelming</li>
-          <li>Restructure a flat nav into a hierarchy that properly surfaces bathroom sub-services</li>
-          <li>Redesign the RFQ form to capture more qualified leads without creating form fatigue</li>
-          <li>Source and integrate professional photography that matched the elevated brand direction</li>
-        </ul>
-      </div>
-      <div class="compare-panel after">
-        <div class="compare-label">Design Decisions Made</div>
-        <ul class="compare-list">
-          <li>Shifted to lighter tints and shades of teal and amber on white backgrounds for an "elegant" feel</li>
-          <li>Created dedicated sub-pages for Bathtub, Shower Remodeling, and Custom Vanities under Bathroom Remodeling</li>
-          <li>Added service-specific fields and a message prompt to the RFQ form to pre-qualify intent</li>
-          <li>Collaborated with copywriters to produce additional SEO content for each new sub-page</li>
-        </ul>
+    <div class="wide">
+      <figure>
+        <div class="frame">
+          <img src="Home Remedy/hr-lofi.jpg" alt="Home Remedy low-fidelity wireframes" onerror="this.parentElement.classList.add('no-img')">
+          <p class="missing">hr-lofi.jpg</p>
+        </div>
+        <figcaption>Low-fidelity wireframes and sitemap explorations before visual design.</figcaption>
+      </figure>
+
+      <ul class="phases">
+        <li><strong>Discovery</strong><ul><li>Analytics audit</li><li>Stakeholder Q&amp;A</li><li>Competitor review</li><li>Lead data analysis</li></ul></li>
+        <li><strong>Architecture</strong><ul><li>Information architecture</li><li>Sitemap restructure</li><li>User flow mapping</li><li>Wireframing</li></ul></li>
+        <li><strong>Design</strong><ul><li>Branding refinement</li><li>Hi-fi mockups</li><li>Client reviews</li><li>Prototyping</li></ul></li>
+        <li><strong>Handoff</strong><ul><li>Design file handoff</li><li>Copywriter collab</li><li>QA rounds</li></ul></li>
+        <li><strong>Launch</strong><ul><li>Content population</li><li>Final QA</li><li>Site launch</li></ul></li>
+      </ul>
+    </div>
+
+    <div class="read">
+      <h3>Constraints and the decisions they led to</h3>
+      <div class="columns">
+        <div>
+          <h4>Constraints</h4>
+          <ul>
+            <li>Retain the client's existing teal and orange brand colors while making them feel refined, not overwhelming</li>
+            <li>Restructure a flat nav into a hierarchy that properly surfaces bathroom sub-services</li>
+            <li>Redesign the RFQ form to capture more qualified leads without creating form fatigue</li>
+            <li>Source and integrate professional photography that matched the elevated brand direction</li>
+          </ul>
+        </div>
+        <div class="after">
+          <h4>Decisions</h4>
+          <ul>
+            <li>Shifted to lighter tints and shades of teal and amber on white backgrounds for an "elegant" feel</li>
+            <li>Created dedicated sub-pages for bathtub, shower, and custom vanity remodeling</li>
+            <li>Added service-specific fields and a message prompt to the RFQ form to pre-qualify intent</li>
+            <li>Collaborated with copywriters to produce additional SEO content for each new sub-page</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <!-- BRANDING -->
-  <section id="branding">
-    <div class="section-num"><span>04</span> Branding</div>
-    <h2 class="section-h">Elegant use of<br><em>existing brand colors</em></h2>
-    <p class="body-copy">Rather than a full brand overhaul, the design refined what already existed — shifting the palette toward lighter tints and shades to achieve a premium, airy aesthetic without losing brand recognition. Typography moved to Europa for headings and Arboria for body text, adding clean sophistication.</p>
-
-    <div class="swatch-row" style="margin-top:32px;">
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#08A4B8;"></div>
-        <div class="swatch-hex">#08A4B8</div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#0C3F46;"></div>
-        <div class="swatch-hex">#0C3F46</div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#AEDFE4; border:1px solid #d0ecee;"></div>
-        <div class="swatch-hex">#AEDFE4</div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#FFC266;"></div>
-        <div class="swatch-hex">#FFC266</div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#EDFDFF; border:1px solid #d0ecee;"></div>
-        <div class="swatch-hex">#EDFDFF</div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#F6FAFB; border:1px solid #e0e8ea;"></div>
-        <div class="swatch-hex">#F6FAFB</div>
-      </div>
+  <section id="branding" class="read" aria-labelledby="branding-h">
+    <div class="section-head">
+      <p class="kicker">Branding</p>
+      <h2 id="branding-h">Elegant use of <em>existing brand colors</em></h2>
     </div>
-
-    <div class="image-placeholder small" style="margin-top:32px;">
-		<img
-    src="Home Remedy/hr-buttons.png"
-    alt="Home Remedy redesigned homepage">
-		<img
-    src="Home Remedy/hr-typography.png"
-    alt="Home Remedy redesigned homepage">
-      <div class="image-placeholder-label">Branding System</div>
-      <div class="image-placeholder-title">Typography & Color Guide</div>
-      <p class="image-placeholder-copy">Insert the full branding slide showing Europa headings, Arboria body text, and all color swatches.</p>
+    <p>Rather than a full brand overhaul, the design refined what already existed, shifting the palette toward lighter tints and shades to achieve a premium, airy aesthetic without losing brand recognition. Typography moved to Europa for headings and Arboria for body text, adding clean sophistication.</p>
+    <div class="swatch-row">
+      <div class="swatch"><div class="swatch-circle" style="background:#08A4B8;"></div><div class="swatch-hex">#08A4B8</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#0C3F46;"></div><div class="swatch-hex">#0C3F46</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#AEDFE4; border-color:#d0ecee;"></div><div class="swatch-hex">#AEDFE4</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#FFC266;"></div><div class="swatch-hex">#FFC266</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#EDFDFF; border-color:#d0ecee;"></div><div class="swatch-hex">#EDFDFF</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#F6FAFB; border-color:#e0e8ea;"></div><div class="swatch-hex">#F6FAFB</div></div>
     </div>
+    <figure>
+      <div class="frame">
+        <img src="Home Remedy/hr-typography.png" alt="Home Remedy typography and color guide" onerror="this.parentElement.classList.add('no-img')">
+        <p class="missing">hr-typography.png</p>
+      </div>
+      <figcaption>Typography and color guide: Europa headings, Arboria body text.</figcaption>
+    </figure>
   </section>
-
-  <div class="divider"></div>
 
   <!-- SOLUTIONS -->
-  <section id="solutions">
-    <div class="section-num"><span>05</span> Solutions</div>
-    <h2 class="section-h">Six design decisions<br>built for <em>homeowner trust</em></h2>
-
-    <div class="tag-cloud">
-      <span class="tag">Elevated Visual Design</span>
-      <span class="tag">Expanded Bathroom Navigation</span>
-      <span class="tag">Redesigned RFQ Form</span>
-      <span class="tag">Professional Photography</span>
-      <span class="tag">Trust Signal Placement</span>
-      <span class="tag">Interactive Service Sections</span>
-    </div>
-
-    <div class="solution-row fade-up">
-      <div class="solution-num">01</div>
-      <div>
-        <div class="solution-title">Elevated Visual Design — Light, Professional Aesthetic</div>
-        <div class="solution-body">The original site relied on bold, dark saturation that made navigation feel overwhelming. The redesign shifted to a clean, white-dominant layout using lighter tints of the teal and amber palette — allowing professional photography to carry visual weight. The updated logo and consistent brand application across pages created a polished, cohesive identity that better reflected the quality of the work.</div>
-        <div class="metric-highlight">
-          <span class="metric-pill">↑ Improved brand-to-quality perception</span>
-          <span class="metric-line">per stakeholder review</span>
-        </div>
+  <section id="solutions" aria-labelledby="solutions-h">
+    <div class="read solutions-wrap">
+      <div class="section-head">
+        <p class="kicker">Solutions</p>
+        <h2 id="solutions-h">Here are the four solutions we proposed</h2>
       </div>
-    </div>
+      <ul class="solutions">
+        <li>
+          <h3>Elevated visual design</h3>
+          <p class="sub">A light, professional aesthetic</p>
+          <p>The original site relied on bold, dark saturation that made navigation feel overwhelming. The redesign shifted to a clean, white-dominant layout using lighter tints of the teal and amber palette, allowing professional photography to carry visual weight.</p>
+          <p class="detail">Improved brand-to-quality perception, per stakeholder review</p>
+        </li>
+        <li>
+          <h3>Expanded bathroom navigation</h3>
+          <p class="sub">Sub-service pages</p>
+          <p>Bathroom remodeling drove 44% of all form leads, yet the existing site treated it as a single menu item with no breakdown. The redesign introduced dedicated pages for bathtub, shower, and custom vanity remodeling, giving users the specific information they needed without having to call.</p>
+          <p class="detail">Three new sub-service pages created for the highest-demand category</p>
+        </li>
+        <li>
+          <h3>Redesigned RFQ form</h3>
+          <p class="sub">Qualified lead capture</p>
+          <p>The original form was generic (name, email, message), which produced broad, unqualified submissions. The redesigned RFQ added a "service of interest" dropdown, zip code field, and a file attachment option, letting prospects share project context upfront.</p>
+          <p class="detail">More specific leads per submission vs. the prior generic form</p>
+        </li>
+        <li>
+          <h3>Trust signals above the fold</h3>
+          <p class="sub">Credibility at first glance</p>
+          <p>The 4.9-star Google rating, Houzz Best of 2018, and Angie's List awards were buried or absent from key entry points. The redesign surfaced all three in the top navigation and in an "award-winning service" section below the hero.</p>
+          <p class="detail">4.9★ Google rating surfaced in nav, plus three award badges above the fold</p>
+        </li>
+      </ul>
 
-    <div class="solution-row fade-up">
-      <div class="solution-num">02</div>
-      <div>
-        <div class="solution-title">Expanded Bathroom Navigation — Sub-Service Pages</div>
-        <div class="solution-body">Bathroom remodeling drove 44% of all form leads, yet the existing site treated it as a single menu item with no breakdown. The redesign introduced dedicated intermediate and detail pages for Bathtub Remodeling, Shower Remodeling, and Custom Vanities — giving users the specific information they needed without having to call. This directly addressed the client's top-stated pain point.</div>
-        <div class="metric-highlight">
-          <span class="metric-pill">↑ 3 new sub-service pages created</span>
-          <span class="metric-line">for highest-demand service category</span>
+      <figure>
+        <div class="frame">
+          <img src="Home Remedy/hr-homepage-extended.jpg" alt="Home Remedy high-fidelity homepage and interior pages" onerror="this.parentElement.classList.add('no-img')">
+          <p class="missing">hr-homepage-extended.jpg</p>
         </div>
-      </div>
-    </div>
-
-    <div class="solution-row fade-up">
-      <div class="solution-num">03</div>
-      <div>
-        <div class="solution-title">Redesigned RFQ Form — Qualified Lead Capture</div>
-        <div class="solution-body">The original form was generic — name, email, message — which produced broad, unqualified submissions. The redesigned RFQ added a "Service of Interest" dropdown, zip code field, and a file attachment option, allowing prospects to share project context upfront. This shift reduced back-and-forth qualification time for the client and improved the ratio of actionable leads to total submissions.</div>
-        <div class="metric-highlight">
-          <span class="metric-pill">↑ More specific leads per submission</span>
-          <span class="metric-line">vs. prior generic form</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="solution-row fade-up">
-      <div class="solution-num">04</div>
-      <div>
-        <div class="solution-title">Trust Signals Above the Fold</div>
-        <div class="solution-body">The 4.9-star Google rating, Houzz Best of 2018, and Angie's List awards were buried or absent from key entry points. In the redesign, all three trust signals were surfaced in the top navigation bar and repeated in an "Award-Winning Service" section below the hero — creating immediate credibility for first-time visitors who don't yet know the brand.</div>
-        <div class="metric-highlight">
-          <span class="metric-pill">4.9★ Google rating surfaced in nav</span>
-          <span class="metric-line">+ 3 award badges above fold</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="image-placeholder" style="margin-top:40px;">
-		<img
-    src="Home Remedy/hr-homepage-extended.jpg"
-    alt="Home Remedy redesigned homepage">
-		<img
-    src="Home Remedy/hr-detail.jpg"
-    alt="Home Remedy redesigned homepage">
-		<img
-    src="Home Remedy/hr-gallery.jpg"
-    alt="Home Remedy redesigned homepage">
-		<img
-    src="Home Remedy/hr-blog.jpg"
-    alt="Home Remedy redesigned homepage">
-      <div class="image-placeholder-label">Hi-Fi Designs</div>
-      <div class="image-placeholder-title">Homepage, Interior Page, Gallery & RFQ</div>
-      <p class="image-placeholder-copy">Insert annotated hi-fi mockup screenshots showing the homepage hero, interior remodeling page with interactive service list, filterable gallery, and redesigned RFQ form.</p>
+        <figcaption>The homepage, interior remodeling page, filterable gallery, and redesigned RFQ form.</figcaption>
+      </figure>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <!-- OUTCOMES -->
-  <section id="outcomes">
-    <div class="section-num"><span>06</span> Outcomes</div>
-    <h2 class="section-h">Results, <em>measured</em></h2>
-    <p class="body-copy">Post-launch metrics tracked against the pre-redesign baseline, with a focus on lead quality, conversion behavior, and engagement with the expanded service structure.</p>
+  <section id="outcomes" aria-labelledby="outcomes-h">
+    <div class="read">
+      <div class="section-head">
+        <p class="kicker">Outcomes</p>
+        <h2 id="outcomes-h">Results, <em>measured</em></h2>
+      </div>
+      <p>Post-launch metrics were tracked against the pre-redesign baseline, with a focus on lead quality, conversion behavior, and engagement with the expanded service structure.</p>
+      <ul class="targets">
+        <li><p class="big">44%</p><div><strong>Bathroom lead share</strong><span>Already the top category; new sub-pages gave users a clearer path to submit</span></div></li>
+        <li><p class="big">3×</p><div><strong>New service pages</strong><span>Bathtub, shower, and vanity sub-pages created for the highest-demand service</span></div></li>
+        <li><p class="big">↑ RFQ</p><div><strong>Lead qualification</strong><span>Service dropdown, zip code, and attachments narrowed intake to qualified prospects</span></div></li>
+        <li><p class="big">4.9★</p><div><strong>Trust signal surfaced</strong><span>Google rating and awards visible above the fold on all primary entry pages</span></div></li>
+      </ul>
+    </div>
 
-    <div class="outcome-grid fade-up">
-      <div class="outcome-box">
-        <div class="outcome-num">+44%</div>
-        <div class="outcome-label">Bathroom Lead Share</div>
-        <div class="outcome-sub">Already the top category — new sub-pages gave users a clearer path to submit</div>
-      </div>
-      <div class="outcome-box">
-        <div class="outcome-num">3×</div>
-        <div class="outcome-label">New Service Pages</div>
-        <div class="outcome-sub">Bathtub, Shower, and Vanity sub-pages created for highest-demand service</div>
-      </div>
-      <div class="outcome-box">
-        <div class="outcome-num">↑ RFQ</div>
-        <div class="outcome-label">Lead Qualification</div>
-        <div class="outcome-sub">Service dropdown + zip code + attachments narrowed intake to qualified prospects</div>
-      </div>
-      <div class="outcome-box">
-        <div class="outcome-num">4.9★</div>
-        <div class="outcome-label">Trust Signal Surfaced</div>
-        <div class="outcome-sub">Google rating and awards visible above fold on all primary entry pages</div>
+    <div class="wide" style="margin-top:48px;">
+      <div class="pair">
+        <figure>
+          <div class="frame">
+            <img src="Home Remedy/hr-old-ui.png" alt="Home Remedy original homepage" onerror="this.parentElement.classList.add('no-img')">
+            <p class="missing">hr-old-ui.png</p>
+          </div>
+          <figcaption>Before: one dark, saturated homepage for every visitor</figcaption>
+        </figure>
+        <figure>
+          <div class="frame">
+            <img src="Home Remedy/hr-hp.jpg" alt="Home Remedy redesigned homepage" onerror="this.parentElement.classList.add('no-img')">
+            <p class="missing">hr-hp.jpg</p>
+          </div>
+          <figcaption>After: a lighter, more credible redesign</figcaption>
+        </figure>
       </div>
     </div>
 
-    <div class="before-after-grid">
-      <div class="before-after-card">
-        <div class="before-after-label">Before</div>
-        <div class="image-placeholder small">
-			<img
-    src="Home Remedy/hr-old-ui.png"
-    alt="Home Remedy redesigned homepage">
-          <div class="image-placeholder-label">Legacy UI</div>
-          <div class="image-placeholder-title">Original Website</div>
-          <p class="image-placeholder-copy">Insert screenshots of the original dark-teal homepage, generic nav, and basic RFQ form.</p>
+    <div class="read">
+      <div class="columns" style="margin-top:48px;">
+        <div>
+          <h4>Before</h4>
+          <ul>
+            <li>Bold, dark-saturated palette that overwhelmed the visual hierarchy</li>
+            <li>Flat navigation with no sub-service breakdown for bathroom remodeling</li>
+            <li>Generic RFQ form with minimal fields, attracting unqualified leads</li>
+            <li>Trust signals buried or absent from key pages</li>
+            <li>No "process" section; customers unaware of how projects unfold</li>
+          </ul>
         </div>
-      </div>
-      <div class="before-after-card">
-        <div class="before-after-label after">After</div>
-        <div class="image-placeholder small">
-			<img
-    src="Home Remedy/hr-hp.jpg"
-    alt="Home Remedy redesigned homepage">
-          <div class="image-placeholder-label">Redesigned UI</div>
-          <div class="image-placeholder-title">Redesigned Website</div>
-          <p class="image-placeholder-copy">Insert the final hi-fi mockup of the redesigned homepage and/or interior remodeling page.</p>
+        <div class="after">
+          <h4>After</h4>
+          <ul>
+            <li>Light, elegant palette using tints of teal and amber on white, airy and professional</li>
+            <li>Structured dropdown nav with bathtub, shower, and custom vanity sub-pages</li>
+            <li>Redesigned RFQ with service dropdown, zip code, and file attachment to pre-qualify leads</li>
+            <li>4.9-star Google rating and Houzz awards surfaced in nav and above the fold</li>
+            <li>"The Home Remedy Process" section added to set expectations and build confidence</li>
+          </ul>
         </div>
-      </div>
-    </div>
-
-    <div class="compare-grid fade-up" style="margin-top:0;">
-      <div class="compare-panel">
-        <div class="compare-label">Old UI — Before</div>
-        <ul class="compare-list">
-          <li>Bold, dark-saturated palette that overwhelmed the visual hierarchy</li>
-          <li>Flat navigation with no sub-service breakdown for bathroom remodeling</li>
-          <li>Generic RFQ form with minimal fields — attracting unqualified leads</li>
-          <li>Trust signals (Google rating, awards) buried or absent from key pages</li>
-          <li>Site did not visually reflect the quality of completed work</li>
-          <li>No "Process" section — customers unaware of how projects unfold</li>
-        </ul>
-      </div>
-      <div class="compare-panel after">
-        <div class="compare-label">New UI — After</div>
-        <ul class="compare-list">
-          <li>Light, elegant palette using tints of teal and amber on white — airy and professional</li>
-          <li>Structured dropdown nav with Bathtub, Shower, and Custom Vanity sub-pages</li>
-          <li>Redesigned RFQ with service dropdown, zip code, and file attachment to pre-qualify leads</li>
-          <li>4.9-star Google rating and Houzz awards surfaced in nav and above the fold</li>
-          <li>Professional, bright photography showcases completed projects at a premium standard</li>
-          <li>"The Home Remedy Process" section added to set expectations and build confidence</li>
-        </ul>
       </div>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <!-- REFLECTION -->
-  <section id="reflection">
-    <div class="section-num"><span>07</span> Reflection</div>
-    <h2 class="section-h">What I'd do<br><em>differently</em></h2>
-
-    <div class="reflection-block fade-up">
-      <p>Working on this project gave me a clear window into what local homeowners are looking for when evaluating a remodeling partner: trust, reliability, and evidence of quality. They will not wait for you to earn their confidence — if the site doesn't convey it immediately, they move to the next result. That reality shaped every design decision, from surfacing the Google rating above the fold to ensuring professional photography carried visual authority across every page.</p>
-      <p>If I were starting again, I'd push for usability testing specifically around the RFQ flow — with real homeowners, not just stakeholder assumptions. The form restructure was grounded in analytics and stakeholder insight, but direct user observation would have given us stronger evidence for the specific field choices and ordering. Earlier testing would also have surfaced mobile interaction issues before QA, rather than during it.</p>
-      <p>The other area I'd revisit: the branding colors. While the refinements made the palette feel significantly more sophisticated, I believe a more comprehensive overhaul — moving to a cooler, crisper teal with a warm neutral accent — would better position Home Remedy at the premium end of the local contractor market. That's a conversation worth revisiting in a future phase.</p>
+  <section id="reflection" class="read" aria-labelledby="reflection-h">
+    <div class="section-head">
+      <p class="kicker">Reflection</p>
+      <h2 id="reflection-h">What I'd do <em>differently</em></h2>
     </div>
+    <p>Working on this project gave me a clear window into what local homeowners are looking for when evaluating a remodeling partner: trust, reliability, and evidence of quality. They will not wait for you to earn their confidence. If the site doesn't convey it immediately, they move to the next result.</p>
+    <p>If I were starting again, I'd push for usability testing specifically around the RFQ flow, with real homeowners, not just stakeholder assumptions. The form restructure was grounded in analytics and stakeholder insight, but direct user observation would have given us stronger evidence for the specific field choices and ordering.</p>
+    <p>The other area I'd revisit: the branding colors. While the refinements made the palette feel significantly more sophisticated, I believe a more comprehensive overhaul (moving to a cooler, crisper teal with a warm neutral accent) would better position Home Remedy at the premium end of the local contractor market.</p>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-name">Crystal Obaretin</div>
-    <p class="footer-contact">UX Designer · <a href="mailto:crystaloba@gmail.com">crystaloba@gmail.com</a></p>
-  </footer>
-</div>
+  <div class="next wide">
+    <a href="index.html#work"><span class="label">Back to</span><br><span class="title">All work</span></a>
+    <a href="pss-case-study.html" style="text-align:right"><span class="label">Next case study</span><br><span class="title">Proper Storage Systems</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer wide">
+  <span>© 2026 Crystal Obaretin</span>
+  <a href="mailto:crystaloba@gmail.com">crystaloba@gmail.com</a>
+</footer>
 
 <script>
-  const faders = document.querySelectorAll('.fade-up');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-  faders.forEach(f => observer.observe(f));
-
-  const dots = document.querySelectorAll('.sidebar-dot');
-  const sections = ['overview','research','process','branding','solutions','outcomes','reflection'];
-  window.addEventListener('scroll', () => {
-    let current = 'hero';
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 200) current = id;
-    });
-    dots.forEach(d => {
-      d.classList.toggle('active', d.getAttribute('href') === '#' + current);
-    });
-  });
+  const siteHeader = document.getElementById('siteHeader');
+  const setStuck = () => siteHeader.classList.toggle('is-stuck', window.scrollY > 8);
+  setStuck();
+  window.addEventListener('scroll', setStuck, { passive: true });
 </script>
 </body>
 </html>
