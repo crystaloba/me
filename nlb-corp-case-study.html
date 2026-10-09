@@ -5,11 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NLB Corporation website redesign, Crystal Obaretin</title>
 <meta name="description" content="Case study: redesigning NLB Corporation's website to simplify product discovery and turn industrial buyers into leads.">
-<!-- Brandon Grotesque via Adobe Fonts: replace YOUR-KIT-ID with your kit's ID from fonts.adobe.com -->
-<link rel="stylesheet" href="https://use.typekit.net/YOUR-KIT-ID.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/xoy5rrr.css">
 <style>
 :root {
   --paper: #FFFFFF;
@@ -22,7 +21,7 @@
   --note-apricot: #F4CF9E;
   --note-sage: #D9E6D3;
   --tint: #EEF3EB;           /* NLB project tint, lighter sage */
-  --sans: 'brandon-grotesque', 'Brandon Grotesque', 'Futura PT', Futura, 'Century Gothic', system-ui, sans-serif;
+  --sans: 'sets-grotesk-m', 'Futura PT', Futura, 'Century Gothic', system-ui, sans-serif;
   --hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
   --wide: min(1120px, 100% - 48px);
   --read: min(720px, 100% - 48px);
@@ -44,20 +43,55 @@ img { max-width: 100%; display: block; }
 .read { width: var(--read); margin-inline: auto; }
 .solutions-wrap { width: min(880px, 100% - 48px); }
 
-/* HEADER (matches homepage) */
-header { padding-top: calc(28px + env(safe-area-inset-top, 0px)); padding-bottom: 28px; }
-.header-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-.logo { font-weight: 700; font-size: 18px; text-decoration: none; letter-spacing: 0.01em; }
-nav ul { display: flex; gap: 24px; list-style: none; }
-nav a { text-decoration: none; color: var(--muted); font-size: 16px; }
-nav a:hover { color: var(--cherry); text-decoration: underline; text-underline-offset: 4px; }
+/* HEADER — sticky, transparent, floating pill (unchanged — matches the homepage nav exactly) */
+header#siteHeader {
+  position: sticky; top: 0; z-index: 100;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  padding-bottom: 14px;
+  pointer-events: none;
+}
+.header-row {
+  pointer-events: auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: rgba(247, 246, 244, 0.6);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(231, 226, 227, 0.7);
+  border-radius: 999px;
+  padding: 11px 10px 11px 22px;
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.04), 0 10px 28px -14px rgba(36, 31, 32, 0.22);
+  transition: box-shadow .35s ease, background .35s ease, border-color .35s ease;
+}
+header#siteHeader.is-stuck .header-row {
+  background: rgba(247, 246, 244, 0.85);
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.06), 0 14px 32px -14px rgba(36, 31, 32, 0.3);
+  border-color: rgba(231, 226, 227, 0.95);
+}
+.logo { font-family: var(--hand); font-weight: 600; font-size: 24px; text-decoration: none; letter-spacing: 0.01em; color: var(--cherry); }
+header#siteHeader nav ul { display: flex; gap: 6px; list-style: none; }
+header#siteHeader nav a {
+  display: inline-block; text-decoration: none; color: var(--muted); font-size: 15px;
+  font-weight: 400; letter-spacing: normal; text-transform: none;
+  padding: 8px 16px; border-radius: 999px;
+  transition: color .2s ease, background .2s ease;
+}
+header#siteHeader nav a:hover, header#siteHeader nav a:focus-visible { color: var(--cherry); background: rgba(100,13,20,0.07); }
+@media (max-width: 520px) {
+  .header-row { padding: 9px 8px 9px 18px; }
+  header#siteHeader nav ul { gap: 2px; }
+  header#siteHeader nav a { padding: 7px 12px; font-size: 14px; }
+}
 
 /* INTRO */
 .intro { padding: 48px 0 40px; }
 .back { display: inline-block; color: var(--muted); font-size: 16px; text-underline-offset: 4px; margin-bottom: 28px; }
 .back:hover { color: var(--cherry); }
-h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; max-width: 18ch; }
-.lede { margin-top: 24px; font-size: 21px; color: var(--muted); max-width: 44ch; }
+h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; max-width: 100%; text-wrap: balance; }
+h1 em, h2 em {
+  font-family: inherit; font-weight: inherit; font-style: normal;
+  text-transform: inherit; letter-spacing: inherit; color: inherit;
+}
+.lede { margin-top: 24px; font-size: 21px; color: var(--muted); max-width: 100%; }
 .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 44px; padding-top: 18px; border-top: 1.5px solid var(--ink); }
 .facts dt { color: var(--muted); font-size: 15px; }
 .facts dd { font-weight: 500; line-height: 1.35; margin-top: 2px; }
@@ -76,9 +110,14 @@ figcaption { margin: 12px auto 0; color: var(--muted); font-size: 15px; max-widt
 /* SECTIONS */
 section { padding-top: 96px; scroll-margin-top: 24px; }
 .section-head { border-top: 1.5px solid var(--ink); padding-top: 18px; margin-bottom: 28px; }
-h2 { font-size: clamp(30px, 3.8vw, 46px); font-weight: 700; line-height: 1.05; letter-spacing: 0.03em; text-transform: uppercase; max-width: 24ch; color: var(--ink); }
+h2 { font-size: clamp(24px, 3.8vw, 46px); font-weight: 700; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; max-width: 100%; color: var(--ink); text-wrap: balance; }
+#branding-h { font-size: clamp(18px, 4.6vw, 32px); max-width: none; white-space: nowrap; }
+#solutions-h { font-size: clamp(20px, 4.4vw, 36px); max-width: none; white-space: nowrap; }
+@media (max-width: 480px) {
+  #branding-h, #solutions-h { white-space: normal; text-wrap: balance; }
+}
 .kicker { color: var(--muted); font-size: 16px; margin-bottom: 6px; }
-h3 { font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: 0.05em; text-transform: uppercase; margin: 48px 0 12px; }
+h3 { font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: 0.05em; text-transform: uppercase; margin: 48px 0 12px; text-wrap: balance; }
 p + p { margin-top: 16px; }
 .read p { max-width: 64ch; }
 
@@ -86,6 +125,9 @@ p + p { margin-top: 16px; }
 blockquote { margin: 48px 0; padding-left: 24px; border-left: 3px solid var(--cherry); }
 blockquote p { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.35; font-weight: 500; }
 blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
+.insight { margin: 48px 0; padding: 24px; background: var(--tint); border-radius: 8px; }
+.insight p { font-size: 18px; line-height: 1.5; font-weight: 500; color: var(--ink); }
+.insight footer { margin-top: 12px; color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
 
 /* NUMBERS */
 .numbers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
@@ -100,7 +142,7 @@ blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
 .methods li:first-child { border-top: 1px solid var(--line); }
 .methods strong { font-weight: 700; }
 
-/* FINDINGS: sticky notes, echoing the homepage */
+/* FINDINGS: sticky notes */
 .notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 32px; }
 .note {
   padding: 26px 26px 28px; border-radius: 2px;
@@ -113,9 +155,9 @@ blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
 .note h4 { font-family: var(--hand); font-weight: 600; font-size: 27px; line-height: 1.08; color: #2B2324; margin-bottom: 12px; }
 .note p { font-size: 16px; line-height: 1.55; color: #3A3133; }
 
-/* PROCESS (a real sequence, so numbered) */
+/* PROCESS */
 .phases { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; margin-top: 32px; }
-.phases li { border-top: 3px solid var(--note-sage); padding-top: 14px; }
+.phases li { border-top: 3px solid var(--note-pearl); padding-top: 14px; }
 .phases strong { display: block; font-size: 20px; margin: 2px 0 8px; }
 .phases ul { list-style: none; color: var(--muted); font-size: 15px; line-height: 1.5; }
 
@@ -146,11 +188,17 @@ blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
 .targets strong { display: block; font-weight: 700; }
 .targets span { color: var(--muted); font-size: 16px; }
 
+/* BRANDING SWATCHES */
+.swatch-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+.swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.swatch-circle { width: 52px; height: 52px; border-radius: 50%; border: 0.5px solid rgba(0,0,0,0.08); }
+.swatch-hex { font-size: 12px; font-weight: 500; color: var(--muted); }
+
 /* END */
 .next { margin: 120px auto 0; padding-top: 18px; border-top: 1.5px solid var(--ink); display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; }
 .next a { text-decoration: none; }
 .next .label { color: var(--muted); font-size: 16px; }
-.next .title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; line-height: 1.1; }
+.next .title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; line-height: 1.1; text-wrap: balance; }
 .next a:hover .title { color: var(--cherry); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 .site-footer { padding: 48px 0 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .site-footer a { color: var(--cherry); }
@@ -170,14 +218,14 @@ blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="wide">
-  <div class="header-row">
-    <a href="/me/" class="logo">Crystal Obaretin</a>
+<header id="siteHeader">
+  <div class="wide header-row">
+    <a href="index.html" class="logo">Crystal Obaretin</a>
     <nav aria-label="Main">
       <ul>
-        <li><a href="/me/#work">Work</a></li>
-        <li><a href="/me/#about">About</a></li>
-        <li><a href="/me/#contact">Contact</a></li>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
       </ul>
     </nav>
   </div>
@@ -186,7 +234,7 @@ blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
 <main id="main">
 
   <div class="intro wide">
-    <a class="back" href="/me/#work">Back to all work</a>
+    <a class="back" href="index.html#work">Back to all work</a>
     <h1>NLB Corporation website redesign</h1>
     <p class="lede">Redesigning a global water jetting manufacturer's website to cut information overload, simplify product discovery, and turn industrial buyers into leads.</p>
     <dl class="facts">
@@ -492,7 +540,7 @@ blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
   </section>
 
   <div class="next wide">
-    <a href="/me/#work"><span class="label">Back to</span><br><span class="title">All work</span></a>
+    <a href="index.html#work"><span class="label">Back to</span><br><span class="title">All work</span></a>
     <a href="home-remedy-case-study.html" style="text-align:right"><span class="label">Next case study</span><br><span class="title">Home Remedy LLC</span></a>
   </div>
 
@@ -502,5 +550,12 @@ blockquote footer { margin-top: 12px; color: var(--muted); font-size: 15px; }
   <span>© 2026 Crystal Obaretin</span>
   <a href="mailto:crystaloba@gmail.com">crystaloba@gmail.com</a>
 </footer>
+
+<script>
+  const siteHeader = document.getElementById('siteHeader');
+  const setStuck = () => siteHeader.classList.toggle('is-stuck', window.scrollY > 8);
+  setStuck();
+  window.addEventListener('scroll', setStuck, { passive: true });
+</script>
 </body>
 </html>
