@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/xoy5rrr.css">
 <style>
 :root {
   --paper: #FFFFFF;
@@ -21,15 +22,17 @@
   --note-cotton: #FCD3DE;
   --note-apricot: #F4CF9E;
   --note-sage: #D9E6D3;
+  --sage-deep: #4F6B52;      /* legible text version of note-sage */
+  --pink-deep: #B5527A;      /* legible text version of flower-pink */
   --focus: #640D14;
-  --sans: 'brandon-grotesque', 'Brandon Grotesque', 'Futura PT', Futura, 'Century Gothic', system-ui, sans-serif;
+  --sans: 'sets-grotesk-m', 'Futura PT', Futura, 'Century Gothic', system-ui, sans-serif;
   --hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
   --page: min(1120px, 100% - 48px);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
@@ -92,7 +95,18 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   align-items: center;
   padding: 40px 0 96px;
 }
-.hero { position: relative; }
+.hero { position: relative; z-index: 0; }
+.mode-toggle {
+  display: inline-flex; gap: 2px; margin-bottom: 18px;
+  background: var(--note-pearl); border-radius: 999px; padding: 3px;
+}
+.mode-btn {
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  border: none; background: none; color: #5A4E50;
+  padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.mode-btn.is-active { background: var(--cherry); color: #fff; }
 .hero h1 {
   font-size: clamp(38px, 5.4vw, 64px);
   font-weight: 500;
@@ -133,11 +147,70 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   gap: 14px;
 }
 .hero-cta:hover svg, .hero-cta:focus-visible svg { transform: translateX(3px); }
+.scroll-cue {
+  font-family: var(--hand); font-weight: 600; font-size: 17px; color: var(--muted);
+  margin-top: 18px !important; animation: scroll-cue-bob 2.2s ease-in-out infinite;
+}
+@keyframes scroll-cue-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
 
 /* Doodle accents — loose, decorative, ignored by assistive tech */
+.gradient-blob {
+  position: absolute; border-radius: 50%; filter: blur(60px);
+  pointer-events: none; z-index: -1;
+}
+.blob-1 {
+  width: 360px; height: 360px; top: -120px; left: -100px;
+  background: radial-gradient(circle, var(--flower-orange), transparent 70%);
+  opacity: .32; animation: blob-float-a 26s ease-in-out infinite;
+}
+.blob-2 {
+  width: 320px; height: 320px; bottom: -140px; right: -80px;
+  background: radial-gradient(circle, var(--cherry), transparent 70%);
+  opacity: .22; animation: blob-float-b 30s ease-in-out infinite;
+}
+.blob-3 {
+  width: 240px; height: 240px; top: 20%; right: 8%;
+  background: radial-gradient(circle, var(--flower-pink), transparent 70%);
+  opacity: .3; animation: blob-float-a 22s ease-in-out infinite reverse;
+}
+.blob-4 {
+  width: 200px; height: 200px; top: 45%; left: 18%;
+  background: radial-gradient(circle, var(--note-sage), transparent 70%);
+  opacity: .34; animation: blob-float-b 25s ease-in-out infinite reverse;
+}
+.blob-5 {
+  width: 180px; height: 180px; bottom: 10%; left: 40%;
+  background: radial-gradient(circle, var(--note-apricot), transparent 70%);
+  opacity: .3; animation: blob-float-a 23s ease-in-out infinite;
+}
+.blob-6 {
+  width: 260px; height: 260px; top: -40px; right: 30%;
+  background: radial-gradient(circle, var(--flower-orange), transparent 70%);
+  opacity: .22; animation: blob-float-b 28s ease-in-out infinite reverse;
+}
+@keyframes blob-float-a {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(38vw, -22vh); }
+  50% { transform: translate(60vw, 18vh); }
+  75% { transform: translate(18vw, 30vh); }
+}
+@keyframes blob-float-b {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-34vw, 26vh); }
+  50% { transform: translate(-56vw, -14vh); }
+  75% { transform: translate(-16vw, -28vh); }
+}
 .doodle { position: absolute; pointer-events: none; z-index: 0; }
-.doodle-flower { top: -6px; left: 46%; width: clamp(46px, 5.5vw, 64px); color: var(--flower-orange); }
-.doodle-blob { top: 10%; left: 63%; width: clamp(52px, 6vw, 72px); color: var(--flower-pink); }
+.doodle-flower { top: -6px; left: 46%; width: clamp(46px, 5.5vw, 64px); color: var(--flower-orange); animation: doodle-float 7s ease-in-out infinite; }
+.doodle-blob { top: 10%; left: 63%; width: clamp(52px, 6vw, 72px); color: var(--flower-pink); animation: doodle-float 9s ease-in-out infinite reverse; }
+@keyframes doodle-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(4px, -10px) rotate(8deg); }
+  66% { transform: translate(-5px, 6px) rotate(-6deg); }
+}
 @media (max-width: 860px) {
   .doodle-flower { top: -2px; left: 4%; }
   .doodle-blob { top: 2%; left: 78%; }
@@ -166,7 +239,10 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 
 /* NOTES BOARD — the one memorable thing */
 .board-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.board-shell { container-type: inline-size; width: 100%; }
+.board-shell {
+  container-type: inline-size; width: 100%;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text x='0' y='26' font-size='26'>✏️</text></svg>") 2 28, text;
+}
 .board {
   position: relative;
   aspect-ratio: 10 / 8;
@@ -179,6 +255,7 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 18px -8px rgba(36,31,32,0.28);
 }
 .board.is-spread .item { left: var(--sx); top: var(--sy); transform: rotate(var(--sr)); }
+.board.is-spread { aspect-ratio: 10 / 11; }
 
 /* Polaroid */
 .polaroid {
@@ -206,6 +283,7 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 .scribble {
   font-family: var(--hand); color: #2B2324; line-height: 1.05;
   padding: 1.6cqi 0.6cqi 2.2cqi;
+  text-align: center;
 }
 .scribble strong { display: block; font-weight: 600; font-size: clamp(20px, 4.6cqi, 30px); color: var(--cherry); }
 .scribble span { display: block; font-weight: 500; font-size: clamp(15px, 3.1cqi, 20px); margin-top: 0.6cqi; }
@@ -222,6 +300,11 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   line-height: 1.1;
   color: #2B2324;
   display: flex; flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.note:hover {
+  transform: rotate(0deg) scale(1.04) !important;
+  box-shadow: 0 4px 10px rgba(36,31,32,0.12), 0 14px 26px -10px rgba(36,31,32,0.35);
 }
 .note small {
   order: -1; margin-bottom: 1.2cqi;
@@ -231,6 +314,7 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 .n-cotton { background: var(--note-cotton); }
 .n-apricot { background: var(--note-apricot); }
 .n-sage { background: var(--note-sage); }
+
 
 /* Positions: stacked pile (c) and spread board (s) */
 .polaroid { --cx:31%; --cy:6%;  --cr:-4deg;  --sx:1%;  --sy:9%;  --sr:-3deg; }
@@ -259,6 +343,7 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 }
 
 .board-toggle {
+  position: relative;
   align-self: center;
   margin-top: -6px;
   display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -275,12 +360,33 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 .board-toggle:hover { color: var(--ink); }
 @keyframes doodle-point { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
+/* Confetti burst — fires on board-toggle click */
+.confetti-piece {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 999;
+  animation: confetti-burst .8s cubic-bezier(.2,.7,.3,1) forwards;
+}
+@keyframes confetti-burst {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(var(--dr)) scale(0.5); opacity: 0; }
+}
+
 /* SECTIONS */
 section { scroll-margin-top: 90px; }
 .section-head {
+  position: relative;
   display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
   border-top: 1.5px solid var(--ink);
   padding-top: 18px; margin-bottom: 36px;
+}
+.section-pin {
+  position: absolute; top: -9px; left: 28px;
+  width: 18px; height: 18px; color: var(--cherry);
+  filter: drop-shadow(0 2px 2px rgba(36,31,32,0.25));
 }
 h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.005em; line-height: 1.1; display: flex; align-items: center; gap: 12px; }
 .section-head p { color: var(--muted); font-size: 15px; }
@@ -288,59 +394,110 @@ h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.0
 .doodle-inline.star { color: var(--flower-orange); }
 .doodle-inline.spiral { color: var(--note-sage); filter: saturate(1.4) brightness(0.75); }
 
-.squiggle-divider { width: min(180px, 40%); margin: 0 auto 8px; color: var(--muted); opacity: .55; }
+.squiggle-divider { width: min(180px, 40%); margin: 0 auto 8px; color: var(--muted); opacity: .55; overflow: hidden; }
+.squiggle-divider path { animation: squiggle-flow 1.8s linear infinite; }
+@keyframes squiggle-flow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-24px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .squiggle-divider path { animation: none; }
+}
 
 .contact h2 .doodle-inline { width: 0.55em; height: 0.55em; }
 .contact h2 .doodle-inline.heart { color: var(--flower-pink); }
 
-/* WORK */
-.works { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 40px; list-style: none; padding-bottom: 120px; }
-.works li:first-child { grid-column: 1 / -1; }
-.work { display: block; text-decoration: none; }
+/* WORK — a two-column masonry grid of colorful tiles, each image full-bleed,
+   with a small-caps eyebrow + italic title + one-liner underneath, inspired
+   by emmiwu.com's project grid. */
+.works { list-style: none; padding-bottom: 100px; columns: 2; column-gap: 40px; }
+.works li { display: inline-block; width: 100%; break-inside: avoid; margin-bottom: 40px; }
+.work-card { display: block; text-decoration: none; }
 .work-media {
-  aspect-ratio: 4 / 3;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--note-pearl);
-  position: relative;
+  position: relative; border-radius: 10px; overflow: hidden;
+  background: linear-gradient(135deg, var(--tile-a, var(--note-pearl)), var(--tile-b, var(--note-cotton)));
 }
-.works li:first-child .work-media { aspect-ratio: 16 / 8; }
 .work-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .work-media img { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
-  .work:hover .work-media img, .work:focus-visible .work-media img { transform: scale(1.05); }
-}
 .work-media .fallback {
-  position: absolute; inset: 0; display: none; place-items: center;
-  font-size: clamp(22px, 3vw, 34px); font-weight: 500; letter-spacing: -0.02em; color: var(--cherry);
-  padding: 24px; text-align: center;
+  position: absolute; inset: 0; display: none; align-items: center; justify-content: center;
+  text-align: center; padding: 24px; font-size: 20px; font-weight: 600; color: #fff;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.25);
 }
-.work-media.no-img .fallback { display: grid; }
+.work-media.no-img .fallback { display: flex; }
 .work-media.no-img img { display: none; }
-.m-cotton { background: var(--note-cotton); }
-.m-apricot { background: var(--note-apricot); }
-.m-sage { background: var(--note-sage); }
-.work-caption { display: flex; justify-content: space-between; gap: 20px; margin-top: 16px; }
-.work-title { font-size: 21px; font-weight: 700; letter-spacing: 0; line-height: 1.25; }
-.work-desc { color: var(--muted); margin-top: 4px; max-width: 100%; }
-#wgu-desc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: clamp(13px, 1.5vw, 17px); }
-.work-industry { color: var(--muted); font-size: 15px; white-space: nowrap; }
-.work:hover .work-title { color: var(--cherry); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.work-card:hover .work-media, .work-card:focus-visible .work-media { outline: 2px solid var(--tile-accent, var(--cherry)); outline-offset: 3px; }
+.work-caption { padding: 16px 4px 0; }
+.work-eyebrow {
+  font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted);
+}
+.work-title {
+  font-family: var(--sans); font-weight: 700;
+  font-size: clamp(19px, 2.2vw, 24px); color: var(--ink); margin-top: 4px; line-height: 1.25;
+  transition: color .15s ease;
+}
+.work-card:hover .work-title, .work-card:focus-visible .work-title { color: var(--tile-accent, var(--cherry)); }
+.work-desc { color: var(--muted); font-size: 15px; margin-top: 4px; max-width: 48ch; }
+.work-locked-card { cursor: default; }
+.work-locked-card .work-media { filter: grayscale(0.4) brightness(0.92); }
+.coming-soon-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(36,31,32,0.82); color: #fff;
+  font-size: 12px; font-weight: 600; letter-spacing: .02em;
+  padding: 6px 13px; border-radius: 999px; backdrop-filter: blur(4px);
+}
+.coming-soon-badge svg { width: 13px; height: 13px; }
+@media (max-width: 700px) {
+  .works { columns: 1; }
+}
 
 /* ABOUT */
-.about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 56px; padding-bottom: 120px; }
-.about-text p + p { margin-top: 16px; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; padding-bottom: 120px; }
+.about-left .section-head { margin-bottom: 28px; }
+.about-text { margin-bottom: 40px; }
+.about-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 160px)); gap: 28px; }
+.about-right { padding-top: 76px; }
+.mini-polaroid {
+  width: 160px; background: #fff; padding: 10px 10px 0;
+  border: 1px solid #EFEBEC;
+  box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 18px -8px rgba(36,31,32,0.28);
+}
+.mini-polaroid:nth-child(1) { transform: rotate(-3deg); }
+.mini-polaroid:nth-child(2) { transform: rotate(2deg); }
+.mini-polaroid:nth-child(3) { transform: rotate(-1.5deg); }
+.mini-polaroid:nth-child(4) { transform: rotate(2.5deg); }
+.mini-polaroid .photo { aspect-ratio: 1; background: #E9E4E5; overflow: hidden; position: relative; }
+.mini-polaroid .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mini-polaroid .photo-fallback {
+  position: absolute; inset: 0; display: none; place-items: center; text-align: center;
+  font-family: var(--hand); font-size: 14px; color: var(--muted); padding: 10%;
+}
+.mini-polaroid .photo.no-img .photo-fallback { display: grid; }
+.mini-polaroid .photo.no-img img { display: none; }
+.mini-polaroid figcaption {
+  font-family: var(--hand); font-weight: 600; font-size: 17px; color: #2B2324;
+  text-align: center; padding: 10px 4px 16px; line-height: 1.15;
+}
 .about-text p { max-width: 48ch; }
-.about-text a { color: var(--cherry); text-underline-offset: 3px; font-weight: 500; }
+.resume-btn-row { display: flex; justify-content: center; margin-bottom: 24px; }
+.resume-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap;
+  border: 1.5px solid var(--ink); border-radius: 999px; padding: 10px 18px;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, gap .2s ease;
+}
+.resume-btn svg { width: 15px; height: 15px; transition: transform .2s ease; }
+.resume-btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; gap: 12px; }
+.resume-btn:hover svg { transform: translateY(2px); }
 .jobs { list-style: none; }
 .jobs li {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 20px;
+  display: flex; flex-direction: column; gap: 4px;
   padding: 18px 0; border-bottom: 1px solid var(--line);
 }
 .jobs li:first-child { border-top: 1px solid var(--line); }
 .job-role { font-weight: 700; }
-.job-org { color: var(--muted); grid-column: 1; }
-.job-dates { color: var(--muted); font-size: 15px; grid-row: 1; grid-column: 2; }
+.job-org { color: var(--muted); }
 .edu { margin-top: 28px; color: var(--muted); font-size: 15px; }
 
 /* CONTACT */
@@ -356,14 +513,17 @@ h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.0
 .contact-links a svg { width: 16px; height: 16px; transition: transform .2s ease; }
 .contact-links a:hover { background: var(--ink); border-color: var(--ink); color: #fff; gap: 12px; }
 .contact-links a:hover svg { transform: translateX(3px); }
-footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
+footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+footer a:not(.back-to-top) { color: var(--muted); text-underline-offset: 3px; }
+footer a:not(.back-to-top):hover { color: var(--cherry); }
+.back-to-top { font-family: var(--hand); font-weight: 600; font-size: 17px; color: var(--cherry); text-decoration: none; }
+.back-to-top:hover { text-decoration: underline; }
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 24px 0 72px; }
-  .works { grid-template-columns: 1fr; gap: 44px; padding-bottom: 88px; }
-  .works li:first-child .work-media { aspect-ratio: 4 / 3; }
+  .works { padding-bottom: 72px; }
   .about-grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 88px; }
-  .work-caption { flex-direction: column; gap: 6px; }
+  .about-right { padding-top: 0; }
 }
 @media (max-width: 520px) {
   .header-row { padding: 9px 8px 9px 18px; }
@@ -375,6 +535,9 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
   .note { transition: none; }
   .header-row { transition: none; }
   .board-toggle .doodle-arrow { animation: none; }
+  .doodle-flower, .doodle-blob { animation: none; }
+  .gradient-blob { animation: none; }
+  .confetti-piece { display: none; }
 }
 </style>
 </head>
@@ -389,6 +552,7 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
         <ul>
           <li><a href="#work">Work</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="playground.html">Play</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -399,6 +563,12 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
 <main id="main" class="wrap">
 
   <section class="hero" aria-labelledby="intro">
+    <div class="gradient-blob blob-1" aria-hidden="true"></div>
+    <div class="gradient-blob blob-2" aria-hidden="true"></div>
+    <div class="gradient-blob blob-3" aria-hidden="true"></div>
+    <div class="gradient-blob blob-4" aria-hidden="true"></div>
+    <div class="gradient-blob blob-5" aria-hidden="true"></div>
+    <div class="gradient-blob blob-6" aria-hidden="true"></div>
     <svg class="doodle doodle-flower" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
       <path d="M32 4 L37 22 L54 14 L40 28 L58 32 L40 36 L54 50 L37 42 L32 60 L27 42 L10 50 L24 36 L6 32 L24 28 L10 14 L27 22 Z" fill="currentColor"/>
     </svg>
@@ -406,10 +576,15 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
       <path d="M36 4C50 2 66 14 68 30C70 46 58 60 42 66C26 72 8 64 4 48C0 32 8 16 22 8C27 5 31 4.5 36 4Z" fill="currentColor"/>
     </svg>
     <div>
+      <div class="mode-toggle" role="group" aria-label="Tailor this page for">
+        <button type="button" class="mode-btn is-active" id="modeDesigner" aria-pressed="true">For designers</button>
+        <button type="button" class="mode-btn" id="modeRecruiter" aria-pressed="false">For recruiters</button>
+      </div>
       <h1 id="intro">Hi, I'm <span class="name-doodle">Crystal</span><span class="line-gap">I create <span class="accent">intuitive</span> user&nbsp;experiences.</span></h1>
-      <p>I'm a <strong>UX Designer at Western Governors University</strong>, designing partnership experiences and internal tools.</p>
-      <p>Before that I worked in agency and civic tech.</p>
-      <a class="hero-cta" href="#work">View Work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+      <p id="heroP1">I'm a <strong>UX Designer at Western Governors University</strong>, designing partnership experiences and internal tools.</p>
+      <p id="heroP2">Before that I worked in agency and civic tech.</p>
+      <a class="hero-cta" href="#work" id="heroCta"><span id="heroCtaLabel">View Work</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+      <p class="scroll-cue" aria-hidden="true">scroll to see the work ↓</p>
     </div>
 
     <div class="board-wrap">
@@ -450,96 +625,138 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
 
   <section id="work" aria-labelledby="work-h">
     <div class="section-head">
+    <svg class="section-pin" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="6" fill="currentColor"/><path d="M12 15 L12 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="9.5" cy="7" r="1.6" fill="#fff" opacity="0.6"/></svg>
       <h2 id="work-h"><svg class="doodle-inline star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.3 6.9L21 9l-5.5 4.4L17.4 21 12 16.9 6.6 21l1.9-7.6L3 9l6.7-1.1L12 1z"/></svg>Work</h2>
     </div>
     <ul class="works">
       <li>
-        <a class="work" href="wgu-partnerships-case-study.html">
-          <div class="work-media">
+        <a class="work-card" href="wgu-partnerships-case-study.html" style="--tile-a:#640D14; --tile-b:#E36A2C; --tile-accent:#640D14;">
+          <div class="work-media" style="aspect-ratio: 4/5;">
             <img src="wgu-partnerships-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
             <span class="fallback" aria-hidden="true">WGU Strategic Partnerships</span>
           </div>
           <div class="work-caption">
-            <div>
-              <h3 class="work-title">WGU Strategic Partnerships</h3>
-              <p class="work-desc" id="wgu-desc">A 16-week redesign that routes employers, workforce boards, and community colleges to the right starting point and puts ROI evidence in front of them early.</p>
-            </div>
-            <span class="work-industry">Higher education</span>
+            <p class="work-eyebrow">Case study &middot; 2024</p>
+            <h3 class="work-title">WGU Strategic Partnerships</h3>
+            <p class="work-desc">A 16-week redesign that routes employers, workforce boards, and community colleges to the right starting point.</p>
           </div>
         </a>
       </li>
       <li>
-        <a class="work" href="nlb-corp-case-study.html">
-          <div class="work-media m-sage">
+        <a class="work-card" href="nlb-corp-case-study.html" style="--tile-a:#4F6B52; --tile-b:#D9E6D3; --tile-accent:#4F6B52;">
+          <div class="work-media" style="aspect-ratio: 16/11;">
             <img src="nlb-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
             <span class="fallback" aria-hidden="true">NLB Corporation</span>
           </div>
           <div class="work-caption">
-            <div>
-              <h3 class="work-title">NLB Corporation</h3>
-              <p class="work-desc">Restructured navigation for a global manufacturer so buyers can find the right product faster.</p>
-            </div>
-            <span class="work-industry">Industrial manufacturing</span>
+            <p class="work-eyebrow">Case study</p>
+            <h3 class="work-title">NLB Corporation</h3>
+            <p class="work-desc">Restructured navigation for a global manufacturer so buyers can find the right product faster.</p>
           </div>
         </a>
       </li>
       <li>
-        <a class="work" href="home-remedy-case-study.html">
-          <div class="work-media m-cotton">
-            <img src="home-remedy-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
-            <span class="fallback" aria-hidden="true">Home Remedy</span>
-          </div>
-          <div class="work-caption">
-            <div>
-              <h3 class="work-title">Home Remedy LLC</h3>
-              <p class="work-desc">Rebuilt a local remodeler's site around trust signals and clearer services to attract better-fit leads.</p>
-            </div>
-            <span class="work-industry">Home remodeling</span>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="work" href="pss-case-study.html">
-          <div class="work-media m-apricot">
+        <a class="work-card" href="pss-case-study.html" style="--tile-a:#E36A2C; --tile-b:#F4CF9E; --tile-accent:#E36A2C;">
+          <div class="work-media" style="aspect-ratio: 4/3;">
             <img src="pss-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
             <span class="fallback" aria-hidden="true">Proper Storage Systems</span>
           </div>
           <div class="work-caption">
-            <div>
-              <h3 class="work-title">Proper Storage Systems</h3>
-              <p class="work-desc">Took a legacy industrial site mobile-first and reworked the quote request flow for enterprise buyers.</p>
-            </div>
-            <span class="work-industry">Industrial manufacturing</span>
+            <p class="work-eyebrow">Case study &middot; 2024</p>
+            <h3 class="work-title">Proper Storage Systems</h3>
+            <p class="work-desc">Took a legacy industrial site mobile-first and reworked the quote request flow for enterprise buyers.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <div class="work-card work-locked-card" aria-disabled="true" style="--tile-a:#9B9093; --tile-b:#E7E2E3;">
+          <div class="work-media" style="aspect-ratio: 4/3;">
+            <span class="coming-soon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Coming soon</span>
+            <img src="partner-portal-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">Partner Portal</span>
+          </div>
+          <div class="work-caption">
+            <p class="work-eyebrow">In progress</p>
+            <h3 class="work-title">Partner Portal</h3>
+            <p class="work-desc">A B2B portal giving corporate partners visibility into their employees' progress through WGU programs.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a class="work-card" href="home-remedy-case-study.html" style="--tile-a:#B5527A; --tile-b:#FCD3DE; --tile-accent:#B5527A;">
+          <div class="work-media" style="aspect-ratio: 4/5;">
+            <img src="home-remedy-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">Home Remedy</span>
+          </div>
+          <div class="work-caption">
+            <p class="work-eyebrow">Case study &middot; 2023</p>
+            <h3 class="work-title">Home Remedy LLC</h3>
+            <p class="work-desc">Rebuilt a local remodeler's site around trust signals and clearer services to attract better-fit leads.</p>
           </div>
         </a>
       </li>
     </ul>
   </section>
 
+  <svg class="squiggle-divider" viewBox="0 0 180 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 10c8-10 16 10 24 0s16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0"/></svg>
+
   <section id="about" aria-labelledby="about-h">
-    <div class="section-head">
-      <h2 id="about-h"><svg class="doodle-inline spiral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 12c3 0 5-1.5 5-4s-2-4-5-4-6 2-6 6 3 7 7 7 8-3 8-8-4-8-9-8"/></svg>About</h2>
-      <p>Research, systems, accessibility</p>
-    </div>
     <div class="about-grid">
-      <div class="about-text">
-        <p>I started in public health, then moved into clinical research, which is what led me to UX research and design. That path taught me to look at both the current state and the historical state of a system before trying to improve or refine it.</p>
-        <p>My work spans agency projects for manufacturers and local businesses, civic tech research at Coforma, and now enterprise partnership experiences at WGU. The common thread is untangling complex journeys and designing to WCAG 2.2 AA from the start.</p>
-        <p><a href="Obaretin__Crystal.pdf" download>Download my resume (PDF)</a></p>
+      <div class="about-left">
+        <div class="section-head">
+          <svg class="section-pin" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="6" fill="currentColor"/><path d="M12 15 L12 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="9.5" cy="7" r="1.6" fill="#fff" opacity="0.6"/></svg>
+          <h2 id="about-h"><svg class="doodle-inline spiral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 12c3 0 5-1.5 5-4s-2-4-5-4-6 2-6 6 3 7 7 7 8-3 8-8-4-8-9-8"/></svg>About</h2>
+        </div>
+        <div class="about-text">
+          <p>I started in public health, then moved into clinical research, which is what led me to UX research and design. UX design sits at the intersection of strategy and design, and I enjoy solving the complexities that come with that.</p>
+        </div>
+        <div class="about-photos">
+          <figure class="mini-polaroid">
+            <div class="photo">
+              <img src="about-travel.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+              <span class="photo-fallback" aria-hidden="true">photo goes here</span>
+            </div>
+            <figcaption>love travelling<br>I &lt;3 Chicago!!</figcaption>
+          </figure>
+          <figure class="mini-polaroid">
+            <div class="photo">
+              <img src="about-paella.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+              <span class="photo-fallback" aria-hidden="true">photo goes here</span>
+            </div>
+            <figcaption>on a mission to try every paella</figcaption>
+          </figure>
+          <figure class="mini-polaroid">
+            <div class="photo">
+              <img src="about-outdoors.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+              <span class="photo-fallback" aria-hidden="true">photo goes here</span>
+            </div>
+            <figcaption>city girl learning to love the outdoors</figcaption>
+          </figure>
+          <figure class="mini-polaroid">
+            <div class="photo">
+              <img src="about-rooftop.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+              <span class="photo-fallback" aria-hidden="true">photo goes here</span>
+            </div>
+            <figcaption>any excuse to be on a rooftop</figcaption>
+          </figure>
+        </div>
       </div>
-      <div>
+      <div class="about-right">
+        <div class="resume-btn-row">
+          <a class="resume-btn" href="Obaretin__Crystal.pdf" download>Download Resume <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 11l5 5 5-5"></path><path d="M5 20h14"></path></svg></a>
+        </div>
         <ul class="jobs">
-          <li><span class="job-role">UX Designer</span><span class="job-dates">2024 to now</span><span class="job-org">Western Governors University</span></li>
-          <li><span class="job-role">UX Designer</span><span class="job-dates">2023 to 2024</span><span class="job-org">TopSpot Internet Marketing</span></li>
-          <li><span class="job-role">Design &amp; Research Associate</span><span class="job-dates">2022 to 2023</span><span class="job-org">Coforma, contract</span></li>
-          <li><span class="job-role">Marketing Associate</span><span class="job-dates">2021 to 2022</span><span class="job-org">Castec Construction</span></li>
+          <li><span class="job-role">UX Designer</span><span class="job-org">Western Governors University</span></li>
+          <li><span class="job-role">UX Designer</span><span class="job-org">TopSpot Internet Marketing</span></li>
+          <li><span class="job-role">Design &amp; Research Associate</span><span class="job-org">Coforma, contract</span></li>
+          <li><span class="job-role">Marketing Associate</span><span class="job-org">Castec Construction</span></li>
         </ul>
         <p class="edu">Certificate in UI/UX, Rice University. B.S. in Public Health, University of Texas at San Antonio.</p>
       </div>
     </div>
   </section>
 
-  <svg class="squiggle-divider" viewBox="0 0 180 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 10c8-10 16 10 24 0s16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0"/></svg>
+  <svg class="squiggle-divider" viewBox="0 0 180 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 10c8-10 16 10 24 0s16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0 16-10 24 0 16 10 24 0"/></svg>
 
   <section id="contact" class="contact" aria-labelledby="contact-h">
     <h2 id="contact-h">Let's work together!</h2>
@@ -552,19 +769,94 @@ footer { padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
 
 </main>
 
-<footer class="wrap">© 2026 Crystal Obaretin</footer>
+<footer class="wrap">
+  <span>© 2026 Crystal Obaretin · <a href="how-i-built-this.html">how I built this site</a></span>
+  <a class="back-to-top" href="#main">↑ back to top</a>
+</footer>
 
 <script>
 const board = document.getElementById('board');
 const toggle = document.getElementById('boardToggle');
 const labelClick = toggle.querySelector('.label-click');
 const labelTap = toggle.querySelector('.label-tap');
+
+const confettiColors = ['#640D14', '#E36A2C', '#E7A8C4', '#D9E6D3', '#F6ECC9'];
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function burstConfetti(originEl) {
+  if (reduceMotion) return;
+  const rect = originEl.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height / 2;
+  for (let i = 0; i < 18; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 60 + Math.random() * 70;
+    piece.style.setProperty('--dx', (Math.cos(angle) * distance) + 'px');
+    piece.style.setProperty('--dy', (Math.sin(angle) * distance - 20) + 'px');
+    piece.style.setProperty('--dr', (Math.random() * 360 - 180) + 'deg');
+    piece.style.left = originX + 'px';
+    piece.style.top = originY + 'px';
+    piece.style.background = confettiColors[i % confettiColors.length];
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    document.body.appendChild(piece);
+    piece.addEventListener('animationend', () => piece.remove());
+  }
+}
+
 toggle.addEventListener('click', () => {
   const spread = board.classList.toggle('is-spread');
   toggle.setAttribute('aria-pressed', String(spread));
   labelClick.textContent = spread ? 'click to stack!' : 'click to spread!';
   labelTap.textContent = spread ? 'tap to stack!' : 'tap to spread!';
+  burstConfetti(toggle);
 });
+
+const modeDesigner = document.getElementById('modeDesigner');
+const modeRecruiter = document.getElementById('modeRecruiter');
+const heroP1 = document.getElementById('heroP1');
+const heroP2 = document.getElementById('heroP2');
+const heroCta = document.getElementById('heroCta');
+const heroCtaLabel = document.getElementById('heroCtaLabel');
+
+const heroCopy = {
+  designer: {
+    p1: 'I\'m a <strong>UX Designer at Western Governors University</strong>, designing partnership experiences and internal tools.',
+    p2: 'Before that I worked in agency and civic tech.',
+    ctaLabel: 'View Work',
+    ctaHref: '#work',
+    ctaDownload: false
+  },
+  recruiter: {
+    p1: 'I\'m a <strong>UX Designer at Western Governors University</strong>, 2+ years designing B2B partnership experiences and internal tools.',
+    p2: 'Previously in agency and civic tech. Open to new opportunities.',
+    ctaLabel: 'Download Resume',
+    ctaHref: 'Obaretin__Crystal.pdf',
+    ctaDownload: true
+  }
+};
+
+function setMode(mode) {
+  const copy = heroCopy[mode];
+  heroP1.innerHTML = copy.p1;
+  heroP2.textContent = copy.p2;
+  heroCtaLabel.textContent = copy.ctaLabel;
+  heroCta.setAttribute('href', copy.ctaHref);
+  if (copy.ctaDownload) {
+    heroCta.setAttribute('download', '');
+  } else {
+    heroCta.removeAttribute('download');
+  }
+  const isRecruiter = mode === 'recruiter';
+  modeDesigner.classList.toggle('is-active', !isRecruiter);
+  modeRecruiter.classList.toggle('is-active', isRecruiter);
+  modeDesigner.setAttribute('aria-pressed', String(!isRecruiter));
+  modeRecruiter.setAttribute('aria-pressed', String(isRecruiter));
+}
+
+modeDesigner.addEventListener('click', () => setMode('designer'));
+modeRecruiter.addEventListener('click', () => setMode('recruiter'));
 
 const siteHeader = document.getElementById('siteHeader');
 const setStuck = () => siteHeader.classList.toggle('is-stuck', window.scrollY > 8);
