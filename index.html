@@ -147,14 +147,6 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   gap: 14px;
 }
 .hero-cta:hover svg, .hero-cta:focus-visible svg { transform: translateX(3px); }
-.scroll-cue {
-  font-family: var(--hand); font-weight: 600; font-size: 17px; color: var(--muted);
-  margin-top: 18px !important; animation: scroll-cue-bob 2.2s ease-in-out infinite;
-}
-@keyframes scroll-cue-bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
-}
 
 /* Doodle accents — loose, decorative, ignored by assistive tech */
 .gradient-blob {
@@ -318,28 +310,21 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 
 /* Positions: stacked pile (c) and spread board (s) */
 .polaroid { --cx:31%; --cy:6%;  --cr:-4deg;  --sx:1%;  --sy:9%;  --sr:-3deg; }
-.i1 { --cx:56%; --cy:3%;  --cr:9deg;   --sx:44%; --sy:0%;  --sr:-2deg;   z-index:6; }
-.i2 { --cx:20%; --cy:12%; --cr:-11deg; --sx:73%; --sy:1%;  --sr:2deg;    z-index:5; }
-.i3 { --cx:58%; --cy:36%; --cr:5deg;   --sx:44%; --sy:34%; --sr:1.5deg;  z-index:4; }
-.i4 { --cx:22%; --cy:40%; --cr:-6deg;  --sx:73%; --sy:35%; --sr:-2deg;   z-index:3; }
-.i5 { --cx:50%; --cy:20%; --cr:14deg;  --sx:44%; --sy:68%; --sr:-1deg;   z-index:2; }
-.i6 { --cx:30%; --cy:28%; --cr:-3deg;  --sx:73%; --sy:68%; --sr:2.5deg;  z-index:1; }
+.i5 { --cx:50%; --cy:20%; --cr:14deg;  --sx:44%; --sy:9%;  --sr:-2deg;   z-index:2; }
+.i6 { --cx:30%; --cy:28%; --cr:-3deg;  --sx:44%; --sy:50%; --sr:2.5deg;  z-index:1; }
 
 /* Narrow boards (phones): polaroid on top, notes in two columns below */
 @container (max-width: 519px) {
   .board { aspect-ratio: 10 / 11; }
-  .board.is-spread { aspect-ratio: 10 / 24; }
-  .polaroid { width: 70%; padding: 3cqi 3cqi 0; --cx:15%; --cy:5%; --sx:15%; --sy:1.5%; }
+  .board.is-spread { aspect-ratio: 10 / 13; }
+  .polaroid { width: 70%; padding: 3cqi 3cqi 0; --cx:15%; --cy:5%; --sx:1%; --sy:9%; }
+  .board.is-spread .polaroid { width: 36%; }
   .polaroid::before { height: 5cqi; top: -2.5cqi; }
   .scribble { padding: 2.6cqi 1cqi 3.4cqi; }
   .note { width: 46%; padding: 3.4cqi 3cqi; font-size: clamp(16px, 5.4cqi, 22px); }
   .note small { font-size: 12px; margin-bottom: 2cqi; }
-  .i1 { --cx:48%; --cy:4%;  --sx:2%;  --sy:36.5%; }
-  .i2 { --cx:4%;  --cy:10%; --sx:52%; --sy:36.5%; }
-  .i3 { --cx:50%; --cy:44%; --sx:2%;  --sy:57.5%; }
-  .i4 { --cx:6%;  --cy:48%; --sx:52%; --sy:57.5%; }
-  .i5 { --cx:40%; --cy:30%; --sx:2%;  --sy:78.5%; }
-  .i6 { --cx:16%; --cy:36%; --sx:52%; --sy:78.5%; }
+  .i5 { --cx:40%; --cy:30%; --sx:40%; --sy:9%; }
+  .i6 { --cx:16%; --cy:36%; --sx:40%; --sy:55%; }
 }
 
 .board-toggle {
@@ -552,7 +537,6 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         <ul>
           <li><a href="#work">Work</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="playground.html">Play</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -584,12 +568,11 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
       <p id="heroP1">I'm a <strong>UX Designer at Western Governors University</strong>, designing partnership experiences and internal tools.</p>
       <p id="heroP2">Before that I worked in agency and civic tech.</p>
       <a class="hero-cta" href="#work" id="heroCta"><span id="heroCtaLabel">View Work</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-      <p class="scroll-cue" aria-hidden="true">scroll to see the work ↓</p>
     </div>
 
     <div class="board-wrap">
       <div class="board-shell">
-        <div class="board" id="board" role="group" aria-label="About me: my photo, how I work, and what I'm into">
+        <div class="board" id="board" role="group" aria-label="About me: my photo and what I'm into">
           <figure class="item polaroid">
             <div class="badge-sticker" aria-hidden="true">
               <span class="tag">Currently</span>
@@ -604,10 +587,6 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
               <span>music fanatic &amp; hotpot enthusiast</span>
             </figcaption>
           </figure>
-          <div class="item note n-pearl i1"><small>How I work</small>Talk to users and stakeholders before anything gets designed</div>
-          <div class="item note n-sage i2"><small>How I work</small>Check the analytics before the opinions</div>
-          <div class="item note n-pearl i3"><small>How I work</small>Build it with the assumption that this may scale in the future</div>
-          <div class="item note n-sage i4"><small>How I work</small>Accessible from the first wireframe</div>
           <div class="item note n-cotton i5"><small>What I'm currently into</small>House music, Rap music, The Wire, Industry (HBO show), history documentaries</div>
           <div class="item note n-apricot i6"><small>Off the clock</small>Making my little families on Sims</div>
         </div>
@@ -770,7 +749,7 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
 </main>
 
 <footer class="wrap">
-  <span>© 2026 Crystal Obaretin · <a href="how-i-built-this.html">how I built this site</a></span>
+  <span>© 2026 Crystal Obaretin</span>
   <a class="back-to-top" href="#main">↑ back to top</a>
 </footer>
 
