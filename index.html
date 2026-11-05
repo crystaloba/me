@@ -71,12 +71,10 @@ header {
   border: 1px solid rgba(231, 226, 227, 0.7);
   border-radius: 999px;
   padding: 11px 10px 11px 22px;
-  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.04), 0 10px 28px -14px rgba(36, 31, 32, 0.22);
-  transition: box-shadow .35s ease, background .35s ease, border-color .35s ease;
+  transition: background .35s ease, border-color .35s ease;
 }
 header.is-stuck .header-row {
   background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.06), 0 14px 32px -14px rgba(36, 31, 32, 0.3);
   border-color: rgba(231, 226, 227, 0.95);
 }
 .logo { font-family: var(--hand); font-weight: 600; font-size: 24px; text-decoration: none; letter-spacing: 0.01em; color: var(--cherry); }
@@ -176,48 +174,28 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 .blob-1 {
   width: 360px; height: 360px; top: -120px; left: -100px;
   background: radial-gradient(circle, var(--flower-orange), transparent 70%);
-  opacity: .32; animation: blob-float-a 26s ease-in-out infinite;
-}
-.blob-2 {
-  width: 320px; height: 320px; bottom: -140px; right: -80px;
-  background: radial-gradient(circle, var(--cherry), transparent 70%);
-  opacity: .22; animation: blob-float-b 30s ease-in-out infinite;
+  opacity: .26; animation: blob-float-a 34s ease-in-out infinite;
 }
 .blob-3 {
   width: 240px; height: 240px; top: 20%; right: 8%;
   background: radial-gradient(circle, var(--flower-pink), transparent 70%);
-  opacity: .3; animation: blob-float-a 22s ease-in-out infinite reverse;
-}
-.blob-4 {
-  width: 200px; height: 200px; top: 45%; left: 18%;
-  background: radial-gradient(circle, var(--note-sage), transparent 70%);
-  opacity: .34; animation: blob-float-b 25s ease-in-out infinite reverse;
+  opacity: .24; animation: blob-float-a 30s ease-in-out infinite reverse;
 }
 .blob-5 {
   width: 180px; height: 180px; bottom: 10%; left: 40%;
   background: radial-gradient(circle, var(--note-apricot), transparent 70%);
-  opacity: .3; animation: blob-float-a 23s ease-in-out infinite;
-}
-.blob-6 {
-  width: 260px; height: 260px; top: -40px; right: 30%;
-  background: radial-gradient(circle, var(--flower-orange), transparent 70%);
-  opacity: .22; animation: blob-float-b 28s ease-in-out infinite reverse;
+  opacity: .24; animation: blob-float-b 32s ease-in-out infinite;
 }
 @keyframes blob-float-a {
   0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(38vw, -22vh); }
-  50% { transform: translate(60vw, 18vh); }
-  75% { transform: translate(18vw, 30vh); }
+  50% { transform: translate(16vw, 10vh); }
 }
 @keyframes blob-float-b {
   0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-34vw, 26vh); }
-  50% { transform: translate(-56vw, -14vh); }
-  75% { transform: translate(-16vw, -28vh); }
+  50% { transform: translate(-14vw, -8vh); }
 }
 .doodle { position: absolute; pointer-events: none; z-index: 0; }
 .doodle-flower { top: -6px; left: 46%; width: clamp(46px, 5.5vw, 64px); color: var(--flower-orange); animation: doodle-float 7s ease-in-out infinite; }
-.doodle-blob { top: 10%; left: 63%; width: clamp(52px, 6vw, 72px); color: var(--flower-pink); animation: doodle-float 9s ease-in-out infinite reverse; }
 @keyframes doodle-float {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
   33% { transform: translate(4px, -10px) rotate(8deg); }
@@ -225,7 +203,6 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
 }
 @media (max-width: 860px) {
   .doodle-flower { top: -2px; left: 4%; }
-  .doodle-blob { top: 2%; left: 78%; }
 }
 
 /* Tilted "currently" sticker — stuck on the polaroid's corner, Jessa-style */
@@ -233,7 +210,6 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   position: absolute; top: -9%; right: -11%;
   background: #fff; border: 1.5px solid var(--ink); border-radius: 7px;
   padding: 1.3cqi 1.6cqi 1.5cqi; transform: rotate(9deg);
-  box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 16px -10px rgba(36,31,32,0.32);
   line-height: 1.25; z-index: 20; white-space: nowrap;
 }
 .badge-sticker .tag {
@@ -261,7 +237,6 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   width: 86%; max-width: 420px;
   background: #FFFFFF;
   padding: 1.8cqi 1.8cqi 0;
-  border: 1px solid #EFEBEC;
   box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 18px -8px rgba(36,31,32,0.28);
   transform: rotate(-2deg);
   cursor: pointer;
@@ -317,15 +292,23 @@ h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.0
 @media (prefers-reduced-motion: reduce) {
   .bounce-cherry { animation: none; }
 }
-@media (prefers-reduced-motion: reduce) {
-}
 
 .contact h2 .doodle-inline { width: 0.55em; height: 0.55em; }
 
 /* WORK — a two-column masonry grid of colorful tiles, each image full-bleed,
    with a small-caps eyebrow + italic title + one-liner underneath, inspired
    by emmiwu.com's project grid. */
+.work-tabs { display: inline-flex; gap: 2px; margin-bottom: 36px; background: var(--note-pearl); border-radius: 999px; padding: 3px; }
+.work-tab {
+  font-family: var(--sans); font-size: 14px; font-weight: 600;
+  border: none; background: none; color: #5A4E50;
+  padding: 9px 18px; border-radius: 999px; cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.work-tab.is-active { background: var(--cherry); color: #fff; }
 .works { list-style: none; padding-bottom: 100px; columns: 2; column-gap: 40px; }
+.passion-grid { list-style: none; padding-bottom: 100px; max-width: 480px; }
+.passion-grid .work-media { aspect-ratio: 16 / 10; }
 .works li { display: inline-block; width: 100%; break-inside: avoid; margin-bottom: 40px; }
 .work-card { display: block; text-decoration: none; }
 .work-media {
@@ -375,7 +358,6 @@ h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.0
 .about-right { padding-top: 76px; }
 .mini-polaroid {
   width: 220px; background: #fff; padding: 12px 12px 0;
-  border: 1px solid #EFEBEC;
   box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 18px -8px rgba(36,31,32,0.28);
 }
 .mini-polaroid:nth-child(1) { animation: polaroid-float-1 7s ease-in-out infinite; }
@@ -464,7 +446,7 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .header-row { transition: none; }
-  .doodle-flower, .doodle-blob { animation: none; }
+  .doodle-flower { animation: none; }
   .gradient-blob { animation: none; }
   .mini-polaroid:nth-child(1) { animation: none; transform: rotate(-3deg); }
   .mini-polaroid:nth-child(2) { animation: none; transform: rotate(2deg); }
@@ -495,21 +477,9 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
 
   <section class="hero" aria-labelledby="intro">
     <div class="gradient-blob blob-1" aria-hidden="true"></div>
-    <div class="gradient-blob blob-2" aria-hidden="true"></div>
     <div class="gradient-blob blob-3" aria-hidden="true"></div>
-    <div class="gradient-blob blob-4" aria-hidden="true"></div>
     <div class="gradient-blob blob-5" aria-hidden="true"></div>
-    <div class="gradient-blob blob-6" aria-hidden="true"></div>
     <svg class="doodle doodle-flower" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <path d="M30 20 C28 10, 24 6, 20 4" fill="none" stroke="#4F6B52" stroke-width="2.6" stroke-linecap="round"/>
-      <path d="M34 20 C36 10, 40 6, 44 4" fill="none" stroke="#4F6B52" stroke-width="2.6" stroke-linecap="round"/>
-      <path d="M20 4 C24 2, 28 3, 29 7 C25 8, 21 7, 20 4 Z" fill="#9BBF8E" stroke="#4F6B52" stroke-width="1.4" stroke-linejoin="round"/>
-      <circle cx="24" cy="34" r="11.5" fill="#640D14" stroke="#241F20" stroke-width="1.6"/>
-      <circle cx="42" cy="34" r="11.5" fill="#8A1420" stroke="#241F20" stroke-width="1.6"/>
-      <circle cx="20.5" cy="29.5" r="3" fill="#ffffff" opacity="0.55"/>
-      <circle cx="38.5" cy="29.5" r="2.6" fill="#ffffff" opacity="0.45"/>
-    </svg>
-    <svg class="doodle doodle-blob" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
       <path d="M30 20 C28 10, 24 6, 20 4" fill="none" stroke="#4F6B52" stroke-width="2.6" stroke-linecap="round"/>
       <path d="M34 20 C36 10, 40 6, 44 4" fill="none" stroke="#4F6B52" stroke-width="2.6" stroke-linecap="round"/>
       <path d="M20 4 C24 2, 28 3, 29 7 C25 8, 21 7, 20 4 Z" fill="#9BBF8E" stroke="#4F6B52" stroke-width="1.4" stroke-linejoin="round"/>
@@ -560,7 +530,25 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         <circle cx="38.5" cy="29.5" r="2.6" fill="#ffffff" opacity="0.45"/>
       </svg>Work</h2>
     </div>
+    <div class="work-tabs" role="tablist" aria-label="Work type">
+      <button type="button" class="work-tab is-active" id="tabShipped" role="tab" aria-selected="true" aria-controls="panelShipped">Shipped Work</button>
+      <button type="button" class="work-tab" id="tabPassion" role="tab" aria-selected="false" aria-controls="panelPassion">Passion Projects</button>
+    </div>
+    <div id="panelShipped" role="tabpanel" aria-labelledby="tabShipped">
     <ul class="works">
+      <li>
+        <a class="work-card" href="nasa-case-study.html" style="--tile-a:#291553; --tile-b:#5F1E78; --tile-accent:#5F1E78;">
+          <div class="work-media" style="aspect-ratio: 4/3;">
+            <img src="nasa-images/nasa-hero.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">NASA Redesign</span>
+          </div>
+          <div class="work-caption">
+            <p class="work-eyebrow">Case study &middot; 2022</p>
+            <h3 class="work-title">NASA Redesign</h3>
+            <p class="work-desc">A 4-week student project fixing hierarchy, contrast, and navigation problems on NASA's website.</p>
+          </div>
+        </a>
+      </li>
       <li>
         <a class="work-card" href="wgu-partnerships-case-study.html" style="--tile-a:#640D14; --tile-b:#E36A2C; --tile-accent:#640D14;">
           <div class="work-media" style="aspect-ratio: 4/5;">
@@ -628,6 +616,24 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         </a>
       </li>
     </ul>
+    </div>
+    <div id="panelPassion" role="tabpanel" aria-labelledby="tabPassion" hidden>
+    <ul class="passion-grid">
+      <li>
+        <a class="work-card" href="medic-redesign/index.html" style="--tile-a:#0E6F6A; --tile-b:#2BA79F; --tile-accent:#0E6F6A;">
+          <div class="work-media">
+            <img src="medic-redesign/images/prev_home.webp" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">Medic, a 2026 redesign</span>
+          </div>
+          <div class="work-caption">
+            <p class="work-eyebrow">Passion project &middot; 2026</p>
+            <h3 class="work-title">Medic, a 2026 redesign</h3>
+            <p class="work-desc">Revisited a medication-management app I helped design back in 2022, with a new identity, a day organized like a pill box instead of a timeline, and a working prototype you can try.</p>
+          </div>
+        </a>
+      </li>
+    </ul>
+    </div>
   </section>
 
   <section id="about" aria-labelledby="about-h">
@@ -763,6 +769,24 @@ function setMode(mode) {
 
 modeDesigner.addEventListener('click', () => setMode('designer'));
 modeRecruiter.addEventListener('click', () => setMode('recruiter'));
+
+const tabShipped = document.getElementById('tabShipped');
+const tabPassion = document.getElementById('tabPassion');
+const panelShipped = document.getElementById('panelShipped');
+const panelPassion = document.getElementById('panelPassion');
+
+function setWorkTab(tab) {
+  const showPassion = tab === 'passion';
+  tabShipped.classList.toggle('is-active', !showPassion);
+  tabPassion.classList.toggle('is-active', showPassion);
+  tabShipped.setAttribute('aria-selected', String(!showPassion));
+  tabPassion.setAttribute('aria-selected', String(showPassion));
+  panelShipped.hidden = showPassion;
+  panelPassion.hidden = !showPassion;
+}
+
+tabShipped.addEventListener('click', () => setWorkTab('shipped'));
+tabPassion.addEventListener('click', () => setWorkTab('passion'));
 
 const siteHeader = document.getElementById('siteHeader');
 const setStuck = () => siteHeader.classList.toggle('is-stuck', window.scrollY > 8);
