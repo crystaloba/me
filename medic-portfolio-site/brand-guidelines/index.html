@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medic brand guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --t900:#083D3A; --t800:#0B524E; --t700:#0E6F6A; --t500:#2BA79F; --t100:#D9F0EC; --t50:#EEF8F6;
+  --paper:#F2F5F6; --ink:#16212B; --muted:#56646F; --line:#DCE3E7;
+  --coral7:#C93B1E; --coral5:#F2603F; --coral1:#FFE2DA;
+  --bg:#FFFFFF; --text:#16212B; --text2:#56646F; --card:#F2F5F6; --rule:#DCE3E7; --accent:#0E6F6A;
+  --pad:clamp(20px,5vw,64px);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0C1A1D;--text:#EAF4F3;--text2:#A5BDBD;--card:#12292C;--rule:#2B4A4D;--accent:#6FD3C9}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font-family:'Open Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+h1,h2,h3,h4,p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{display:block}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* wordmark */
+.wm{position:relative;display:inline-block;font-family:'Lora',Georgia,'Times New Roman',serif;font-weight:700;letter-spacing:-0.02em;line-height:1;white-space:nowrap}
+.wm .i{position:relative;display:inline-block}
+.wm .cp{position:absolute;left:50%;top:-.2em;width:.23em;height:.46em;margin-left:-.115em;border-radius:.115em;transform:rotate(28deg);background:linear-gradient(180deg,#F2603F 0 50%,currentColor 50% 100%)}
+
+/* nav */
+.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:64px}
+.top .wm{font-size:26px;color:var(--accent)}
+.top nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.top nav::-webkit-scrollbar{display:none}
+.top nav a{white-space:nowrap;text-decoration:none;color:var(--text2);font-weight:600;font-size:14.5px;padding:10px 12px;border-radius:10px}
+.top nav a:hover{background:var(--card);color:var(--text)}
+
+/* cover */
+.cover{background:var(--t900);color:#fff;position:relative;overflow:hidden}
+.cover::before{content:"";position:absolute;right:-120px;top:-80px;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(43,167,159,.4),rgba(43,167,159,0) 66%)}
+.cover .wrap{position:relative;display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding-top:72px;padding-bottom:72px}
+.cover .wm{font-size:clamp(64px,9vw,112px);color:#fff}
+.cover h1{margin-top:28px;font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-0.02em;line-height:1.15;max-width:520px}
+.cover p{margin-top:14px;font-size:18px;color:#B9DCD8;max-width:460px}
+.cover .meta{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap}
+.cover .meta span{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:600;font-size:14px}
+.cover .art{display:grid;place-items:center}
+.cover .art svg{width:min(100%,460px);height:auto;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
+@media (max-width:820px){.cover .wrap{grid-template-columns:1fr}}
+
+/* sections */
+section.s{padding:88px 0 8px}
+.s h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-0.025em;line-height:1.1;color:var(--accent)}
+.s .lead{margin-top:14px;font-size:18px;color:var(--text2);max-width:680px}
+.s h3{font-size:20px;font-weight:800;margin:44px 0 6px;letter-spacing:-0.01em}
+.s h3 + p{color:var(--text2);max-width:680px}
+.s .cols{display:grid;gap:20px;margin-top:24px}
+.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.c3,.c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.c2,.c3,.c4{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:24px;padding:24px}
+.card h4{font-size:17px;font-weight:800;margin-bottom:6px}
+.card p{font-size:15px;color:var(--text2)}
+.panel{border-radius:24px;display:grid;place-items:center;min-height:200px;padding:28px;position:relative}
+.cap{margin-top:10px;font-size:14px;color:var(--text2)}
+.cap b{color:var(--text)}
+
+/* statement */
+.statement{margin-top:28px;font-size:clamp(26px,3.4vw,38px);font-weight:700;line-height:1.25;letter-spacing:-0.02em;max-width:900px}
+.statement em{font-style:normal;color:var(--text)}
+
+/* logo */
+.lg-light{background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
+.lg-dark{background:var(--t900)}
+.lg-teal{background:var(--t700)}
+.lg-sun{background:#FFF0C4}
+.appicon{width:132px;height:132px;border-radius:30px;background:var(--t700);display:grid;place-items:center;box-shadow:0 14px 30px rgba(14,111,106,.35)}
+.constr{position:relative;display:inline-block;padding:44px 56px}
+.constr .wm{font-size:96px;color:var(--t700)}
+.constr .guide{position:absolute;border:1.5px dashed #F2603F;border-radius:6px;pointer-events:none}
+.constr .tag{position:absolute;font-size:12.5px;font-weight:700;color:#C93B1E;background:#fff;padding:2px 8px;border-radius:999px;box-shadow:0 0 0 1.5px #F2603F}
+.misuse{position:relative;min-height:150px;overflow:hidden}
+.misuse .x{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:var(--coral7);color:#fff;display:grid;place-items:center}
+.misuse .wm{font-size:44px;color:var(--t700)}
+
+/* color */
+.sw{border-radius:20px;overflow:hidden;background:var(--card)}
+.sw .chip{height:96px;display:flex;align-items:flex-end;padding:10px 14px;font-weight:700;font-size:13px}
+.sw .info{padding:12px 14px 14px}
+.sw b{display:block;font-size:15px}
+.sw code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;color:var(--text2)}
+.sw p{font-size:13.5px;color:var(--text2);margin-top:4px;line-height:1.4}
+.copy{margin-top:8px;font-size:12.5px;font-weight:700;color:var(--accent);padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--accent)}
+.copy:hover{background:var(--accent);color:var(--bg)}
+.ramp{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:24px}
+.ramp .sw .chip{height:120px}
+@media (max-width:900px){.ramp{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.ramp{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.row5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:24px}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}
+.row4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
+.row6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:24px}
+@media (max-width:900px){.row5,.row6,.row4{grid-template-columns:repeat(3,minmax(0,1fr))}.row3{grid-template-columns:1fr}}
+@media (max-width:520px){.row5,.row6,.row4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tod{border-radius:20px;padding:16px;font-weight:800}
+.tod small{display:block;font-weight:600;font-size:13px;margin-top:6px;opacity:.9}
+.pillsw{border-radius:20px;background:var(--card);padding:14px;text-align:center}
+.pillsw .dot{width:56px;height:56px;border-radius:50%;margin:0 auto 8px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.08)}
+.pillsw b{display:block;font-size:14px}
+.pillsw code{font-size:12.5px;color:var(--text2);font-family:ui-monospace,Menlo,monospace}
+.ratio{width:100%;border-collapse:collapse;margin-top:24px;font-size:15px}
+.ratio th{text-align:left;font-size:13px;color:var(--text2);font-weight:700;padding:8px 10px;border-bottom:1.5px solid var(--rule)}
+.ratio td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.ratio .demo{display:inline-flex;align-items:center;justify-content:center;min-width:92px;padding:6px 12px;border-radius:10px;font-weight:700}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:800}
+.ok{background:#CFEFE0;color:#0C4A30}
+@media (prefers-color-scheme:dark){.ok{background:#164536;color:#B8F0D6}}
+.scroll-x{overflow-x:auto}
+.balance{display:flex;height:44px;border-radius:14px;overflow:hidden;margin-top:24px;box-shadow:inset 0 0 0 1.5px var(--rule)}
+.balance span{display:flex;align-items:center;padding:0 12px;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden}
+
+/* type */
+.spec{display:grid;grid-template-columns:1fr 1.2fr;gap:20px;margin-top:24px}
+@media (max-width:820px){.spec{grid-template-columns:1fr}}
+.aa{font-size:150px;line-height:1;font-weight:800;letter-spacing:-0.04em;color:var(--accent)}
+.wts{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:10px;font-size:22px}
+.scale{margin-top:24px;border-top:1.5px solid var(--rule)}
+.scale .r{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--rule)}
+.scale .n{font-size:13.5px;color:var(--text2);line-height:1.4}
+.scale .n b{display:block;color:var(--text);font-size:14px}
+@media (max-width:620px){.scale .r{grid-template-columns:1fr;gap:4px}}
+
+/* shape */
+.shape{display:grid;place-items:center;min-height:130px;background:var(--t100);color:var(--t900);font-weight:800;font-size:14px;text-align:center}
+.shape small{display:block;font-weight:600;opacity:.8}
+.elev{background:#fff;border-radius:22px;min-height:120px;display:grid;place-items:center;color:var(--ink);font-weight:700;font-size:14px;text-align:center;padding:12px}
+.elevbg{background:var(--paper);border-radius:28px;padding:28px}
+@media (prefers-color-scheme:dark){.elevbg{background:#dfe8ea}}
+
+/* icons */
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:12px;margin-top:24px}
+.ibox{background:var(--card);border-radius:18px;padding:16px 8px 12px;text-align:center;color:var(--t700);font-size:12.5px;font-weight:600}
+@media (prefers-color-scheme:dark){.ibox{color:#7FD6CD}}
+.ibox svg{margin:0 auto 8px}
+.ibox span{color:var(--text2)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;margin-top:24px}
+.fbox{background:#fff;border-radius:20px;padding:14px 8px 10px;text-align:center;font-size:13px;font-weight:700;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.fbox svg{margin:0 auto 6px}
+
+/* illustration */
+.mrow{display:flex;gap:20px;flex-wrap:wrap}
+.mrow .panel{flex:1 1 220px;min-height:260px}
+
+/* components (device light surface) */
+.dev{background:var(--paper);border-radius:28px;padding:24px;color:var(--ink);font-family:'Open Sans',sans-serif}
+.dev .btnrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.b{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;border-radius:999px;font-weight:700;font-size:16px}
+.b.primary{background:var(--t700);color:#fff}
+.b.line{background:#fff;color:var(--t800);box-shadow:inset 0 0 0 2px var(--t700)}
+.b.white{background:#fff;color:var(--t800)}
+.b.ghost{background:var(--t900);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.b.dis{background:var(--t700);color:#fff;opacity:.5}
+.dpanel{background:var(--t900);border-radius:20px;padding:16px;display:flex;gap:12px;flex-wrap:wrap}
+.comp{border-radius:26px;background:#FFF0C4;padding:14px 14px 12px;max-width:440px}
+.comp header{display:flex;align-items:center;gap:12px;padding:0 4px}
+.cicon{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.7);color:#6E4B00;display:grid;place-items:center}
+.comp h4{font-size:18px;font-weight:800;color:#6E4B00}
+.comp header p{font-size:13px;color:#6E4B00;opacity:.85}
+.cnt{margin-left:auto;font-size:13.5px;font-weight:700;color:#6E4B00}
+.dose{display:flex;align-items:center;gap:10px;background:#fff;border-radius:20px;padding:10px 10px 10px 12px;box-shadow:0 2px 6px rgba(22,33,43,.07);margin-top:10px}
+.dose .g{width:44px;height:44px;display:grid;place-items:center}
+.dose h5{margin:0;font-size:17px;font-weight:700;line-height:1.2}
+.dose p{margin:0;font-size:14px;color:var(--muted)}
+.dose .tm{font-weight:700;color:#34424D;font-variant-numeric:tabular-nums}
+.dose .mid{flex:1;min-width:0}
+.tick{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#8B99A3;background:#fff;box-shadow:inset 0 0 0 2.5px #C5D0D6;flex:none}
+.tick.on{background:var(--t700);color:#fff;box-shadow:none}
+.tick.pop{animation:pop 1.6s ease-in-out infinite}
+@keyframes pop{0%,55%,100%{transform:scale(1)}65%{transform:scale(1.15)}78%{transform:scale(.97)}}
+.chipc{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.inpd{height:54px;border:2px solid #CAD5DB;border-radius:14px;background:#fff;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#5B6A75;width:100%}
+.inpd.focus{border-color:var(--t700);box-shadow:0 0 0 4px rgba(14,111,106,.16);color:var(--ink)}
+.lbl{display:block;font-size:14px;font-weight:700;color:#34424D;margin-bottom:6px}
+.navd{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:7px;height:70px;background:#fff;border-radius:35px;box-shadow:0 12px 32px rgba(8,61,58,.2);max-width:400px}
+.navd div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:28px;font-size:11.5px;font-weight:700;color:#4A5964}
+.navd .on{background:var(--t700);color:#fff}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:440px}
+.opt{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:84px;justify-content:center;border-radius:18px;background:#fff;box-shadow:inset 0 0 0 2px #CAD5DB;font-size:13px;font-weight:700;color:#34424D}
+.opt.on{background:var(--t100);box-shadow:inset 0 0 0 3px var(--t700);color:var(--t900)}
+
+/* motion */
+.mot{display:grid;gap:12px}
+.mot .r{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.mot b{font-family:ui-monospace,Menlo,monospace;font-size:14px}
+.mot span{color:var(--text2);font-size:15px}
+.pb{animation:pbio 5.6s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes pbio{0%,10%{transform:translateY(0)}34%,56%{transform:translateY(-106px)}82%,100%{transform:translateY(0)}}
+
+/* voice */
+.say{border-radius:22px;padding:22px}
+.say.yes{background:var(--t100);color:var(--t900)}
+.say.no{background:var(--coral1);color:#7A2A12}
+.say small{display:block;font-size:12.5px;font-weight:800;letter-spacing:.02em;margin-bottom:8px;opacity:.9}
+.say p{font-size:19px;font-weight:600;line-height:1.35;color:inherit}
+.say.no p{text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:rgba(122,42,18,.5)}
+.copytbl{width:100%;border-collapse:collapse;margin-top:24px;font-size:15px}
+.copytbl th{text-align:left;font-size:13px;color:var(--text2);font-weight:700;padding:8px 10px;border-bottom:1.5px solid var(--rule)}
+.copytbl td{padding:12px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.copytbl td:first-child{font-weight:700;white-space:nowrap}
+
+/* tokens */
+pre{margin:24px 0 0;background:#0E2A2C;color:#D7EEEB;border-radius:20px;padding:22px;overflow:auto;font:13.5px/1.65 ui-monospace,'SF Mono',Menlo,monospace}
+.copybig{margin-top:14px;padding:12px 22px;border-radius:999px;background:var(--accent);color:var(--bg);font-weight:700}
+.rules{display:grid;gap:12px;margin-top:20px}
+.rules li{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:var(--card);border-radius:16px;font-size:15.5px}
+.rules svg{flex:none;color:var(--accent);margin-top:2px}
+footer{margin-top:96px;background:var(--t900);color:#B9DCD8;padding:48px 0}
+footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+footer .wm{font-size:34px;color:#fff}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#16212B;color:#fff;padding:12px 20px;border-radius:14px;font-weight:700;z-index:80;box-shadow:0 14px 30px rgba(0,0,0,.3)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pb,.tick.pop{animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="wm" role="img" aria-label="Medic"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div>
+    <nav aria-label="Sections">
+      <a href="#idea">Idea</a><a href="#logo">Logo</a><a href="#color">Color</a><a href="#type">Type</a><a href="#shape">Shape</a><a href="#icons">Icons</a><a href="#cap">Mascot</a><a href="#ui">Components</a><a href="#motion">Motion</a><a href="#voice">Voice</a><a href="#a11y">Access</a><a href="#tokens">Tokens</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="cover" aria-label="Cover">
+  <div class="wrap">
+    <div>
+      <div class="wm" role="img" aria-label="Medic"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div>
+      <h1>Brand guidelines</h1>
+      <p>How Medic looks, sounds, and moves.</p>
+      <div class="meta"><span>Version 1.0</span><span>November 2026</span><span>Open Sans + Lora</span></div>
+    </div>
+    <div class="art" id="heroArt"></div>
+  </div>
+</section>
+
+<section class="s" id="idea"><div class="wrap">
+  <h2>The brand idea</h2>
+  <p class="statement">Medic is a user friendly health management platform. <em>Every dose has a slot, a time, and a tick.</em></p>
+  <p class="lead">The design starts with a weekly pillbox. A pillbox has a slot for morning, afternoon, evening, and bedtime, so you can see what is done and what is left. Medic borrows that structure for the layout, the shapes, the colors, and the way it talks.</p>
+  <div class="cols c4">
+    <div class="card"><h4>Calm</h4><p>People open Medic while they manage something serious. It uses quiet color and plenty of space, and it only raises an alarm when a dose is due.</p></div>
+    <div class="card"><h4>Clear</h4><p>Each screen does one job. Targets are big, labels sit above fields, and plain words replace medical shorthand.</p></div>
+    <div class="card"><h4>Kind</h4><p>A missed dose is information. It gets a small coral note. It never gets a scolding.</p></div>
+    <div class="card"><h4>Steady</h4><p>Everything sits where it sat yesterday. When the task is your health, reliable beats clever.</p></div>
+  </div>
+</div></section>
+
+<section class="s" id="logo"><div class="wrap">
+  <h2>Logo</h2>
+  <p class="lead">The Medic logo is the word medic in Lora Bold. A capsule takes the place of the dot on the i. The capsule is half coral and half the color of the word, and it leans 28 degrees.</p>
+
+  <div class="cols c2">
+    <div><div class="panel lg-light"><div class="wm" style="font-size:84px;color:#0E6F6A" role="img" aria-label="Medic logo on white"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div><p class="cap"><b>Primary.</b> Teal 700 on white or paper.</p></div>
+    <div><div class="panel lg-dark"><div class="wm" style="font-size:84px;color:#fff" role="img" aria-label="Medic logo reversed"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div><p class="cap"><b>Reversed.</b> White on Teal 900 or Teal 800.</p></div>
+    <div><div class="panel lg-teal"><div class="wm" style="font-size:84px;color:#fff" role="img" aria-label="Medic logo on teal"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div><p class="cap"><b>On Teal 700.</b> White wordmark. The coral half stays coral.</p></div>
+    <div><div class="panel lg-sun"><div class="wm" style="font-size:84px;color:#083D3A" role="img" aria-label="Medic logo on a light tint"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div><p class="cap"><b>On tints.</b> Teal 900 on the four time of day tints.</p></div>
+  </div>
+
+  <h3>App icon and capsule mark</h3>
+  <p>The capsule works alone as an icon. Use it where the full wordmark does not fit, like the home screen, a browser tab, or a small avatar.</p>
+  <div class="cols c3">
+    <div class="panel card" style="min-height:220px"><div class="appicon" role="img" aria-label="Medic app icon"><svg width="76" height="76" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(-40 24 24)"><rect x="3" y="14" width="42" height="20" rx="10" fill="#fff"/><path d="M24 14h11a10 10 0 0 1 0 20H24z" fill="#F2603F"/></g></svg></div></div>
+    <div class="panel card" style="min-height:220px;gap:18px"><div style="display:flex;gap:16px;align-items:center"><div class="appicon" style="width:64px;height:64px;border-radius:15px;box-shadow:none"><svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(-40 24 24)"><rect x="3" y="14" width="42" height="20" rx="10" fill="#fff"/><path d="M24 14h11a10 10 0 0 1 0 20H24z" fill="#F2603F"/></g></svg></div><div class="appicon" style="width:40px;height:40px;border-radius:10px;box-shadow:none"><svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(-40 24 24)"><rect x="3" y="14" width="42" height="20" rx="10" fill="#fff"/><path d="M24 14h11a10 10 0 0 1 0 20H24z" fill="#F2603F"/></g></svg></div></div><p class="cap">64, 40, and 24 px</p></div>
+    <div class="panel card" style="min-height:220px"><div style="display:flex;gap:14px;align-items:center"><svg width="46" height="46" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(-40 24 24)"><rect x="3" y="14" width="42" height="20" rx="10" fill="#fff" stroke="#0E6F6A" stroke-width="2"/><path d="M24 14h11a10 10 0 0 1 0 20H24z" fill="#F2603F"/></g></svg><span style="font-weight:700">Mark on light backgrounds gets a teal outline.</span></div></div>
+  </div>
+
+  <h3>Anatomy and clear space</h3>
+  <p>Keep clear space equal to the height of the capsule on every side. Keep text, edges, and images out of that zone.</p>
+  <div class="cols c2">
+    <div class="panel lg-light" style="min-height:260px"><div class="constr"><span class="guide" style="inset:6px"></span><span class="tag" style="left:14px;top:-4px">clear space equals capsule height</span><div class="wm" role="img" aria-label="Medic logo with clear space guide"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div></div>
+    <div class="card"><h4>Specifications</h4>
+      <ul class="rules" style="margin-top:12px">
+        <li><span><b>Typeface.</b> Lora Bold, lowercase, with letter spacing tightened by 2%.</span></li>
+        <li><span><b>Capsule.</b> 0.23 em wide, 0.46 em tall, corner radius half its width, tilted 28 degrees. Top half Coral 500, bottom half matches the wordmark.</span></li>
+        <li><span><b>Minimum size.</b> Wordmark 72 px wide on screen, 20 mm in print. Capsule mark 24 px.</span></li>
+        <li><span><b>The i.</b> Use the dotless i (U+0131) so the capsule replaces the dot.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>What to avoid</h3>
+  <div class="cols c4">
+    <div class="panel lg-light misuse"><span class="x" aria-hidden="true">&#10005;</span><div class="wm" style="transform:scaleX(1.5)"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div>
+    <div class="panel lg-light misuse"><span class="x" aria-hidden="true">&#10005;</span><div class="wm" style="font-family:'Open Sans',sans-serif;font-weight:800"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div>
+    <div class="panel lg-light misuse"><span class="x" aria-hidden="true">&#10005;</span><div class="wm" style="color:#7B3FE4"><span aria-hidden="true">med<span class="i">&#305;<span class="cp" style="background:linear-gradient(180deg,#7B3FE4 0 50%,#2BA79F 50% 100%)"></span></span>c</span></div></div>
+    <div class="panel lg-light misuse"><span class="x" aria-hidden="true">&#10005;</span><div class="wm" style="color:#0E6F6A;text-shadow:3px 4px 0 rgba(0,0,0,.25);transform:rotate(-8deg)"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div></div>
+  </div>
+  <div class="cols c4" style="margin-top:10px">
+    <p class="cap"><b>Do not stretch</b> or squash the wordmark.</p><p class="cap"><b>Do not swap the typeface.</b> Open Sans is for the interface.</p><p class="cap"><b>Do not recolor</b> the capsule or the word.</p><p class="cap"><b>Do not add shadows</b> or rotate the wordmark.</p>
+  </div>
+</div></section>
+
+<section class="s" id="color"><div class="wrap">
+  <h2>Color</h2>
+  <p class="lead">Teal does most of the work. Coral appears only where something needs attention. Four soft tints give each part of the day its own compartment.</p>
+
+  <h3>Teal</h3>
+  <p>Teal is the core of the brand. Teal 700 carries every primary action, every link, and every selected state.</p>
+  <div class="ramp" id="tealRamp"></div>
+
+  <h3>Coral</h3>
+  <p>Coral 700 is the only coral allowed for text. Coral 500 is for shapes and the logo capsule.</p>
+  <div class="row3" id="coralRow"></div>
+
+  <h3>Neutrals</h3>
+  <div class="row5" id="neutRow"></div>
+
+  <h3>Time of day</h3>
+  <p>Each compartment on the Today screen has a tint and a darker ink color from the same hue. Pair them as shown.</p>
+  <div class="row4" id="todRow"></div>
+
+  <h3>Pill colors</h3>
+  <p>People tag each medicine with one of six colors, and the tag also colors the medicine icon. Use these colors for graphics. Never use them for text.</p>
+  <div class="row6" id="pillRow"></div>
+
+  <h3>Proportion</h3>
+  <p>A typical screen is mostly neutral, with teal for the main action and one or two tints.</p>
+  <div class="balance" role="img" aria-label="Color proportion bar with 55 percent neutrals, 20 percent teal, 20 percent time of day tints, 5 percent coral">
+    <span style="flex:55;background:#F2F5F6;color:#16212B">Neutrals 55%</span>
+    <span style="flex:20;background:#0E6F6A;color:#fff">Teal 20%</span>
+    <span style="flex:20;background:#FFF0C4;color:#6E4B00">Tints 20%</span>
+    <span style="flex:5;background:#F2603F;color:#16212B"></span>
+  </div>
+  <p class="cap">Coral takes about 5 percent.</p>
+
+  <h3>Approved text pairings</h3>
+  <p>The page calculates these ratios from the hex values. Body text must reach 4.5 to 1. Large text and graphics must reach 3 to 1.</p>
+  <div class="scroll-x"><table class="ratio" id="ratioTbl"><thead><tr><th>Sample</th><th>Text</th><th>Background</th><th>Ratio</th><th>Result</th></tr></thead><tbody></tbody></table></div>
+</div></section>
+
+<section class="s" id="type"><div class="wrap">
+  <h2>Typography</h2>
+  <p class="lead">Open Sans runs the whole interface. Lora appears in one place, the logo.</p>
+  <div class="spec">
+    <div class="card"><div class="aa" aria-hidden="true">Aa</div><h4 style="margin-top:6px">Open Sans</h4><p>Body, headings, buttons, forms, and numbers.</p>
+      <div class="wts"><span style="font-weight:400">Regular</span><span style="font-weight:500">Medium</span><span style="font-weight:600">Semibold</span><span style="font-weight:700">Bold</span><span style="font-weight:800">Extrabold</span></div></div>
+    <div class="card"><div class="aa" style="font-family:'Lora',Georgia,serif;font-weight:700;letter-spacing:-0.02em" aria-hidden="true">Aa</div><h4 style="margin-top:6px">Lora Bold</h4><p>Lora is for the wordmark only. Never set interface text or headlines in Lora.</p><div class="wts" style="font-family:'Lora',Georgia,serif;font-weight:700"><span>medic</span></div></div>
+  </div>
+
+  <h3>Type scale</h3>
+  <p>Sizes are for a 390 px wide phone. Larger text mode raises the base from 16 px to 18.5 px and everything scales with it.</p>
+  <div class="scale">
+    <div class="r"><div class="n"><b>Display</b>34 px, 800, tracking minus 2.5%</div><div style="font-size:34px;font-weight:800;letter-spacing:-0.025em;line-height:1.1">Good morning, Peter</div></div>
+    <div class="r"><div class="n"><b>Screen title</b>27 px, 800, tracking minus 2%</div><div style="font-size:27px;font-weight:800;letter-spacing:-0.02em">Medicines</div></div>
+    <div class="r"><div class="n"><b>Section</b>19 px, 800</div><div style="font-size:19px;font-weight:800">How are you feeling?</div></div>
+    <div class="r"><div class="n"><b>Body</b>16 px, 400, line height 1.5</div><div style="font-size:16px">Lisinopril belongs to a class of drugs known as ACE inhibitors and is used to treat high blood pressure.</div></div>
+    <div class="r"><div class="n"><b>Body strong</b>16 px, 700</div><div style="font-size:16px;font-weight:700">Take 1, before meal</div></div>
+    <div class="r"><div class="n"><b>Label</b>14 px, 700</div><div style="font-size:14px;font-weight:700">First dose at</div></div>
+    <div class="r"><div class="n"><b>Time</b>14 px, 700, tabular numerals</div><div style="font-size:14px;font-weight:700;font-variant-numeric:tabular-nums">8:00 AM &nbsp; 9:30 AM &nbsp; 12:15 PM</div></div>
+  </div>
+  <ul class="rules">
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Nothing is smaller than 14 px. Body text is 16 px or larger.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Use sentence case everywhere. Skip all caps.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Times and doses use tabular numerals so columns line up.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Write times as 8:00 AM. Write doses as the label does, like 600mg or 1000 IU.</span></li>
+  </ul>
+</div></section>
+
+<section class="s" id="shape"><div class="wrap">
+  <h2>Shape, space, and depth</h2>
+  <p class="lead">The capsule is the main shape. Anything you tap is round or has big corners. Anything that holds content is a soft rounded card, like a pillbox compartment.</p>
+  <h3>Corner radius</h3>
+  <div class="row5">
+    <div class="shape" style="border-radius:14px">14<small>Inputs</small></div>
+    <div class="shape" style="border-radius:20px">20<small>Dose rows</small></div>
+    <div class="shape" style="border-radius:26px">26<small>Compartments</small></div>
+    <div class="shape" style="border-radius:30px 30px 0 0">30<small>Sheets</small></div>
+    <div class="shape" style="border-radius:999px">Full<small>Buttons, chips, tabs</small></div>
+  </div>
+  <h3>Spacing and targets</h3>
+  <p>Space moves in steps of 4 px. Use 4, 8, 12, 16, 20, 24, or 32. Screen margins are 20 px. Everything you tap is at least 48 px tall, and primary buttons are 54 px.</p>
+  <div class="row4" style="align-items:end">
+    <div class="card" style="text-align:center"><div style="height:48px;border-radius:999px;background:var(--t700);display:grid;place-items:center;color:#fff;font-weight:700">48 px</div><p class="cap">Minimum target</p></div>
+    <div class="card" style="text-align:center"><div style="height:54px;border-radius:999px;background:var(--t700);display:grid;place-items:center;color:#fff;font-weight:700">54 px</div><p class="cap">Primary button</p></div>
+    <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:50%;background:var(--t700);display:grid;place-items:center;color:#fff;margin:0 auto"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg></div><p class="cap">Dose tick, 52 px</p></div>
+    <div class="card" style="text-align:center"><div style="width:20px;height:20px;border-radius:6px;background:var(--t500);margin:14px auto 17px"></div><p class="cap">20 px margin</p></div>
+  </div>
+  <h3>Elevation</h3>
+  <p>Shadows are soft and tinted with the ink color. Depth tells you what floats.</p>
+  <div class="elevbg"><div class="cols c4" style="margin-top:0">
+    <div class="elev" style="box-shadow:0 2px 8px rgba(22,33,43,.10)">Card<br>2 px lift, 8 px blur</div>
+    <div class="elev" style="box-shadow:0 8px 18px rgba(14,111,106,.35)">Selected<br>8 px lift, teal tint</div>
+    <div class="elev" style="box-shadow:0 12px 32px rgba(8,61,58,.2)">Floating bar<br>12 px lift, 32 px blur</div>
+    <div class="elev" style="box-shadow:0 -20px 50px rgba(0,0,0,.25)">Sheet<br>20 px up, 50 px blur</div>
+  </div></div>
+</div></section>
+
+<section class="s" id="icons"><div class="wrap">
+  <h2>Iconography</h2>
+  <p class="lead">Icons sit on a 24 px grid with a 2 px rounded stroke and no fills. They take the color of the text beside them. Medicine icons and mood faces are the only filled artwork in the app.</p>
+  <div class="igrid" id="iconGrid"></div>
+  <h3>Mood faces</h3>
+  <p>Faces are the one place the app uses full color. Each face has its own fill and a dark outline. Put them on white so the fills stay clear.</p>
+  <div class="fgrid" id="faceGrid"></div>
+  <h3>Medicine icons</h3>
+  <p>These icons show the form of a medicine. The pill color comes from the tag a person chooses.</p>
+  <div class="fgrid" id="glyphGrid"></div>
+</div></section>
+
+<section class="s" id="cap"><div class="wrap">
+  <h2>Mascot and illustration</h2>
+  <p class="lead">Cap is a capsule with a face. Cap shows up where a person might feel unsure, like the help sheets, the assistant, and the success screen. The app has no stock photos and no human figures.</p>
+  <div class="mrow" id="mascotRow"></div>
+  <ul class="rules">
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Cap speaks in first person with short sentences. Interface labels do not.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Cap never appears on error or overdue states. Those stay plain.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Illustrations use flat shapes from the palette, with no gradients and no outlines thicker than 3 px.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>The weekly pill organizer is the main image for use outside the app. Pills rise out of the compartments and drop back in.</span></li>
+  </ul>
+</div></section>
+
+<section class="s" id="ui"><div class="wrap">
+  <h2>Components</h2>
+  <p class="lead">These are the parts people touch most, shown as they appear in the app.</p>
+
+  <h3>Buttons</h3>
+  <div class="dev"><div class="btnrow"><span class="b primary">Save medicine</span><span class="b line">Sync now</span><span class="b dis">Disabled</span></div>
+  <div class="dpanel" style="margin-top:16px"><span class="b white">Create an account</span><span class="b ghost">Sign in</span></div></div>
+  <p class="cap">Use the primary button for the one main action on a screen. White and outline buttons are for dark surfaces only. A disabled button sits at half opacity, and nearby text says why.</p>
+
+  <h3>Compartment and dose row</h3>
+  <div class="dev"><div class="comp"><header><span class="cicon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M5.600 8.600l2 2M3 17h2M19 17h2M18.400 8.600l-2 2M7 17a5 5 0 0 1 10 0M3 21h18"/></svg></span><div><h4>Morning</h4><p>5 AM to noon</p></div><span class="cnt">1 of 2 taken</span></header>
+    <div class="dose"><span class="g" id="gl1"></span><div class="mid"><h5>Ibuprofen <span style="font-weight:600;color:var(--muted)">600mg</span></h5><p>Take 1, before meal</p><p class="tm">8:00 AM</p></div><span class="tick on" role="img" aria-label="Taken"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg></span></div>
+    <div class="dose"><span class="g" id="gl2"></span><div class="mid"><h5>Lisinopril <span style="font-weight:600;color:var(--muted)">5mg</span></h5><p>Take 1, before meal</p><p class="tm">9:30 AM <span style="color:#C93B1E">&middot; Overdue</span></p></div><span class="tick pop" role="img" aria-label="Not taken yet"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg></span></div>
+  </div></div>
+  <p class="cap">Open ring means not taken. Filled teal means taken. The tick pops when it changes state. Overdue text is Coral 700 and never red.</p>
+
+  <h3>Form fields and choices</h3>
+  <div class="dev"><div style="max-width:440px"><span class="lbl">Medicine name</span><div class="inpd focus">Lisino</div><div style="height:18px"></div><span class="lbl">Dosage</span><div class="inpd">For example, 5mg</div><div style="height:18px"></div><span class="lbl">Form</span>
+    <div class="seg" id="segDemo"></div></div></div>
+  <p class="cap">Labels sit above fields and stay visible. Focus draws a teal border plus a soft 4 px halo. A selected choice gets a 3 px teal border and a Teal 100 fill.</p>
+
+  <h3>Navigation bar</h3>
+  <div class="dev"><div class="navd" id="navDemo"></div></div>
+  <p class="cap">A floating capsule with four destinations. The current one is filled Teal 700. Labels are always shown.</p>
+</div></section>
+
+<section class="s" id="motion"><div class="wrap">
+  <h2>Motion</h2>
+  <p class="lead">Motion confirms what happened. A pill moving in or out of a compartment is Medic’s one decorative animation.</p>
+  <div class="cols c2">
+    <div class="panel lg-dark" id="motionArt" style="min-height:260px"></div>
+    <div class="mot">
+      <div class="r"><b>150 ms</b><span>Taps, hovers, and color changes.</span></div>
+      <div class="r"><b>260 ms</b><span>Screen changes. Content rises 10 px and fades in.</span></div>
+      <div class="r"><b>320 ms</b><span>Bottom sheets slide up from the edge.</span></div>
+      <div class="r"><b>600 ms</b><span>The daily progress ring fills.</span></div>
+      <div class="r"><b>Easing</b><span>Use the curve .2, .8, .2, 1 for movement and a plain ease for fades.</span></div>
+      <div class="r"><b>Reduced motion</b><span>Every animation switches off when the device asks for it. Nothing depends on motion to make sense.</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="s" id="voice"><div class="wrap">
+  <h2>Voice</h2>
+  <p class="lead">Medic talks like a patient pharmacist who has time for you. Short sentences, everyday words, and a clear statement of what happens next.</p>
+  <div class="cols c2">
+    <div class="say yes"><small>MEDIC SAYS</small><p>Time for your medicine. Lisinopril 5mg, take 1 before a meal.</p></div>
+    <div class="say no"><small>MEDIC DOES NOT SAY</small><p>ALERT. Scheduled dose of Lisinopril is now due.</p></div>
+    <div class="say yes"><small>MEDIC SAYS</small><p>All set! I’ll remind you at 6:00 PM.</p></div>
+    <div class="say no"><small>MEDIC DOES NOT SAY</small><p>Medication reminder successfully configured.</p></div>
+  </div>
+  <ul class="rules">
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Say what happened and what comes next. Skip filler like “please note” and “successfully.”</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Use plain words. Write “side effects,” not “adverse events,” and explain any term you cannot avoid.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Never give medical advice in Medic’s own voice. Point people to the label, their pharmacist, or their doctor.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Do not scare or shame. A missed dose gets the word “Missed” in small coral type and nothing more.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Keep punctuation simple. Use commas and periods, and save exclamation marks for the success screen.</span></li>
+  </ul>
+  <h3>Microcopy</h3>
+  <div class="scroll-x"><table class="copytbl"><thead><tr><th>Moment</th><th>Copy</th></tr></thead><tbody>
+    <tr><td>Welcome headline</td><td>Manage your medications, stress free.</td></tr>
+    <tr><td>Empty list</td><td>No medicines yet. Add your first one to get reminders.</td></tr>
+    <tr><td>Up next card</td><td>Up next, 9:30 AM. Lisinopril 5mg. Mark as taken.</td></tr>
+    <tr><td>All done</td><td>All done for today. You took every dose. Nice work.</td></tr>
+    <tr><td>Form error</td><td>Enter the medicine name to save.</td></tr>
+    <tr><td>Journal prompt</td><td>How did you feel after taking your medicines?</td></tr>
+    <tr><td>Portal consent</td><td>Medic can only read your records. It can’t change anything in your portal.</td></tr>
+    <tr><td>Disconnect</td><td>Medic will stop syncing. Medicines you already added stay in Medic.</td></tr>
+  </tbody></table></div>
+
+  <h3>Partner names</h3>
+  <p>When Medic connects to a patient portal, name the portal in plain text, like “Connect MyChart.” Do not use partner logos or claim a partnership until one is approved in writing. Say a connection is available only where it works today.</p>
+</div></section>
+
+<section class="s" id="a11y"><div class="wrap">
+  <h2>Accessibility</h2>
+  <p class="lead">Many people who manage several medicines are older, and many have low vision or limited dexterity. These rules are part of the brand.</p>
+  <div class="cols c2">
+    <div class="card"><h4>See it</h4><p>Text meets 4.5 to 1 contrast and graphics meet 3 to 1. Color never carries meaning alone, so every status pairs color with an icon or a word. Larger text mode scales the whole interface.</p></div>
+    <div class="card"><h4>Tap it</h4><p>Targets are at least 48 px with 8 px between them. Steppers have big buttons and typed input. Nothing needs a swipe, a long press, or a precise drag.</p></div>
+    <div class="card"><h4>Hear it</h4><p>Every icon button has a name. Groups, tabs, switches, and checkboxes use real roles, and updates are announced politely. Focus shows a 3 px teal ring.</p></div>
+    <div class="card"><h4>Skip it</h4><p>Animation respects the device’s reduced motion setting. Reminders can be turned off in Settings, and nothing expires while the screen is open.</p></div>
+  </div>
+</div></section>
+
+<section class="s" id="tokens"><div class="wrap">
+  <h2>Design tokens</h2>
+  <p class="lead">The values below are the ones in the app’s style sheet. Copy them as is.</p>
+<pre id="tokenCss">:root{
+  /* teal */
+  --t900:#083D3A; --t800:#0B524E; --t700:#0E6F6A;
+  --t500:#2BA79F; --t100:#D9F0EC; --t50:#EEF8F6;
+  /* coral */
+  --coral:#C93B1E;   /* text and alerts */
+  --coral-l:#F2603F; /* graphics and the logo capsule */
+  --coral-100:#FFE2DA;
+  /* neutrals */
+  --paper:#F2F5F6; --card:#FFFFFF; --ink:#16212B;
+  --muted:#56646F; --line:#DCE3E7;
+  /* time of day: tint / ink */
+  --morning:#FFF0C4;   --morning-ink:#6E4B00;
+  --afternoon:#D9ECFF; --afternoon-ink:#1B4A78;
+  --evening:#FFE0D4;   --evening-ink:#8A3418;
+  --bedtime:#E4DFFF;   --bedtime-ink:#40337C;
+  /* type */
+  --font-ui:'Open Sans',system-ui,sans-serif;
+  --font-logo:'Lora',Georgia,serif;
+  /* shape */
+  --r-input:14px; --r-row:20px; --r-card:26px; --r-sheet:30px; --r-pill:999px;
+  /* motion */
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --t-tap:150ms; --t-screen:260ms; --t-sheet:320ms; --t-ring:600ms;
+}</pre>
+  <button class="copybig" data-copy-target="tokenCss">Copy tokens</button>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="wm" role="img" aria-label="Medic"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div>
+  <p>Brand guidelines, version 1.0. Send questions about using the brand to the Medic design team.</p>
+</div></footer>
+
+<div id="toastBox" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var LET = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+  /* ---------- icons ---------- */
+  var P = {
+    today: '<rect x="3.500" y="5" width="17" height="15.500" rx="3.500"/><path d="M8 3v4M16 3v4M3.500 10h17M9 15l2 2 4-4"/>',
+    pill: '<path d="M10.500 20.500a4.950 4.950 0 0 1-7-7l10-10a4.950 4.950 0 0 1 7 7zM8.500 8.500l7 7"/>',
+    book: '<path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/>',
+    journal: '<path d="M7 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7zM7 3v18M11 8h5M11 12h5M3.500 7H7M3.500 12H7M3.500 17H7"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M19.400 15a1.650 1.650 0 0 0 .33 1.820l.06.06a2 2 0 1 1-2.830 2.830l-.06-.06a1.650 1.650 0 0 0-1.820-.33 1.650 1.650 0 0 0-1 1.510V21a2 2 0 1 1-4 0v-.09A1.650 1.650 0 0 0 9 19.400a1.650 1.650 0 0 0-1.820.33l-.06.06a2 2 0 1 1-2.830-2.830l.06-.06A1.650 1.650 0 0 0 4.600 15a1.650 1.650 0 0 0-1.510-1H3a2 2 0 1 1 0-4h.09A1.650 1.650 0 0 0 4.600 9a1.650 1.650 0 0 0-.33-1.820l-.06-.06a2 2 0 1 1 2.830-2.830l.06.06A1.650 1.650 0 0 0 9 4.600a1.650 1.650 0 0 0 1-1.510V3a2 2 0 1 1 4 0v.09a1.650 1.650 0 0 0 1 1.510 1.650 1.650 0 0 0 1.820-.33l.06-.06a2 2 0 1 1 2.830 2.830l-.06.06A1.650 1.650 0 0 0 19.400 9a1.650 1.650 0 0 0 1.510 1H21a2 2 0 1 1 0 4h-.09a1.650 1.650 0 0 0-1.510 1z"/>',
+    check: '<path d="M5 12.500l4.500 4.500L19 7"/>',
+    pencil: '<path d="M12 20h9M16.500 3.500a2.120 2.120 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.300-4.300"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    minus: '<path d="M5 12h14"/>',
+    x: '<path d="M6 6l12 12M18 6L6 18"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>',
+    lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+    eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    left: '<path d="M15 6l-6 6 6 6"/>',
+    right: '<path d="M9 6l6 6-6 6"/>',
+    arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    help: '<circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.6.300-1 .9-1 1.700M12 17h.01"/>',
+    bell: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.700 21a2 2 0 0 1-3.400 0"/>',
+    chat: '<path d="M21 12a8 8 0 0 1-11.600 7.100L4 20l1-4.600A8 8 0 1 1 21 12z"/>',
+    sunrise: '<path d="M12 3v3M5.600 8.600l2 2M3 17h2M19 17h2M18.400 8.600l-2 2M7 17a5 5 0 0 1 10 0M3 21h18"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/>',
+    sunset: '<path d="M12 2v6M9 5l3 3 3-3M4.200 11.200l1.400 1.400M2 18h2M20 18h2M18.400 12.600l1.400-1.400M22 22H2M16 18a4 4 0 0 0-8 0"/>',
+    moon: '<path d="M21 12.800A9 9 0 1 1 11.200 3a7 7 0 0 0 9.800 9.800z"/>',
+    link: '<path d="M10 14a4 4 0 0 0 5.700 0l3-3a4 4 0 0 0-5.700-5.700l-1 1M14 10a4 4 0 0 0-5.700 0l-3 3a4 4 0 0 0 5.700 5.700l1-1"/>',
+    refresh: '<path d="M20 12a8 8 0 0 0-14-5.300M4 4v4h4M4 12a8 8 0 0 0 14 5.300M20 20v-4h-4"/>',
+    shield: '<path d="M12 3l8 3v6c0 4.500-3.200 7.800-8 9-4.800-1.200-8-4.500-8-9V6zM8.500 12l2.500 2.500 4.500-5"/>'
+  };
+  function ic(n, size, sw) {
+    return '<svg width="' + (size || 24) + '" height="' + (size || 24) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (sw || 2) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + P[n] + '</svg>';
+  }
+
+  /* ---------- faces ---------- */
+  var FACES = {
+    tired: '<circle cx="20" cy="20" r="16"/><path d="M11 18q3 3 6 0M23 18q3 3 6 0"/><circle cx="20" cy="27" r="2"/><path d="M26 5h5l-5 5h5"/>',
+    dizzy: '<circle cx="20" cy="20" r="16"/><circle cx="14" cy="17" r="3.500"/><circle cx="26" cy="17" r="3.500"/><circle cx="14" cy="17" r=".8"/><circle cx="26" cy="17" r=".8"/><path d="M12 28q2.500-3 5 0t5 0t5 0"/>',
+    excited: '<circle cx="20" cy="20" r="16"/><path d="M11 18q3-4 6 0M23 18q3-4 6 0"/><path d="M11 24h18a9 9 0 0 1-18 0z"/>',
+    nauseous: '<circle cx="20" cy="20" r="16"/><path d="M11 16l5 3M29 16l-5 3"/><path d="M13 28q2-3 4 0t4 0t4 0"/><path d="M31 25v5M28 30v3"/>',
+    neutral: '<circle cx="20" cy="20" r="16"/><circle cx="14" cy="17" r="1.300" fill="currentColor"/><circle cx="26" cy="17" r="1.300" fill="currentColor"/><path d="M14 27h12"/>',
+    headache: '<circle cx="20" cy="20" r="16"/><path d="M11 17h6M23 17h6"/><path d="M14 29q6-5 12 0"/><path d="M32 4v5M29.500 6.500h5"/>',
+    cough: '<circle cx="20" cy="20" r="16"/><path d="M12 15l4 2M28 15l-4 2"/><ellipse cx="20" cy="27" rx="3.500" ry="3"/><path d="M30 24l4-1M30 28l4 1"/>'
+  };
+  var FILL = { tired: '#C9BEFF', dizzy: '#FFD166', excited: '#FFC93C', nauseous: '#B5E08A', neutral: '#BFE0FF', headache: '#FFA38F', cough: '#FFC48A' };
+  var NAMES = { tired: 'Tired', dizzy: 'Dizzy', excited: 'Great', nauseous: 'Nauseous', neutral: 'Neutral', headache: 'Headache', cough: 'Dry cough' };
+  var INK = '#16212B';
+  function face(t, size) {
+    var b = FACES[t].replace(/currentColor/g, INK).replace('<circle cx="20" cy="20" r="16"/>', '<circle cx="20" cy="20" r="16" fill="' + FILL[t] + '"/>');
+    if (t === 'dizzy') b = b.replace('<circle cx="14" cy="17" r="3.500"/><circle cx="26" cy="17" r="3.500"/>', '<circle cx="14" cy="17" r="3.500" fill="#fff"/><circle cx="26" cy="17" r="3.500" fill="#fff"/>');
+    if (t === 'excited') b = b.replace('<path d="M11 24h18a9 9 0 0 1-18 0z"/>', '<path d="M11 24h18a9 9 0 0 1-18 0z" fill="#fff"/><circle cx="9" cy="23" r="2.600" fill="#FF8A70" stroke="none"/><circle cx="31" cy="23" r="2.600" fill="#FF8A70" stroke="none"/>');
+    if (t === 'tired') b += '<circle cx="11" cy="24" r="2.400" fill="#FF9DB4" stroke="none"/><circle cx="29" cy="24" r="2.400" fill="#FF9DB4" stroke="none"/>';
+    if (t === 'cough') b = b.replace('<ellipse cx="20" cy="27" rx="3.500" ry="3"/>', '<ellipse cx="20" cy="27" rx="3.500" ry="3" fill="#fff"/>');
+    if (t === 'headache') b += '<path d="M31 8l1.500 3 3 1.500-3 1.500L31 17l-1.500-3-3-1.500 3-1.500z" fill="#FFD166" stroke="none"/>';
+    return '<svg width="' + (size || 36) + '" height="' + (size || 36) + '" viewBox="0 0 40 40" fill="none" stroke="' + INK + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + b + '</svg>';
+  }
+
+  /* ---------- glyphs ---------- */
+  var CO = { teal: '#2BA79F', coral: '#F2603F', sun: '#FFC93C', sky: '#6FB1F0', lilac: '#9D8FF0', white: '#EEF2F4' };
+  function glyph(form, color, s) {
+    s = s || 40; var c = CO[color] || CO.teal, f = String(form).toLowerCase();
+    var h = '<svg width="' + s + '" height="' + s + '" viewBox="0 0 48 48" aria-hidden="true">';
+    if (f === 'capsule') h += '<g transform="rotate(-40 24 24)"><rect x="5" y="14" width="38" height="20" rx="10" fill="#fff" stroke="rgba(22,33,43,.25)" stroke-width="1.500"/><path d="M24 14h9a10 10 0 0 1 0 20h-9z" fill="' + c + '"/><rect x="9" y="17" width="12" height="3" rx="1.500" fill="#fff" opacity=".7"/></g>';
+    else if (f === 'liquid') h += '<rect x="16" y="5" width="16" height="7" rx="2.500" fill="#16212B"/><rect x="12" y="12" width="24" height="31" rx="7" fill="#fff" stroke="rgba(22,33,43,.25)" stroke-width="1.500"/><rect x="12" y="26" width="24" height="17" rx="7" fill="' + c + '"/><rect x="16" y="17" width="16" height="5" rx="2" fill="rgba(22,33,43,.14)"/>';
+    else if (f === 'injection') h += '<rect x="7" y="21" width="30" height="10" rx="3" transform="rotate(-35 22 26)" fill="#fff" stroke="rgba(22,33,43,.3)" stroke-width="1.500"/><rect x="11" y="23" width="14" height="6" rx="2" transform="rotate(-35 22 26)" fill="' + c + '"/><path d="M34 12l5-5M36 7l5 5M10 40l5-5" stroke="#16212B" stroke-width="2.500" stroke-linecap="round"/>';
+    else h += '<ellipse cx="24" cy="27" rx="17" ry="16" fill="rgba(22,33,43,.14)"/><circle cx="24" cy="24" r="17" fill="' + c + '"/><path d="M8 24h32" stroke="rgba(22,33,43,.18)" stroke-width="2"/><path d="M13 14a14 14 0 0 1 10-5" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55" fill="none"/>';
+    return h + '</svg>';
+  }
+
+  /* ---------- mascot + pillbox ---------- */
+  function mascot(mood, size, light) {
+    var s = size || 150, arm = light ? '#8EDAD2' : '#0B524E';
+    var arms = mood === 'cheer'
+      ? '<path d="M30 92l-14-22M90 92l14-22" stroke="' + arm + '" stroke-width="5" stroke-linecap="round"/><circle cx="14" cy="66" r="5" fill="#fff" stroke="' + arm + '" stroke-width="3"/><circle cx="106" cy="66" r="5" fill="#fff" stroke="' + arm + '" stroke-width="3"/>'
+      : mood === 'think'
+        ? '<path d="M30 100l-12 10M90 100l8-24" stroke="' + arm + '" stroke-width="5" stroke-linecap="round"/><circle cx="98" cy="72" r="5" fill="#fff" stroke="' + arm + '" stroke-width="3"/>'
+        : '<path d="M30 100l-14 8M90 96l16-16" stroke="' + arm + '" stroke-width="5" stroke-linecap="round"/><circle cx="108" cy="77" r="5" fill="#fff" stroke="' + arm + '" stroke-width="3"/>';
+    var mouth = mood === 'think' ? '<path d="M52 117q8 4 16 0" stroke="#16212B" stroke-width="3.500" stroke-linecap="round" fill="none"/>' : '<path d="M48 112q12 14 24 0z" fill="#16212B"/><path d="M53 118q7 5 14 0" fill="#F2603F"/>';
+    var sp = mood === 'cheer' ? '<g stroke="#FFD166" stroke-width="4" stroke-linecap="round"><path d="M10 28v10M5 33h10M112 20v10M107 25h10M100 6v6M97 9h6"/></g>' : '';
+    return '<svg width="' + s + '" height="' + s * 1.25 + '" viewBox="0 0 120 150" role="img" aria-label="Cap the capsule mascot">' + sp +
+      '<ellipse cx="60" cy="144" rx="30" ry="5" fill="rgba(0,0,0,.18)"/>' + arms +
+      '<rect x="30" y="8" width="60" height="132" rx="30" fill="#fff" stroke="#0B524E" stroke-width="3"/>' +
+      '<path d="M30 76V38a30 30 0 0 1 60 0v38z" fill="#0E6F6A"/><rect x="40" y="20" width="8" height="34" rx="4" fill="#fff" opacity=".35"/>' +
+      '<circle cx="48" cy="96" r="4.500" fill="#16212B"/><circle cx="72" cy="96" r="4.500" fill="#16212B"/><circle cx="40" cy="106" r="5" fill="#FFB4A2" opacity=".8"/><circle cx="80" cy="106" r="5" fill="#FFB4A2" opacity=".8"/>' + mouth + '</svg>';
+  }
+  function pillbox(animated) {
+    var cols = ['#FFD166', '#6FB1F0', '#FF8A70', '#2BA79F', '#9D8FF0', '#FFC93C', '#6FB1F0'], out = '';
+    out += '<rect x="6" y="64" width="328" height="170" rx="30" fill="#0B524E"/><rect x="6" y="64" width="328" height="170" rx="30" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2"/>';
+    for (var i = 0; i < 7; i++) {
+      var x = 20 + i * 44, cx = x + 19, tilt = (i % 2 ? 1 : -1) * (8 + i * 3);
+      out += '<rect x="' + x + '" y="82" width="38" height="136" rx="19" fill="#062E2C"/>';
+      out += '<g' + (animated ? ' class="pb" style="animation-delay:' + (i * 0.42).toFixed(2) + 's"' : '') + '><g transform="rotate(' + tilt + ' ' + cx + ' 176)"><rect x="' + (x + 8) + '" y="160" width="22" height="34" rx="11" fill="#fff"/><path d="M' + (x + 8) + ' 177h22v6a11 11 0 0 1-22 0z" fill="' + cols[(i + 3) % 7] + '"/></g></g>';
+      out += '<circle cx="' + cx + '" cy="104" r="15" fill="' + cols[i] + '"/><text x="' + cx + '" y="109.500" text-anchor="middle" font-family="Open Sans,sans-serif" font-weight="800" font-size="15" fill="#16212B">' + LET[i] + '</text>';
+    }
+    out += '<g transform="rotate(30 270 40)"><rect x="254" y="22" width="40" height="22" rx="11" fill="#fff"/><path d="M274 22h9a11 11 0 0 1 0 22h-9z" fill="#6FB1F0"/></g>';
+    return '<svg viewBox="0 0 340 250" role="img" aria-label="A weekly pill organizer with a compartment for each day">' + out + '</svg>';
+  }
+
+  /* ---------- color helpers ---------- */
+  function lum(h) {
+    var c = [1, 3, 5].map(function (i) { var v = parseInt(h.substr(i, 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function ratio(a, b) { var x = lum(a), y = lum(b), hi = Math.max(x, y), lo = Math.min(x, y); return (hi + 0.05) / (lo + 0.05); }
+  function onText(bg) { return ratio('#FFFFFF', bg) >= ratio('#16212B', bg) ? '#FFFFFF' : '#16212B'; }
+  function sw(name, hex, use) {
+    var t = onText(hex);
+    return '<div class="sw"><div class="chip" style="background:' + hex + ';color:' + t + (hex.toUpperCase() === '#FFFFFF' ? ';box-shadow:inset 0 0 0 1.5px #DCE3E7' : '') + '">' + ratio('#FFFFFF', hex).toFixed(1) + ' to 1 on white</div><div class="info"><b>' + name + '</b><code>' + hex + '</code><p>' + use + '</p><button class="copy" data-copy="' + hex + '" aria-label="Copy ' + name + ' hex">Copy</button></div></div>';
+  }
+  function put(id, h) { var e = document.getElementById(id); if (e) e.innerHTML = h; }
+
+  put('heroArt', pillbox(true));
+  put('motionArt', '<div style="width:min(100%,380px)">' + pillbox(true) + '</div>');
+
+  put('tealRamp', [['Teal 900', '#083D3A', 'Splash and dark surfaces'], ['Teal 800', '#0B524E', 'Up next card, dark panels'], ['Teal 700', '#0E6F6A', 'Primary actions, links, selected'], ['Teal 500', '#2BA79F', 'Accents and activity dots'], ['Teal 100', '#D9F0EC', 'Soft fills and chips'], ['Teal 50', '#EEF8F6', 'Quiet backgrounds']].map(function (x) { return sw(x[0], x[1], x[2]); }).join(''));
+  put('coralRow', [['Coral 700', '#C93B1E', 'Alerts and overdue text'], ['Coral 500', '#F2603F', 'Graphics and the logo capsule'], ['Coral 100', '#FFE2DA', 'Alert backgrounds']].map(function (x) { return sw(x[0], x[1], x[2]); }).join(''));
+  put('neutRow', [['Ink', '#16212B', 'Primary text'], ['Muted', '#56646F', 'Secondary text'], ['Line', '#DCE3E7', 'Borders and dividers'], ['Paper', '#F2F5F6', 'App background'], ['White', '#FFFFFF', 'Cards and inputs']].map(function (x) { return sw(x[0], x[1], x[2]); }).join(''));
+  put('todRow', [['Morning', '#FFF0C4', '#6E4B00'], ['Afternoon', '#D9ECFF', '#1B4A78'], ['Evening', '#FFE0D4', '#8A3418'], ['Bedtime', '#E4DFFF', '#40337C']].map(function (x) {
+    return '<div class="tod" style="background:' + x[1] + ';color:' + x[2] + '">' + x[0] + '<small>' + x[1] + ' on ' + x[2] + '<br>' + ratio(x[1], x[2]).toFixed(1) + ' to 1</small></div>';
+  }).join(''));
+  put('pillRow', [['Teal', '#2BA79F'], ['Coral', '#F2603F'], ['Sun', '#FFC93C'], ['Sky', '#6FB1F0'], ['Lilac', '#9D8FF0'], ['White', '#EEF2F4']].map(function (x) {
+    return '<div class="pillsw"><div class="dot" style="background:' + x[1] + (x[0] === 'White' ? ';box-shadow:inset 0 0 0 2px #C5D0D6' : '') + '"></div><b>' + x[0] + '</b><code>' + x[1] + '</code></div>';
+  }).join(''));
+
+  /* ratio table */
+  var PAIRS = [
+    ['Primary text', '#16212B', '#F2F5F6'], ['Secondary text', '#56646F', '#F2F5F6'], ['Button label', '#FFFFFF', '#0E6F6A'],
+    ['Up next card', '#FFFFFF', '#0B524E'], ['Chip text', '#083D3A', '#D9F0EC'], ['Overdue text', '#C93B1E', '#FFFFFF'],
+    ['Morning', '#6E4B00', '#FFF0C4'], ['Afternoon', '#1B4A78', '#D9ECFF'], ['Evening', '#8A3418', '#FFE0D4'], ['Bedtime', '#40337C', '#E4DFFF'],
+    ['Link on white', '#0E6F6A', '#FFFFFF']
+  ];
+  var tb = document.querySelector('#ratioTbl tbody');
+  tb.innerHTML = PAIRS.map(function (p) {
+    var r = ratio(p[1], p[2]);
+    var res = r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : 'Large only';
+    return '<tr><td><span class="demo" style="background:' + p[2] + ';color:' + p[1] + (p[2] === '#FFFFFF' ? ';box-shadow:inset 0 0 0 1.5px #DCE3E7' : '') + '">' + p[0] + '</span></td><td><code>' + p[1] + '</code></td><td><code>' + p[2] + '</code></td><td><b>' + r.toFixed(1) + ' to 1</b></td><td><span class="badge ok">' + res + '</span></td></tr>';
+  }).join('');
+
+  /* icons, faces, glyphs */
+  var IC_NAMES = ['today', 'pill', 'book', 'journal', 'gear', 'check', 'pencil', 'search', 'plus', 'minus', 'x', 'user', 'lock', 'eye', 'left', 'right', 'arrow', 'help', 'bell', 'chat', 'sunrise', 'sun', 'sunset', 'moon', 'link', 'refresh', 'shield'];
+  put('iconGrid', IC_NAMES.map(function (n) { return '<div class="ibox">' + ic(n, 28, 2) + '<span>' + n + '</span></div>'; }).join(''));
+  put('faceGrid', Object.keys(FACES).map(function (k) { return '<div class="fbox">' + face(k, 52) + NAMES[k] + '</div>'; }).join(''));
+  put('glyphGrid', [['Pill', 'teal', 'Pill'], ['Pill', 'coral', 'Pill'], ['Pill', 'sky', 'Pill'], ['Capsule', 'coral', 'Capsule'], ['Capsule', 'lilac', 'Capsule'], ['Liquid', 'teal', 'Liquid'], ['Injection', 'sun', 'Injection']].map(function (x) { return '<div class="fbox">' + glyph(x[0], x[1], 52) + x[2] + '</div>'; }).join(''));
+
+  /* mascot row */
+  put('mascotRow',
+    '<div class="panel lg-dark">' + mascot('cheer', 130, true) + '</div>' +
+    '<div class="panel card" style="background:#E6F4F1">' + mascot('hi', 130) + '</div>' +
+    '<div class="panel card" style="background:#FFF0C4">' + mascot('think', 130) + '</div>' +
+    '<div class="panel card" style="background:#D9ECFF"><div style="transform:scale(.62);transform-origin:center"><svg width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="Prescription bottle illustration"><ellipse cx="100" cy="184" rx="52" ry="9" fill="rgba(0,0,0,.16)"/><rect x="62" y="14" width="76" height="30" rx="8" fill="#fff"/><rect x="62" y="40" width="76" height="6" fill="#D5DEE3"/><rect x="56" y="46" width="88" height="134" rx="18" fill="#FF9B3D"/><rect x="66" y="46" width="12" height="134" fill="#fff" opacity=".22"/><rect x="62" y="80" width="76" height="70" rx="8" fill="#fff"/><path d="M72 96h56M72 108h40M72 120h50M72 132h30" stroke="#16212B" stroke-width="5" stroke-linecap="round" opacity=".8"/></svg></div></div>');
+
+  /* component demos */
+  var g1 = document.getElementById('gl1'), g2 = document.getElementById('gl2');
+  if (g1) g1.innerHTML = glyph('Pill', 'sky', 44);
+  if (g2) g2.innerHTML = glyph('Pill', 'coral', 44);
+  put('segDemo', [['Pill', 'Pill', 'teal', true], ['Capsule', 'Capsule', 'teal'], ['Liquid', 'Liquid', 'teal'], ['Injection', 'Injection', 'teal']].map(function (x) {
+    return '<div class="opt' + (x[3] ? ' on' : '') + '">' + glyph(x[0], x[2], 34) + x[1] + '</div>';
+  }).join(''));
+  put('navDemo', [['today', 'Today', true], ['pill', 'Medicines'], ['book', 'Glossary'], ['journal', 'Journal']].map(function (x) {
+    return '<div' + (x[2] ? ' class="on"' : '') + '>' + ic(x[0], 24, 2) + x[1] + '</div>';
+  }).join(''));
+
+  /* ---------- copy ---------- */
+  function toast(msg) {
+    var b = $('#toastBox'); b.innerHTML = '<div class="toast" role="status">' + msg + '</div>';
+    clearTimeout(toast.h); toast.h = setTimeout(function () { b.innerHTML = ''; }, 1800);
+  }
+  function copyText(t) {
+    function fallback() {
+      try { var a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', ''); a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select(); var ok = document.execCommand('copy'); document.body.removeChild(a); toast(ok ? 'Copied' : 'Select the text to copy it'); }
+      catch (e) { toast('Select the text to copy it'); }
+    }
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { toast('Copied'); }, fallback); } else fallback(); } catch (e) { fallback(); }
+  }
+  document.addEventListener('click', function (e) {
+    var c = e.target.closest('[data-copy]'); if (c) { copyText(c.dataset.copy); return; }
+    var t = e.target.closest('[data-copy-target]'); if (t) { copyText(document.getElementById(t.dataset.copyTarget).textContent); }
+  });
+})();
+</script>
+</body>
+</html>

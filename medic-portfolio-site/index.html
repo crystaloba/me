@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medic 2026 redesign, a case study</title>
+<meta name="description" content="A case study of the 2026 redesign of Medic, a medication management app for people aged 45 to 70.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --t900:#083D3A; --t800:#0B524E; --t700:#0E6F6A; --t500:#2BA79F; --t100:#D9F0EC; --t50:#EEF8F6;
+  --coral7:#C93B1E; --coral5:#F2603F; --coral1:#FFE2DA;
+  --bg:#FFFFFF; --text:#16212B; --text2:#4F5E6A; --card:#F2F5F6; --rule:#DCE3E7; --accent:#0E6F6A;
+  --old:#E4ECF8; --new:#D9F0EC;
+  --pad:clamp(20px,5vw,64px);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0C1A1D;--text:#EAF4F3;--text2:#A9C0C0;--card:#12292C;--rule:#2B4A4D;--accent:#6FD3C9}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;font-family:'Open Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--text);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+h1,h2,h3,h4,p,figure{margin:0}
+ul{margin:0;padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--accent);font-weight:700}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--pad)}
+.wm{position:relative;display:inline-block;font-family:'Lora',Georgia,serif;font-weight:700;letter-spacing:-0.02em;line-height:1;white-space:nowrap}
+.wm .i{position:relative;display:inline-block}
+.wm .cp{position:absolute;left:50%;top:-.2em;width:.23em;height:.46em;margin-left:-.115em;border-radius:.115em;transform:rotate(28deg);background:linear-gradient(180deg,#F2603F 0 50%,currentColor 50% 100%)}
+
+/* hero */
+.hero{background:var(--t900);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-140px;top:-120px;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle,rgba(43,167,159,.42),rgba(43,167,159,0) 66%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding-top:64px;padding-bottom:0;min-height:640px}
+.hero .wm{font-size:64px;color:#fff}
+.hero h1{margin-top:40px;font-size:clamp(44px,6.4vw,84px);font-weight:800;letter-spacing:-0.035em;line-height:1.02}
+.hero .lead{margin-top:20px;font-size:clamp(18px,1.7vw,21px);color:#C5E3DF;max-width:520px;line-height:1.55}
+.tags{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap}
+.tags span{padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:600;font-size:14px}
+.jumps{margin-top:22px;display:flex;gap:12px;flex-wrap:nowrap}
+@media (max-width:520px){.jumps{flex-wrap:wrap}}
+.jumps a{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;white-space:nowrap;border-radius:999px;background:#fff;color:var(--t800);font-weight:700;text-decoration:none;transition:background .2s,transform .2s}
+.jumps a:hover{background:#D9F0EC;transform:translateY(-2px)}
+.jumps a:focus-visible{outline-color:#fff}
+#prototype,#guidelines{scroll-margin-top:24px}
+.hero .phones{position:relative;align-self:end;height:560px}
+.hero .phones img{position:absolute;bottom:-70px;width:min(300px,46vw);filter:drop-shadow(0 24px 30px rgba(0,0,0,.4))}
+.hero .phones .a{left:0;opacity:.92;transform:translateY(24px)}
+.hero .phones .b{right:0}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;min-height:0}.hero .phones{height:440px}.hero .phones img{width:min(230px,44vw)}}
+
+/* sections */
+section{padding:84px 0 0}
+h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-0.025em;line-height:1.1;color:var(--accent)}
+h3{font-size:clamp(22px,2.6vw,28px);font-weight:800;letter-spacing:-0.015em;line-height:1.2;margin-top:0}
+.lead{margin-top:16px;font-size:19px;color:var(--text2);max-width:720px}
+p + p{margin-top:14px}
+.body p{font-size:17px;max-width:720px}
+.body.wide p{max-width:820px}
+.glance{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px;margin-top:28px;border-top:1.5px solid var(--rule)}
+.glance div{padding:16px 0;border-bottom:1px solid var(--rule)}
+.glance b{display:block;font-size:13.5px;color:var(--text2);font-weight:700;margin-bottom:2px}
+.glance span{font-size:16px}
+@media (max-width:700px){.glance{grid-template-columns:1fr}}
+.todo{background:#FFF0C4;color:#6E4B00;border-radius:6px;padding:0 6px;font-weight:700}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:28px}
+.stat{background:var(--card);border-radius:24px;padding:22px}
+.stat .n{font-size:44px;font-weight:800;letter-spacing:-0.03em;color:var(--accent);line-height:1}
+.stat .n small{font-size:20px;font-weight:700;letter-spacing:0;color:var(--text2)}
+.stat p{margin-top:10px;font-size:15px;color:var(--text2);line-height:1.45}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.note{margin-top:12px;font-size:14px;color:var(--text2)}
+blockquote{margin:32px 0 0;padding:26px 28px;border-radius:24px;background:var(--t100);color:var(--t900);font-size:clamp(20px,2.4vw,26px);font-weight:700;line-height:1.35;letter-spacing:-0.01em}
+@media (prefers-color-scheme:dark){blockquote{background:#12333A;color:#DDF5F1}}
+blockquote small{display:block;margin-top:8px;font-size:14px;font-weight:600;opacity:.8}
+
+.finds{display:grid;gap:0;margin-top:28px;border-top:1.5px solid var(--rule)}
+.find{padding:24px 0;border-bottom:1px solid var(--rule)}
+.find .k{width:44px;height:44px;border-radius:50%;background:var(--t100);color:var(--t900);display:grid;place-items:center;font-weight:800;font-size:18px}
+@media (prefers-color-scheme:dark){.find .k{background:#12333A;color:#BFE6E1}}
+.find h4{font-size:19px;font-weight:800;margin-bottom:4px}
+.find p{font-size:16.5px;color:var(--text2);max-width:760px}
+.shots{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px}
+.shots figure{flex:0 0 auto;width:clamp(150px,22vw,210px)}
+.shots .ph{background:var(--old);border-radius:24px;padding:14px 10px}
+.shots figcaption{margin-top:8px;font-size:13.5px;color:var(--text2);text-align:center}
+
+.keep{margin-top:28px;border-radius:24px;background:var(--card);padding:24px 26px}
+.keep h4{font-size:18px;font-weight:800;margin-bottom:6px}
+.keep p{font-size:16.5px;color:var(--text2);max-width:760px}
+
+.goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.goal{border-radius:24px;background:var(--card);padding:22px 24px}
+.goal h4{font-size:18px;font-weight:800;margin-bottom:6px}
+.goal p{font-size:16px;color:var(--text2)}
+@media (max-width:700px){.goals{grid-template-columns:1fr}}
+
+.idea{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;margin-top:28px}
+.idea .art{background:var(--t900);border-radius:28px;padding:28px;display:grid;place-items:center}
+.idea .art img{width:100%;max-width:440px}
+.comps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+.comps div{border-radius:18px;padding:12px 14px;font-weight:800;font-size:15px}
+.comps small{display:block;font-weight:600;font-size:13px;opacity:.85}
+@media (max-width:860px){.idea{grid-template-columns:1fr}}
+
+.change{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center;padding:44px 0;border-bottom:1px solid var(--rule)}
+.change:first-of-type{padding-top:28px}
+.change .tx p{font-size:16.5px;color:var(--text2)}
+.change .tx p b{color:var(--text)}
+.change .tx h3{margin-bottom:14px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pair figure{display:flex;flex-direction:column}
+.pair figure .ph{flex:1;border-radius:28px;padding:16px 12px;display:grid;place-items:center}
+.pair .o img{width:90%}
+.pair .o .ph{background:var(--old)}
+.pair .n .ph{background:var(--new)}
+@media (prefers-color-scheme:dark){.pair .o .ph{background:#1A2A44}.pair .n .ph{background:#14383B}.shots .ph{background:#1A2A44}}
+.pair figcaption,.trio figcaption{margin-top:10px;font-size:14px;color:var(--text2);text-align:center}
+.pair figcaption b,.trio figcaption b{display:inline-block;margin-right:6px;padding:2px 10px;border-radius:999px;background:var(--card);color:var(--text);font-size:13px}
+.pair .n figcaption b{background:var(--t100);color:var(--t900)}
+@media (prefers-color-scheme:dark){.pair .n figcaption b{background:#12333A;color:#BFE6E1}}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.trio .ph{background:var(--new);border-radius:28px;padding:16px 12px;display:grid;place-items:center}
+@media (prefers-color-scheme:dark){.trio .ph{background:#14383B}}
+@media (max-width:900px){.change{grid-template-columns:1fr;gap:24px}.trio{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.pair,.trio{gap:10px}}
+
+.brandrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.brandrow .cell{border-radius:28px;background:var(--card);padding:18px;display:grid;gap:12px;align-content:start}
+.brandrow .cell img{border-radius:16px;width:100%}
+.brandrow figcaption{font-size:14px;color:var(--text2)}
+.brandrow figcaption b{display:inline-block;margin-right:6px;padding:2px 10px;border-radius:999px;background:var(--rule);color:var(--text);font-size:13px}
+.logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.logos .l{border-radius:24px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--rule);display:grid;place-items:center;min-height:150px;padding:20px}
+.logos .l img{max-height:96px;width:auto}
+.logos .cap{font-size:14px;color:var(--text2);margin-top:8px;text-align:center}
+@media (max-width:700px){.brandrow,.logos{grid-template-columns:1fr}}
+
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px;margin-top:28px}
+.checks li{display:flex;gap:12px;font-size:16.5px;color:var(--text2)}
+.checks svg{flex:none;color:var(--accent);margin-top:3px}
+@media (max-width:760px){.checks{grid-template-columns:1fr}}
+
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.linkc{display:block;text-decoration:none;color:inherit;border-radius:28px;padding:26px;background:var(--t800);color:#fff;transition:transform .2s}
+.linkc:hover{transform:translateY(-3px)}
+.linkc.alt{background:var(--card);color:var(--text)}
+.linkc h4{font-size:22px;font-weight:800;letter-spacing:-0.01em}
+.prev{height:230px;border-radius:20px;overflow:hidden;margin-bottom:20px;background:rgba(255,255,255,.1);display:flex;justify-content:center;align-items:flex-start;gap:14px;padding-top:20px}
+.prev.proto img{width:150px;height:auto;flex:none}
+.prev.proto img:nth-child(2){margin-top:30px}
+.prev.guide{padding:0;display:block;background:var(--t900)}
+.prev.guide img{width:100%;height:100%;object-fit:cover;object-position:left top}
+.linkc p{margin-top:6px;font-size:15.5px;color:#C5E3DF}
+.linkc.alt p{color:var(--text2)}
+.linkc span{display:inline-block;margin-top:14px;font-weight:700}
+@media (max-width:700px){.links{grid-template-columns:1fr}}
+.plan{margin-top:24px;border-top:1.5px solid var(--rule)}
+.plan div{display:grid;grid-template-columns:200px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.plan b{font-weight:700}
+.plan span{color:var(--text2)}
+@media (max-width:620px){.plan div{grid-template-columns:1fr;gap:2px}}
+footer{margin-top:96px;background:var(--t900);color:#B9DCD8;padding:44px 0}
+footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+footer .wm{font-size:32px;color:#fff}
+footer p{font-size:14.5px;max-width:560px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.linkc,.jumps a{transition:none}.linkc:hover,.jumps a:hover{transform:none}}
+h1,h2,h3,h4{font-weight:600!important}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="wm" role="img" aria-label="Medic"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div>
+      <h1>Medic 2026 redesign</h1>
+      <p class="lead">In 2022 I helped design a medication app for people aged 45 to 70. In 2026 I rebuilt how it looks and how it is organized, and gave it a new job.</p>
+      <div class="tags"><span>UX and UI design</span><span>2022 original, 2026 redesign</span><span>Interactive prototype</span><span>Brand guidelines</span></div>
+      <div class="jumps"><a href="#prototype">Jump to prototype<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a><a href="#guidelines">Jump to guidelines<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a></div>
+    </div>
+    <div class="phones">
+      <img class="a" src="images/old_home.webp" alt="The 2022 Medic home screen with a medicine timeline" width="420" height="911">
+      <img class="b" src="images/new_home.webp" alt="The 2026 Medic Today screen with a progress ring, an up next card, and time of day compartments" width="440" height="924">
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="overview"><div class="wrap">
+  <h2>Overview</h2>
+  <div class="body" style="margin-top:20px">
+    <p>Medic started in 2022 as a three week team project. Two teammates and I interviewed ten people aged 45 to 70, mapped what they struggled with, and designed an app that reminds you to take your medicines, explains them in plain language, and lets you log how you feel.</p>
+    <p>The research held up. The screens aged less well. When I looked at the 2022 design again, I saw good ideas drawn too small, in a look that could belong to any app.</p>
+    <p>For the refresh I kept the research, the problem statement, and the four core features. I rebuilt the home screen structure, the look, and nearly every part of the interface. I also added one idea the original never tried. Medic can now sync with a patient portal.</p>
+  </div>
+  <div class="glance">
+    <div><b>Role</b><span>Designer on the 2022 team. Sole designer on the 2026 refresh.</span></div>
+    <div><b>2022 team</b><span>Crystal Obaretin, Taya Tepudom, Chia-I Chen</span></div>
+    <div><b>Timeline</b><span>The 2022 original took 3 weeks. The 2026 refresh took 2 weeks.</span></div>
+    <div><b>Scope of the refresh</b><span>A review of the 2022 screens, a new look and logo, a redesign of every core screen, and a portal sync idea</span></div>
+    <div><b>Deliverables</b><span>Interactive prototype, brand guidelines, and design tokens</span></div>
+    <div><b>Tools</b><span>Figma was my main tool, plus an interactive HTML prototype. Type is Open Sans and Lora.</span></div>
+  </div>
+</div></section>
+
+<section id="research"><div class="wrap">
+  <h2>What the 2022 research said</h2>
+  <p class="lead">We interviewed ten people aged 45 to 70 and pulled a few numbers from the conversations.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">8<small> of 10</small></div><p>search for medicine information online</p></div>
+    <div class="stat"><div class="n">6<small> of 10</small></div><p>had lost track of whether they took a medicine</p></div>
+    <div class="stat"><div class="n">4<small> of 10</small></div><p>lack confidence in what they know about their medicines</p></div>
+    <div class="stat"><div class="n">6<small> of 10</small></div><p>did no research on a medicine after it was prescribed</p></div>
+  </div>
+  <p class="note">The original case study showed these as percentages. Ten interviews is a small group, so the numbers are rough. I show them as counts.</p>
+  <div class="body" style="margin-top:28px">
+    <p>People also told us that telehealth was hard to use, and that medicine apps they had tried did not remind them enough. They wanted to take control of their own care and speak up for themselves.</p>
+  </div>
+  <blockquote>Users need reminders to take their medications and supplements so that they can manage their health stress free.<small>Problem statement, 2022</small></blockquote>
+  <div class="body" style="margin-top:24px"><p>That statement still describes the problem. It also sets a bar for the interface. People in this age range need to read it and tap it easily.</p></div>
+</div></section>
+
+<section id="audit"><div class="wrap">
+  <h2>What I wanted to fix</h2>
+  <p class="lead">I went back through the 2022 screens one at a time. These are the five things I kept running into.</p>
+  <div class="finds">
+    <div class="find"><div><h4>The interface was built small for people who need it big</h4><p>The tab labels were small. So were the dose check box and the mood icons, and form labels sat on the hairline border of each field. For an audience between 45 and 70, I wanted bigger targets and type everywhere.</p></div></div>
+    <div class="find"><div><h4>Several color pairings were hard to read</h4><p>The Save button looked disabled while it was active. Gray text sat on lavender fills, and placeholder text was light gray. The yellow filter chip was the only warm color on the screen and it carried no meaning.</p></div></div>
+    <div class="find"><div><h4>The day was laid out as a timeline of times</h4><p>Nobody thinks "9:30 and 10:00." People think "my morning pills" and "my bedtime pills." The timeline left long empty stretches and made people scan for times.</p></div></div>
+    <div class="find"><div><h4>The Medication tab opened the add form</h4><p>There was no single place to see everything you take, check how much is left, or edit a medicine without hunting for it on the home screen.</p></div></div>
+    <div class="find"><div><h4>The look was generic</h4><p>Blue and lavender, illustrations of people, and a mix of Nunito and Poppins. It was tidy and it had no point of view. The product had a wordmark but no logo system and no voice you could point to.</p></div></div>
+  </div>
+  <div class="shots" aria-label="2022 screens">
+    <figure><div class="ph"><img src="images/old_splash.webp" alt="2022 initial screen" width="420" height="909"></div><figcaption>Initial screen, 2022</figcaption></figure>
+    <figure><div class="ph"><img src="images/old_home_exp.webp" alt="2022 expanded home screen" width="420" height="908"></div><figcaption>Expanded home, 2022</figcaption></figure>
+    <figure><div class="ph"><img src="images/old_cal.webp" alt="2022 journal calendar" width="420" height="908"></div><figcaption>Journal calendar, 2022</figcaption></figure>
+    <figure><div class="ph"><img src="images/old_info.webp" alt="2022 medicine information page" width="420" height="903"></div><figcaption>Medicine info, 2022</figcaption></figure>
+  </div>
+  <div class="keep">
+    <h4>What I kept</h4>
+    <p>I kept the four core features. Those are custom schedules and reminders, the medical glossary, the journal with mood and symptom tracking, and help inside the app. I also kept the dosage help text we wrote in 2022 and the idea that every medicine page shows its forms and side effects.</p>
+  </div>
+</div></section>
+
+<section id="goals"><div class="wrap">
+  <h2>Goals for the refresh</h2>
+  <div class="goals">
+    <div class="goal"><h4>Make it easy to read and tap</h4><p>Bigger targets, higher contrast, and labels that stay visible, designed for people between 45 and 70.</p></div>
+    <div class="goal"><h4>Give Medic an identity</h4><p>A logo, a palette, a typeface, and a character that people can recognize in a screenshot.</p></div>
+    <div class="goal"><h4>Match how people already sort medicines</h4><p>Organize the day by morning, afternoon, evening, and bedtime instead of by the clock.</p></div>
+    <div class="goal"><h4>Try portal sync</h4><p>Show how bringing in a medicine list from a patient portal could take the work out of setup.</p></div>
+  </div>
+</div></section>
+
+<section id="idea"><div class="wrap">
+  <h2>The idea grew from medicine management to health</h2>
+  <div class="idea">
+    <div class="body">
+      <p>Medic started with medicine management. The 2022 problem was simple. People lose track of their doses, so the app reminded them.</p>
+      <p>The research pointed to more. People wanted to understand their medicines, notice how they feel, and speak up for themselves. Each need became a feature, and the app grew into a place to manage your health.</p>
+      <p>The pill organizer gave the redesign its structure. You probably know a weekly pill organizer. It has a slot for each day, and many have a row for each part of the day, so you can see what is done and what is left. I used that structure for the whole app. The day splits into four compartments, each with its own soft tint. The idea also shapes the logo, where a capsule replaces the dot of the i, and the buttons, which are rounded like pills.</p>
+      <div class="comps">
+        <div style="background:#FFF0C4;color:#6E4B00">Morning<small>5 AM to noon</small></div>
+        <div style="background:#D9ECFF;color:#1B4A78">Afternoon<small>Noon to 5 PM</small></div>
+        <div style="background:#FFE0D4;color:#8A3418">Evening<small>5 to 9 PM</small></div>
+        <div style="background:#E4DFFF;color:#40337C">Bedtime<small>9 PM to 5 AM</small></div>
+      </div>
+    </div>
+    <div class="art"><img src="images/new_pillbox.webp" alt="A weekly pill organizer with a colored compartment for each day" width="760" height="560"></div>
+  </div>
+</div></section>
+
+<section id="changes"><div class="wrap">
+  <h2>What changed, screen by screen</h2>
+
+  <div class="change" style="margin-top:20px">
+    <div class="tx"><h3>Color coding and use of empty space</h3>
+      <p><b>2022.</b> The home screen listed medicines on a timeline. Most of it sat empty, and finding "my morning pills" meant scanning for times.</p>
+      <p><b>2026.</b> The day splits into four color coded compartments with a count of what you have taken, so you find your morning pills by color and position. Space around each dose keeps the screen calm, and a compartment with nothing in it shrinks to one line. A card at the top shows the next dose with one large button. A ring shows how many doses are done. A late dose says "Overdue" in small coral type and nothing more. The week strip became seven capsules, and you can move between weeks.</p></div>
+    <div class="pair">
+      <figure class="o"><div class="ph"><img src="images/old_home.webp" alt="2022 home screen" width="420" height="911"></div><figcaption><b>2022</b>Home</figcaption></figure>
+      <figure class="n"><div class="ph"><img src="images/new_home2.webp" alt="2026 Today screen showing the morning compartment with two doses" width="440" height="924"></div><figcaption><b>2026</b>Today</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="change">
+    <div class="tx"><h3>Adding a medicine without squinting</h3>
+      <p><b>2022.</b> The form packed every field into one view, with labels sitting on the border of each box. It was compact and hard to read.</p>
+      <p><b>2026.</b> The form is one scrolling page with one question per section and labels above the fields. You choose the form from four large tiles. Pills in the bottle and pills per dose each get big plus and minus buttons. Quick buttons set the first dose to morning, noon, evening, or bedtime, and a color tag helps you spot the medicine later.</p>
+      <p>I kept the help from 2022 and turned it into sheets that slide up. A question mark next to each question opens a plain explanation and an example. The dosage explanation is the text we wrote in 2022.</p></div>
+    <div class="pair">
+      <figure class="o"><div class="ph"><img src="images/old_form.webp" alt="2022 add medicine form" width="420" height="914"></div><figcaption><b>2022</b>Add medicine</figcaption></figure>
+      <figure class="n"><div class="ph"><img src="images/new_form.webp" alt="2026 new medicine form" width="440" height="924"></div><figcaption><b>2026</b>New medicine</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="change">
+    <div class="tx"><h3>Adding new medicines and syncing with health charts</h3>
+      <p><b>2022.</b> The Medication tab opened the form for adding a medicine and nothing else.</p>
+      <p><b>2026.</b> The tab now opens with an Add a medicine button. Below it, a card lets you connect your patient portal, also called a health chart, so Medic can bring in your list for you. Your full list follows, with the schedule and how many pills are left. When seven or fewer remain, a "Refill soon" note appears. Marking a dose as taken counts a pill down, so the warning shows up without anyone tracking it.</p></div>
+    <div class="pair">
+      <figure class="o"><div class="ph"><img src="images/old_form.webp" alt="2022 Medication tab, which opened the add medicine form" width="420" height="914"></div><figcaption><b>2022</b>Medication tab</figcaption></figure>
+      <figure class="n"><div class="ph"><img src="images/new_meds.webp" alt="2026 Medicines tab with a patient portal card and the medicine list" width="440" height="924"></div><figcaption><b>2026</b>Medicines tab</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="change">
+    <div class="tx"><h3>Quick access to the journal to track your health</h3>
+      <p><b>2022.</b> Five small mood tiles, light gray prompt text, and a Save button that looked disabled.</p>
+      <p><b>2026.</b> The Journal tab sits in the bottom bar, so you can log how you feel in one tap. Six moods fill a grid of large tiles. Each face has its own color, so tired and dizzy do not look alike at a glance. Save stays visibly off until you pick a mood or write a note. The calendar marks days with entries and shows the saved note below.</p></div>
+    <div class="pair">
+      <figure class="o"><div class="ph"><img src="images/old_journal.webp" alt="2022 journal input" width="420" height="905"></div><figcaption><b>2022</b>Journal</figcaption></figure>
+      <figure class="n"><div class="ph"><img src="images/new_journal.webp" alt="2026 journal with two moods selected and a note" width="440" height="924"></div><figcaption><b>2026</b>Journal</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="change">
+    <div class="tx"><h3>A glossary that helps you understand your health</h3>
+      <p><b>2022.</b> A search bar, a featured article, and illustrated tiles with people.</p>
+      <p><b>2026.</b> The glossary now teaches in plain language. A bigger search field gets you to a medicine fast. Each medicine page says what the medicine does, shows its forms, and lists side effects and interactions. Side effects reuse the colored faces from the journal, so a symptom looks the same everywhere. A button on each page adds the medicine to your list.</p></div>
+    <div class="pair">
+      <figure class="o"><div class="ph"><img src="images/old_glossary.webp" alt="2022 glossary home" width="420" height="905"></div><figcaption><b>2022</b>Glossary</figcaption></figure>
+      <figure class="n"><div class="ph"><img src="images/new_info.webp" alt="2026 medicine information page with forms and colored side effect faces" width="440" height="924"></div><figcaption><b>2026</b>Medicine info</figcaption></figure>
+    </div>
+  </div>
+</div></section>
+
+<section id="identity"><div class="wrap">
+  <h2>A new identity</h2>
+  <div class="body" style="margin-top:20px">
+    <p>The 2022 style guide had two colors and a typeface. The refresh needed more than a repaint, so I wrote full brand guidelines.</p>
+    <p>Teal does most of the work and carries every main action. Coral appears only where something needs attention, like an overdue dose. Four soft tints belong to the four parts of the day. Open Sans runs the entire interface. Lora is only for the logo, which swaps the dot of the i for a capsule.</p>
+    <p>The illustrations of people became a character. Cap is a capsule with a face. Cap shows up in the help sheets, the assistant, and the success screen, and never on an error or an overdue dose.</p>
+  </div>
+  <div class="logos">
+    <div><div class="l"><img src="images/old_logo.png" alt="The 2022 Medic logo" width="349" height="131"></div><p class="cap">2022 logo</p></div>
+    <div><div class="l"><img src="images/new_logo.webp" alt="The 2026 Medic wordmark with a capsule as the dot of the i" style="max-height:110px"></div><p class="cap">2026 logo</p></div>
+  </div>
+  <div class="brandrow">
+    <figure class="cell"><img src="images/old_styleguide.webp" alt="The 2022 UI style guide with two brand colors and Nunito" width="860" height="580"><figcaption><b>2022</b>Style guide</figcaption></figure>
+    <figure class="cell"><img src="images/new_guide_color.webp" alt="The 2026 brand guidelines color page with a teal ramp" width="1100" height="640"><figcaption><b>2026</b>Brand guidelines, color</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="portal"><div class="wrap">
+  <h2>A new idea, syncing with a patient portal</h2>
+  <div class="body" style="margin-top:20px">
+    <p>Portal sync was not part of the 2022 research. I added it as a guess. Typing a full medicine list is the slowest part of setup, and many patient portals already hold that list.</p>
+    <p>The flow has four steps. You pick your health system, sign in on its own page, allow view only access, and review what Medic found. Medic adds nothing until you confirm. Later syncs show only what changed, like a dose that went from 5mg to 10mg. Portals share how to take a medicine but not the times, so Medic picks usual ones and tells you.</p>
+    <p>The prototype uses sample health systems and no real data. A live version would need registration with each portal vendor, a clear privacy policy, and a real security review. I would not call it available until it works.</p>
+  </div>
+  <div class="trio">
+    <figure><div class="ph"><img src="images/new_pick.webp" alt="Choosing a health system" width="440" height="924"></div><figcaption><b>Step 1</b>Pick your health system</figcaption></figure>
+    <figure><div class="ph"><img src="images/new_consent.webp" alt="Approving view only access" width="440" height="924"></div><figcaption><b>Step 3</b>Allow view only access</figcaption></figure>
+    <figure><div class="ph"><img src="images/new_review.webp" alt="Reviewing found medicines" width="440" height="924"></div><figcaption><b>Step 4</b>Review before adding</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="access"><div class="wrap">
+  <h2>Accessibility choices</h2>
+  <ul class="checks">
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Text meets 4.5 to 1 contrast against its background.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Everything you tap is at least 48 pixels tall.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Labels sit above fields and stay visible while you type.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>A larger text setting raises the base size from 16 to 18.5 pixels.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Color never works alone. A dose shows an icon and a word, and each mood has a name.</span></li>
+    <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7"/></svg><span>Animation switches off when the device asks for reduced motion.</span></li>
+  </ul>
+</div></section>
+
+<section id="try"><div class="wrap">
+  <h2>Try it</h2>
+  <p class="lead">Both run in the browser with sample data. Nothing you enter leaves your device.</p>
+  <div class="links">
+    <a class="linkc" id="prototype" href="prototype/" ><div class="prev proto"><img src="images/prev_splash.webp" alt="The Medic welcome screen" width="360" height="756"><img src="images/prev_home.webp" alt="The Medic Today screen" width="360" height="756"></div><h4>Interactive prototype</h4><p>Check off a dose, add a medicine, log how you feel, and connect a sample patient portal.</p><span>Open the prototype</span></a>
+    <a class="linkc alt" id="guidelines" href="brand-guidelines/" ><div class="prev guide"><img src="images/prev_guide.webp" alt="The cover of the Medic brand guidelines with the logo and the pill organizer" width="900" height="320"></div><h4>Brand guidelines</h4><p>Logo, color, type, components, motion, voice, and design tokens.</p><span>Open the guidelines</span></a>
+  </div>
+</div></section>
+
+<section id="next"><div class="wrap">
+  <h2>Scope and limits</h2>
+  <div class="body" style="margin-top:20px">
+    <p>This redesign did not include new user testing. I refreshed the 2022 design against 2026 best practices for accessibility and mobile design. The 2022 research still supplies the audience and the problem.</p>
+  </div>
+  <div class="plan">
+    <div><b>What it rests on</b><span>The 2022 interviews, plus current guidance on text contrast, tap target size, form labels, motion, and how apps ask for access to health data.</span></div>
+    <div><b>What I did not do</b><span>Run usability sessions on the 2026 design or compare it against the 2022 version with real users.</span></div>
+    <div><b>How to read the claims</b><span>Statements about easier reading and tapping come from design guidance, not from test results.</span></div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="wm" role="img" aria-label="Medic"><span aria-hidden="true">med<span class="i">&#305;<span class="cp"></span></span>c</span></div>
+  <p>The 2022 team was Crystal Obaretin, Taya Tepudom, and Chia-I Chen. Crystal Obaretin designed the 2026 refresh.</p>
+</div></footer>
+
+</body>
+</html>
