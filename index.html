@@ -519,11 +519,7 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         <circle cx="38.5" cy="29.5" r="2.6" fill="#ffffff" opacity="0.45"/>
       </svg>Work</h2>
     </div>
-    <div class="work-tabs" role="tablist" aria-label="Work type">
-      <button type="button" class="work-tab is-active" id="tabShipped" role="tab" aria-selected="true" aria-controls="panelShipped">Shipped Work</button>
-      <button type="button" class="work-tab" id="tabPassion" role="tab" aria-selected="false" aria-controls="panelPassion">Passion Projects</button>
-    </div>
-    <div id="panelShipped" role="tabpanel" aria-labelledby="tabShipped">
+    <div id="panelShipped">
     <div class="work-carousel-wrap">
       <div class="work-carousel" id="workCarousel">
         <article class="work-slide">
@@ -539,7 +535,8 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         </article>
         <article class="work-slide">
           <a class="work-slide-media" href="nlb-corp-case-study.html" style="--tile-a:#4F6B52; --tile-b:#D9E6D3; --tile-accent:#4F6B52;">
-            <iframe src="nlb-cover/nlb-cover.html" title="" tabindex="-1" aria-hidden="true" loading="lazy" style="pointer-events:none;"></iframe>
+            <img src="nlb-corp-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">NLB Corporation</span>
           </a>
           <div class="work-slide-info">
             <p class="work-eyebrow">Industrial | 2024</p>
@@ -549,7 +546,8 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         </article>
         <article class="work-slide">
           <a class="work-slide-media" href="pss-case-study.html" style="--tile-a:#E36A2C; --tile-b:#F4CF9E; --tile-accent:#E36A2C;">
-            <iframe src="pss-cover/pss-cover.html" title="" tabindex="-1" aria-hidden="true" loading="lazy" style="pointer-events:none;"></iframe>
+            <img src="pss-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">Proper Storage Systems</span>
           </a>
           <div class="work-slide-info">
             <p class="work-eyebrow">Industrial | 2024</p>
@@ -571,7 +569,8 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         </article>
         <article class="work-slide">
           <a class="work-slide-media" href="home-remedy-case-study.html" style="--tile-a:#B5527A; --tile-b:#FCD3DE; --tile-accent:#B5527A;">
-            <iframe src="home-remedy-cover/home-remedy-cover.html" title="" tabindex="-1" aria-hidden="true" loading="lazy" style="pointer-events:none;"></iframe>
+            <img src="home-remedy-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">Home Remedy LLC</span>
           </a>
           <div class="work-slide-info">
             <p class="work-eyebrow">Local business | 2023</p>
@@ -585,38 +584,6 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
         <button type="button" class="carousel-arrow" id="carouselNext" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
       </div>
     </div>
-    </div>
-    <div id="panelPassion" role="tabpanel" aria-labelledby="tabPassion" hidden>
-    <ul class="passion-grid">
-      <li>
-        <div class="work-card work-locked-card" aria-disabled="true" style="--tile-a:#291553; --tile-b:#5F1E78;">
-          <div class="work-media">
-            <span class="coming-soon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Coming soon</span>
-            <img src="nasa-images/nasa-hero.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
-            <span class="fallback" aria-hidden="true">NASA Redesign</span>
-          </div>
-          <div class="work-caption">
-            <p class="work-eyebrow">Passion project &middot; In progress</p>
-            <h3 class="work-title">NASA, a refresh</h3>
-            <p class="work-desc">Revisiting a 2022 student project redesigning NASA's website, this time with a refreshed look and a working prototype.</p>
-          </div>
-        </div>
-      </li>
-      <li>
-        <a class="work-card" href="medic-redesign/index.html" style="--tile-a:#0E6F6A; --tile-b:#2BA79F; --tile-accent:#0E6F6A;">
-          <div class="work-media">
-            <div class="phone-mock">
-              <video src="Medic/medic-walkthrough.mp4" autoplay loop muted playsinline></video>
-            </div>
-          </div>
-          <div class="work-caption">
-            <p class="work-eyebrow">Passion project &middot; 2026</p>
-            <h3 class="work-title">Medic, a 2026 redesign</h3>
-            <p class="work-desc">Revisited a medication-management app I helped design back in 2022, with a new identity, a day organized like a pill box instead of a timeline, and a working prototype you can try.</p>
-          </div>
-        </a>
-      </li>
-    </ul>
     </div>
   </section>
 
@@ -711,23 +678,6 @@ if (workCarousel) {
   });
 }
 
-const tabShipped = document.getElementById('tabShipped');
-const tabPassion = document.getElementById('tabPassion');
-const panelShipped = document.getElementById('panelShipped');
-const panelPassion = document.getElementById('panelPassion');
-
-function setWorkTab(tab) {
-  const showPassion = tab === 'passion';
-  tabShipped.classList.toggle('is-active', !showPassion);
-  tabPassion.classList.toggle('is-active', showPassion);
-  tabShipped.setAttribute('aria-selected', String(!showPassion));
-  tabPassion.setAttribute('aria-selected', String(showPassion));
-  panelShipped.hidden = showPassion;
-  panelPassion.hidden = !showPassion;
-}
-
-tabShipped.addEventListener('click', () => setWorkTab('shipped'));
-tabPassion.addEventListener('click', () => setWorkTab('passion'));
 
 const siteHeader = document.getElementById('siteHeader');
 const setStuck = () => siteHeader.classList.toggle('is-stuck', window.scrollY > 8);
