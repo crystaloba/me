@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medic redesign, Crystal Obaretin</title>
+<meta name="description" content="Case study: Medic, a medication management app built for older adults managing complex prescription routines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/xoy5rrr.css">
+<style>
+:root {
+  --paper: #FFFFFF;
+  --ink: #241F20;
+  --muted: #625A5C;
+  --cherry: #640D14;
+  --line: #E7E2E3;
+  --note-pearl: #F6ECC9;
+  --note-cotton: #FCD3DE;
+  --note-apricot: #F4CF9E;
+  --note-sage: #D9E6D3;
+  --tint: #E0F1FC;
+  --medic: #2539A5;
+  --sans: 'Open Sans', 'sets-grotesk-m', 'Century Gothic', system-ui, sans-serif;
+  --heading: 'sets-grotesk-m', 'Century Gothic', system-ui, sans-serif;
+  --hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  --wide: min(1120px, 100% - 48px);
+  --read: min(720px, 100% - 48px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--heading); }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  overflow-x: hidden;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans);
+font-size: 18px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--cherry); outline-offset: 3px; border-radius: 4px; }
+.skip { position: absolute; left: 16px; top: -60px; background: var(--cherry); color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none; z-index: 10; }
+.skip:focus { top: 16px; }
+.wide { width: var(--wide); margin-inline: auto; }
+.read { width: var(--read); margin-inline: auto; }
+.solutions-wrap { width: min(880px, 100% - 48px); }
+
+/* HEADER — sticky, transparent, floating pill (matches the homepage nav exactly) */
+header#siteHeader {
+  position: sticky; top: 0; z-index: 100;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  padding-bottom: 14px;
+  pointer-events: none;
+}
+.header-row {
+  pointer-events: auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: rgba(247, 246, 244, 0.6);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(231, 226, 227, 0.7);
+  border-radius: 999px;
+  padding: 11px 10px 11px 22px;
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.04), 0 10px 28px -14px rgba(36, 31, 32, 0.22);
+  transition: box-shadow .35s ease, background .35s ease, border-color .35s ease;
+}
+header#siteHeader.is-stuck .header-row {
+  background: rgba(247, 246, 244, 0.85);
+  box-shadow: 0 1px 1px rgba(36, 31, 32, 0.06), 0 14px 32px -14px rgba(36, 31, 32, 0.3);
+  border-color: rgba(231, 226, 227, 0.95);
+}
+.logo { font-family: var(--hand); font-weight: 600; font-size: 24px; text-decoration: none; letter-spacing: 0.01em; color: var(--cherry); }
+header#siteHeader nav ul { display: flex; gap: 6px; list-style: none; }
+header#siteHeader nav a {
+  display: inline-block; text-decoration: none; color: var(--muted); font-size: 15px;
+  font-weight: 400; letter-spacing: normal; text-transform: none;
+  padding: 8px 16px; border-radius: 999px;
+  transition: color .2s ease, background .2s ease;
+}
+header#siteHeader nav a:hover, header#siteHeader nav a:focus-visible { color: var(--cherry); background: rgba(100,13,20,0.07); }
+@media (max-width: 520px) {
+  .header-row { padding: 9px 8px 9px 18px; }
+  header#siteHeader nav ul { gap: 2px; }
+  header#siteHeader nav a { padding: 7px 12px; font-size: 14px; }
+}
+
+/* INTRO */
+.intro { padding: 48px 0 40px; }
+.back { display: inline-block; color: var(--muted); font-size: 16px; text-underline-offset: 4px; margin-bottom: 28px; }
+.back:hover { color: var(--cherry); }
+h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; max-width: 100%; text-wrap: balance; }
+h1 em, h2 em {
+  font-family: inherit; font-weight: inherit; font-style: normal;
+  text-transform: inherit; letter-spacing: inherit; color: inherit;
+}
+.lede { margin-top: 24px; font-size: 21px; color: var(--muted); max-width: 100%; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 44px; padding-top: 18px; border-top: 1.5px solid var(--ink); }
+.facts dt { color: var(--muted); font-size: 15px; }
+.facts dd { font-weight: 500; line-height: 1.35; margin-top: 2px; }
+
+/* FIGURES */
+figure { margin: 40px auto; }
+.frame { background: var(--tint); border-radius: 14px; overflow: hidden; position: relative; }
+.frame img { width: 100%; height: auto; }
+.frame .missing { display: none; padding: 64px 24px; text-align: center; color: var(--muted); font-size: 16px; }
+.frame.no-img .missing { display: block; }
+.frame.no-img img { display: none; }
+figcaption { margin: 12px auto 0; color: var(--muted); font-size: 15px; max-width: 64ch; text-align: center; }
+.phone-walkthrough { text-align: center; }
+.phone-walkthrough .frame { width: min(300px, 100%); margin: 0 auto; border-radius: 28px; background: #000; }
+.phone-walkthrough video { width: 100%; height: auto; display: block; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.pair figure { margin: 0; }
+
+/* SECTIONS */
+section { padding-top: 96px; scroll-margin-top: 24px; }
+.section-head { border-top: 1.5px solid var(--ink); padding-top: 18px; margin-bottom: 28px; }
+h2 { font-size: clamp(24px, 3.8vw, 46px); font-weight: 700; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; max-width: 100%; color: var(--ink); text-wrap: balance; }
+.kicker { color: var(--muted); font-size: 16px; margin-bottom: 6px; }
+h3 { font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: 0.05em; text-transform: uppercase; margin: 48px 0 12px; text-wrap: balance; }
+p + p { margin-top: 16px; }
+.read p { max-width: 64ch; }
+
+/* INSIGHT CALLOUT */
+.insight { margin: 48px 0; padding: 24px; background: var(--tint); border-radius: 8px; }
+.insight p { font-size: 18px; line-height: 1.5; font-weight: 500; color: var(--ink); }
+.insight footer { margin-top: 12px; color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* NUMBERS */
+.numbers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+.numbers div { border-top: 1px solid var(--line); padding-top: 14px; }
+.big { font-size: clamp(36px, 4.4vw, 52px); font-weight: 500; line-height: 1; color: var(--medic); }
+.numbers strong { display: block; margin-top: 8px; font-weight: 700; }
+.numbers span { display: block; color: var(--muted); font-size: 15px; line-height: 1.45; margin-top: 2px; }
+
+/* METHODS */
+.methods { list-style: none; margin-top: 8px; }
+.methods li { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.methods li:first-child { border-top: 1px solid var(--line); }
+.methods strong { font-weight: 700; }
+.methods p { color: var(--muted); font-size: 16px; }
+
+/* FINDINGS: sticky notes */
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 32px; }
+.note {
+  padding: 26px 26px 28px; border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(36,31,32,0.08), 0 8px 18px -8px rgba(36,31,32,0.28);
+}
+.note:nth-child(1) { background: var(--note-pearl); transform: rotate(-1deg); }
+.note:nth-child(2) { background: var(--note-sage); transform: rotate(0.8deg); }
+.note:nth-child(3) { background: var(--note-cotton); transform: rotate(0.6deg); }
+.note:nth-child(4) { background: var(--note-apricot); transform: rotate(-0.8deg); }
+.note h4 { font-family: var(--hand); font-weight: 600; font-size: 27px; line-height: 1.08; color: #2B2324; margin-bottom: 12px; }
+.note p { font-size: 16px; line-height: 1.55; color: #3A3133; }
+
+/* PROCESS */
+.phases { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 32px; }
+.phases li { border-top: 3px solid var(--note-pearl); padding-top: 14px; }
+.phases strong { display: block; font-size: 20px; margin: 2px 0 8px; }
+.phases p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+/* TWO-COLUMN LISTS */
+.columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 28px; }
+.columns h4 { font-size: 17px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); margin-bottom: 4px; }
+.columns ul { list-style: none; }
+.columns li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 1.5; }
+.columns .after h4 { color: var(--medic); border-color: var(--medic); }
+
+/* SOLUTIONS */
+.solutions { list-style: none; margin-top: 8px; }
+.solutions li { padding: 28px 0; border-bottom: 1px solid var(--line); }
+.solutions li:first-child { border-top: 1px solid var(--line); }
+.solutions h3 { margin: 0; font-size: 24px; color: var(--medic); }
+.solutions .sub { color: var(--muted); font-size: 17px; margin-top: 2px; }
+.solutions p { margin-top: 12px; }
+
+/* BRANDING SWATCHES */
+.swatch-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; align-items: flex-end; }
+.swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.swatch-circle { width: 52px; height: 52px; border-radius: 50%; border: 0.5px solid rgba(0,0,0,0.08); }
+.swatch-hex { font-size: 12px; font-weight: 500; color: var(--muted); }
+.type-sample { font-size: 15px; color: var(--muted); margin-top: 24px; }
+.type-sample strong { display: block; font-size: 32px; color: var(--ink); font-weight: 700; margin-bottom: 4px; }
+
+/* END */
+.next { margin: 120px auto 0; padding-top: 18px; border-top: 1.5px solid var(--ink); display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+.next a { text-decoration: none; }
+.next .label { color: var(--muted); font-size: 16px; }
+.next .title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; line-height: 1.1; text-wrap: balance; }
+.next a:hover .title { color: var(--cherry); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.site-footer { padding: 48px 0 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.site-footer a { color: var(--cherry); }
+
+@media (max-width: 860px) {
+  body { font-size: 17px; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .numbers, .pair, .notes, .columns { grid-template-columns: 1fr; }
+  .methods li { grid-template-columns: 1fr; gap: 6px; }
+  .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .note { transform: none !important; }
+  section { padding-top: 72px; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="siteHeader">
+  <div class="wide header-row">
+    <a href="index.html" class="logo">Crystal Obaretin</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="intro wide">
+    <a class="back" href="index.html#work">Back to all work</a>
+    <h1>Medic: a medication manager for older adults</h1>
+    <p class="lede">A medication management app that helps older adults keep track of what they take, understand it, and manage the side effects and mood changes that come with it, without relying on memory alone.</p>
+    <dl class="facts">
+      <div><dt>Role</dt><dd>UX Researcher &amp; Designer</dd></div>
+      <div><dt>Team</dt><dd>Crystal Obaretin, Taya Tepudom, Chia-I Chen</dd></div>
+      <div><dt>Timeline</dt><dd>3 weeks, research through high-fidelity prototype</dd></div>
+      <div><dt>Tools</dt><dd>Figma, InVision, Slack</dd></div>
+    </dl>
+  </div>
+
+  <figure class="wide phone-walkthrough">
+    <div class="frame phone-frame">
+      <video src="Medic/medic-walkthrough.mp4" poster="Medic/medic-walkthrough-poster.jpg" autoplay loop muted playsinline controls></video>
+    </div>
+    <figcaption>A user signing in, moving through the welcome tour, marking a dose taken, checking a medicine's details, and logging a journal entry, captured from the working prototype.</figcaption>
+  </figure>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="read" aria-labelledby="overview-h">
+    <div class="section-head">
+      <p class="kicker">Overview</p>
+      <h2 id="overview-h">Medication routines that depend on memory alone</h2>
+    </div>
+    <p>Over a three-week sprint, two teammates and I conducted user research and ideated a healthcare management application aimed at adding efficiency to a user's daily medication routine. I led the research and design work alongside Taya Tepudom and Chia-I Chen, then continued iterating on the design after the initial sprint closed.</p>
+
+    <h3>Business challenges</h3>
+    <ul class="methods">
+      <li><strong>Reminders go unused</strong><p>Many older users don't rely on mobile apps to remind them to take their medication.</p></li>
+      <li><strong>Knowledge gaps</strong><p>Users often don't fully understand the medications they're taking or why.</p></li>
+      <li><strong>Impersonal telehealth</strong><p>Telehealth experiences aren't personalized to the individual user's needs.</p></li>
+    </ul>
+
+    <h3>Objectives and goals</h3>
+    <p>Build an app that aids and informs users about their medication routine and habits, with a focus on reminder settings, in-app assistance, medication knowledge, and mood and side effect tracking.</p>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research" class="read" aria-labelledby="research-h">
+    <div class="section-head">
+      <p class="kicker">Research</p>
+      <h2 id="research-h">What older adults actually struggle with</h2>
+    </div>
+    <p>Ten user interviews were conducted with a population of individuals aged 45 to 70. Before interviewing, we identified the specific challenges this group faces with existing medication and telehealth tools.</p>
+
+    <ul class="methods">
+      <li><strong>Operating telehealth</strong><p>Older users have trouble operating telehealth services in the first place.</p></li>
+      <li><strong>Lack of personalization</strong><p>Telehealth hasn't become more personalized for the individual user.</p></li>
+      <li><strong>Inadequate reminders</strong><p>Users who had tried medicine apps before felt they didn't receive adequate reminders.</p></li>
+    </ul>
+
+    <h3>Quantitative research</h3>
+    <p>Following the interviews, we pulled key metrics from the responses.</p>
+    <div class="numbers">
+      <div><p class="big">60%</p><strong>Lost track of their medicine</strong><span>Said they had lost track of medicine they'd already taken</span></div>
+      <div><p class="big">40%</p><strong>Lack confidence</strong><span>Don't feel confident in their knowledge of the medications they take</span></div>
+      <div><p class="big">80%</p><strong>Search online</strong><span>Of users search for medicine information online rather than ask a provider</span></div>
+      <div><p class="big">60%</p><strong>Skip research after prescribing</strong><span>Did no research on their medication after being prescribed</span></div>
+    </div>
+
+    <div class="insight">
+      <p>Users have trouble remembering to take their meds on time, and some don't remember taking them at all on a given day. They aren't especially knowledgeable about the medications and supplements they take, but they want to take control of their healthcare, be proactive, and be their own advocate.</p>
+      <footer>Synthesized from user interviews</footer>
+    </div>
+
+    <h3>Competitor analysis</h3>
+    <div class="columns">
+      <div>
+        <h4>Medisafe</h4>
+        <ul>
+          <li>Compiles all of a user's medical and health information in one place</li>
+          <li>Pill and medicine reminders, drug-to-drug interactions, refill alerts</li>
+          <li>Doctor appointments and a health journal with 20+ trackable measurements</li>
+        </ul>
+      </div>
+      <div>
+        <h4>MyTherapy</h4>
+        <ul>
+          <li>Ad-free, award-winning pill reminder and medication tracker</li>
+          <li>Combines a pill tracker, mood tracker, and health journal</li>
+          <li>Helps the user and their doctor track treatment progress over time</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Where Medic could stand apart</h3>
+    <ul class="methods">
+      <li><strong>Medical glossary</strong><p>A place to locate medication information, drug interactions, and potential side effects without leaving the app.</p></li>
+      <li><strong>In-app assistant</strong><p>A built-in assistant to help with reminders, locating pages, and adding new medications.</p></li>
+      <li><strong>Mood and symptom log</strong><p>A way to jot down notes and track daily mood, side effects, and reactions to meds and supplements.</p></li>
+    </ul>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" aria-labelledby="process-h">
+    <div class="read">
+      <div class="section-head">
+        <p class="kicker">Process</p>
+        <h2 id="process-h">Discover, define, ideate, design</h2>
+      </div>
+      <p>Problem statement: users need reminders to take their medications and supplements so they can manage their health stress-free.</p>
+      <p>Solution: a medicine management application that lets users set reminders, manage, and educate themselves on the medications and supplements they take.</p>
+    </div>
+
+    <div class="wide">
+      <ul class="phases">
+        <li><strong>Discover</strong><p>User interviews, competitor analysis, and quantitative research into medication habits</p></li>
+        <li><strong>Define</strong><p>Problem statement, proto-personas, and the core feature set</p></li>
+        <li><strong>Ideate</strong><p>Sitemap, user flows, and low-fidelity sketches</p></li>
+        <li><strong>Design</strong><p>UI style guide and a high-fidelity prototype</p></li>
+      </ul>
+    </div>
+
+    <div class="read">
+      <h3>Early sketches</h3>
+      <p>Wireframes covered the full loop: onboarding, viewing a medicine's details, logging a dose, adding a new medication, tracking mood in a journal, and a small celebration screen for days when every dose gets taken.</p>
+    </div>
+
+    <figure class="wide">
+      <div class="frame">
+        <img src="Medic/medic-sketches.jpg" alt="Grayscale wireframe sketches of the onboarding, medicine detail, daily log, add-medication, calendar, and journal screens" onerror="this.parentElement.classList.add('no-img')">
+        <p class="missing">medic-sketches.jpg</p>
+      </div>
+      <figcaption>Early wireframes for onboarding, medicine detail, daily dose tracking, and mood journaling.</figcaption>
+    </figure>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section id="solutions" aria-labelledby="solutions-h">
+    <div class="read solutions-wrap">
+      <div class="section-head">
+        <p class="kicker">Solutions</p>
+        <h2 id="solutions-h">Four features built to resolve user needs</h2>
+      </div>
+      <ul class="solutions">
+        <li>
+          <h3>Customized schedules and reminders</h3>
+          <p class="sub">Reminders that match how someone actually takes their meds</p>
+          <p>Users set reminders around their own routine instead of a generic schedule, addressing the core complaint that past medicine apps didn't remind them adequately.</p>
+        </li>
+        <li>
+          <h3>Medical glossary</h3>
+          <p class="sub">Answers without leaving the app</p>
+          <p>A searchable glossary of medications, drug interactions, and side effects, built for the 80% of users who said they search for this information online instead of asking a provider directly.</p>
+        </li>
+        <li>
+          <h3>Journal and mood tracker</h3>
+          <p class="sub">Tracking how a medication actually feels</p>
+          <p>Users log daily mood, side effects, and reactions alongside their medication schedule, giving them (and eventually their doctor) a clearer record of how a treatment is going.</p>
+        </li>
+        <li>
+          <h3>In-app assistance</h3>
+          <p class="sub">Help finding your way around</p>
+          <p>A built-in assistant helps users add new medications and find their way to the right page, aimed squarely at the users who found telehealth tools hard to operate on their own.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BRANDING -->
+  <section id="branding" class="read" aria-labelledby="branding-h">
+    <div class="section-head">
+      <p class="kicker">UI style guide</p>
+      <h2 id="branding-h">A calm, legible system for an older audience</h2>
+    </div>
+    <p>The visual system leans on a single confident blue, a light secondary tint for backgrounds and cards, and Nunito, a rounded sans-serif chosen for legibility across a wide range of ages and reading conditions.</p>
+    <div class="swatch-row">
+      <div class="swatch"><div class="swatch-circle" style="background:#2539A5;"></div><div class="swatch-hex">Primary / #2539A5</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#E0F1FC; border-color:#d0ecee;"></div><div class="swatch-hex">Secondary / #E0F1FC</div></div>
+    </div>
+    <div class="type-sample">
+      <strong>Nunito</strong>
+      Heading sizes run from 56px down to 20px across six levels, keeping a clear hierarchy on small phone screens.
+    </div>
+  </section>
+
+  <!-- MAJOR SCREENS -->
+  <section id="screens" class="read" aria-labelledby="screens-h">
+    <div class="section-head">
+      <p class="kicker">Major screens</p>
+      <h2 id="screens-h">Home, journal, and glossary</h2>
+    </div>
+    <div class="notes">
+      <article class="note">
+        <h4>Home screen</h4>
+        <p>A 5-day mini-calendar up top, a filter for time of day, and a medicine list with a clear indicator for whether each dose has been taken yet.</p>
+      </article>
+      <article class="note">
+        <h4>Journal</h4>
+        <p>A mood and symptom picker paired with a free-text entry, so a quick tap or a longer note both fit depending on how much someone wants to log.</p>
+      </article>
+      <article class="note">
+        <h4>Glossary</h4>
+        <p>A search bar up top and a set of recommended article tiles below it, covering topics like managing blood pressure and understanding a new prescription.</p>
+      </article>
+      <article class="note">
+        <h4>Navigation</h4>
+        <p>A persistent bottom bar for Home, Medication, Glossary, and Journal, so the four core tasks are never more than one tap away.</p>
+      </article>
+    </div>
+
+    <figure class="wide">
+      <div class="frame">
+        <img src="Medic/medic-major-screens.jpg" alt="High-fidelity home screen, journal, and glossary screens for the Medic app" onerror="this.parentElement.classList.add('no-img')">
+        <p class="missing">medic-major-screens.jpg</p>
+      </div>
+      <figcaption>Home screen, journal, and glossary in the final high-fidelity prototype.</figcaption>
+    </figure>
+
+  </section>
+
+  <!-- REFLECTION -->
+  <section id="reflection" class="read" aria-labelledby="reflection-h">
+    <div class="section-head">
+      <p class="kicker">Reflection</p>
+      <h2 id="reflection-h">What I'd do differently</h2>
+    </div>
+    <p>This project was a fast, research-first sprint, and the compressed timeline forced hard calls on what to test and what to take on faith. The quantitative findings, especially how many users had already lost track of a dose or skipped researching a new prescription, did a lot to keep the feature set honest and grounded in an actual problem instead of a nice-to-have.</p>
+    <p>If I ran it again, I'd want to usability test the onboarding and medication-entry flows directly with people in the 45 to 70 age range we interviewed, rather than relying on the interview findings alone to shape the wireframes. That age range spans a wide range of comfort with mobile apps, and a flow that reads as simple to a younger tester can still trip up the exact users the app is meant for.</p>
+    <p>I'd also want to pressure-test the in-app assistant concept further. It tested well as an idea in interviews, but assistants are easy to design well on paper and hard to get right in practice, especially for users who already found existing telehealth tools confusing.</p>
+  </section>
+
+  <div class="next wide">
+    <a href="index.html#work"><span class="label">Back to</span><br><span class="title">All work</span></a>
+    <a href="wgu-partnerships-case-study.html" style="text-align:right"><span class="label">Next case study</span><br><span class="title">WGU Strategic Partnerships</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer wide">
+  <span>© 2026 Crystal Obaretin</span>
+  <a href="mailto:crystaloba@gmail.com">crystaloba@gmail.com</a>
+</footer>
+
+<script>
+  const siteHeader = document.getElementById('siteHeader');
+  const setStuck = () => siteHeader.classList.toggle('is-stuck', window.scrollY > 8);
+  setStuck();
+  window.addEventListener('scroll', setStuck, { passive: true });
+</script>
+</body>
+</html>
