@@ -98,17 +98,6 @@ nav a:hover, nav a:focus-visible { color: var(--cherry); background: rgba(100, 1
   padding: 40px 0 96px;
 }
 .hero { position: relative; z-index: 0; }
-.mode-toggle {
-  display: inline-flex; gap: 2px; margin-bottom: 18px;
-  background: var(--note-pearl); border-radius: 999px; padding: 3px;
-}
-.mode-btn {
-  font-family: var(--sans); font-size: 13px; font-weight: 600;
-  border: none; background: none; color: #5A4E50;
-  padding: 7px 14px; border-radius: 999px; cursor: pointer;
-  transition: background .2s ease, color .2s ease;
-}
-.mode-btn.is-active { background: var(--cherry); color: #fff; }
 .hero h1 {
   font-size: clamp(38px, 7vw, 88px);
   font-weight: 500;
@@ -495,10 +484,6 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
       <circle cx="38.5" cy="29.5" r="2.6" fill="#ffffff" opacity="0.45"/>
     </svg>
     <div class="hero-copy">
-      <div class="mode-toggle" role="group" aria-label="Tailor this page for">
-        <button type="button" class="mode-btn is-active" id="modeDesigner" aria-pressed="true">For designers</button>
-        <button type="button" class="mode-btn" id="modeRecruiter" aria-pressed="false">For recruiters</button>
-      </div>
       <h1 id="intro">Hi, I'm <span class="name-doodle">Crystal</span><span class="line-gap">I create <span class="accent">intuitive</span> user&nbsp;experiences.</span></h1>
       <p id="heroP1">I'm a <strong>UX Designer at Western Governors University</strong>, designing partnership experiences and internal tools.</p>
       <p id="heroP2">Before that I worked in agency and civic tech.</p>
@@ -540,7 +525,7 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
           </a>
           <div class="work-slide-info">
             <p class="work-eyebrow">Industrial | 2024</p>
-            <h3><a href="nlb-cover.html">NLB Corporation</a></h3>
+            <h3><a href="nlb-corp-case-study.html">NLB Corporation</a></h3>
             <p class="work-slide-desc">Restructured navigation for a global manufacturer so buyers can find the right product faster.</p>
           </div>
         </article>
@@ -612,51 +597,7 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
 </footer>
 
 <script>
-const modeDesigner = document.getElementById('modeDesigner');
-const modeRecruiter = document.getElementById('modeRecruiter');
-const heroP1 = document.getElementById('heroP1');
-const heroP2 = document.getElementById('heroP2');
 const heroCta = document.getElementById('heroCta');
-const heroCtaLabel = document.getElementById('heroCtaLabel');
-
-const heroCopy = {
-  designer: {
-    p1: 'I\'m a <strong>UX Designer at Western Governors University</strong>, designing partnership experiences and internal tools.',
-    p2: 'Before that I worked in agency and civic tech.',
-    ctaLabel: 'View Work',
-    ctaHref: '#work',
-    ctaDownload: false
-  },
-  recruiter: {
-    p1: 'I\'m a <strong>UX Designer at Western Governors University</strong>, 5+ years designing B2B partnership experiences and internal tools.',
-    p2: 'Previously in agency and civic tech.<br><strong>Open to new opportunities.</strong>',
-    ctaLabel: 'Download Resume',
-    ctaHref: 'Obaretin__Crystal.pdf',
-    ctaDownload: true
-  }
-};
-
-function setMode(mode) {
-  const copy = heroCopy[mode];
-  heroP1.innerHTML = copy.p1;
-  heroP2.innerHTML = copy.p2;
-  heroCtaLabel.textContent = copy.ctaLabel;
-  heroCta.setAttribute('href', copy.ctaHref);
-  if (copy.ctaDownload) {
-    heroCta.setAttribute('download', '');
-  } else {
-    heroCta.removeAttribute('download');
-  }
-  const isRecruiter = mode === 'recruiter';
-  modeDesigner.classList.toggle('is-active', !isRecruiter);
-  modeRecruiter.classList.toggle('is-active', isRecruiter);
-  modeDesigner.setAttribute('aria-pressed', String(!isRecruiter));
-  modeRecruiter.setAttribute('aria-pressed', String(isRecruiter));
-}
-
-modeDesigner.addEventListener('click', () => setMode('designer'));
-modeRecruiter.addEventListener('click', () => setMode('recruiter'));
-
 const workCarousel = document.getElementById('workCarousel');
 if (workCarousel) {
   const slides = Array.from(workCarousel.querySelectorAll('.work-slide'));
