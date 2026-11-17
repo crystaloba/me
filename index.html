@@ -281,6 +281,11 @@ h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.0
 .work-slide-info h3 a { text-decoration: none; color: var(--ink); transition: color .15s ease; }
 .work-slide-info h3 a:hover { color: var(--cherry); }
 .work-slide-desc { color: var(--muted); font-size: 16px; margin-top: 8px; max-width: 56ch; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.tag-pill { font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; color: #2B2324; }
+.tag-pill.t1 { background: var(--note-sage); }
+.tag-pill.t2 { background: var(--note-pearl); }
+.tag-pill.t3 { background: var(--note-cotton); }
 .stat-row { display: flex; gap: 40px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
 .stat-big { font-size: clamp(24px, 2.6vw, 32px); font-weight: 600; color: var(--ink); line-height: 1; }
 .stat-label { display: block; color: var(--muted); font-size: 14px; margin-top: 6px; }
@@ -521,18 +526,6 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
     <div id="panelShipped" role="tabpanel" aria-labelledby="tabShipped">
     <div class="work-carousel-wrap">
       <div class="work-carousel" id="workCarousel">
-        <article class="work-slide work-slide-locked">
-          <div class="work-slide-media" aria-disabled="true" style="--tile-a:#9B9093; --tile-b:#E7E2E3;">
-            <span class="coming-soon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Coming soon</span>
-            <img src="partner-portal-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
-            <span class="fallback" aria-hidden="true">WGU Partner Portal</span>
-          </div>
-          <div class="work-slide-info">
-            <p class="work-eyebrow">Portal | In progress</p>
-            <h3>WGU Partner Portal</h3>
-            <p class="work-slide-desc">A B2B portal giving corporate partners visibility into their employees' progress through WGU programs.</p>
-          </div>
-        </article>
         <article class="work-slide">
           <a class="work-slide-media" href="wgu-partnerships-case-study.html" style="--tile-a:#640D14; --tile-b:#E36A2C; --tile-accent:#640D14;">
             <img src="wgu-partnerships-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
@@ -562,6 +555,18 @@ footer a:not(.back-to-top):hover { color: var(--cherry); }
             <p class="work-eyebrow">Industrial | 2024</p>
             <h3><a href="pss-case-study.html">Proper Storage Systems</a></h3>
             <p class="work-slide-desc">Took a legacy industrial site mobile-first and reworked the quote request flow for enterprise buyers.</p>
+          </div>
+        </article>
+        <article class="work-slide work-slide-locked">
+          <div class="work-slide-media" aria-disabled="true" style="--tile-a:#9B9093; --tile-b:#E7E2E3;">
+            <span class="coming-soon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Coming soon</span>
+            <img src="partner-portal-preview.jpg" alt="" onerror="this.parentElement.classList.add('no-img')">
+            <span class="fallback" aria-hidden="true">Partner Portal</span>
+          </div>
+          <div class="work-slide-info">
+            <p class="work-eyebrow">Portal | In progress</p>
+            <h3>Partner Portal</h3>
+            <p class="work-slide-desc">A B2B portal giving corporate partners visibility into their employees' progress through WGU programs.</p>
           </div>
         </article>
         <article class="work-slide">
